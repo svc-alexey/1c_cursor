@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ConfigDumpInfo xmlns="http://v8.1c.ru/8.3/xcf/dumpinfo" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" format="Hierarchical" version="2.17">
+	<ConfigVersions>
+		<Metadata name="Configuration.MRS_Cursor" id="db09653c-ac9b-48f4-81ff-bc86fa9d5901" configVersion="a70351b973c71a1f9dba4c7412785e96eaf260b9"/>
+		<Metadata name="DataProcessor.MRS_КорректировкаНазначений" id="3d240765-91a3-43cb-9401-93da8ea471c0" configVersion="afd2e3c9ec22d427b0866452c16ceb6fa388d4a3"/>
+		<Metadata name="DataProcessor.MRS_КорректировкаНазначений.Form.Форма" id="773bd07b-8af0-4641-882d-09e96150dd50" configVersion="92927d4ef9572145a042f5bde5a7c5c75d808140"/>
+		<Metadata name="DataProcessor.MRS_КорректировкаНазначений.Form.Форма.Form" id="773bd07b-8af0-4641-882d-09e96150dd50.0" configVersion="b4d333d2dfc2222e4349643e361fbbfae75ee055"/>
+		<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL" id="381ede49-6d01-4b1d-81e4-c415e4f278f1" configVersion="40b09ba6a3dcd79f5c7eb1357aad4f0124e9cc07">
+			<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.Attribute.Адрес" id="45692267-9065-47ec-820b-61b264d22140"/>
+			<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.Attribute.ПериодРегистрации" id="4b7b7564-d075-4db7-b6e7-89d60e0daf5a"/>
+			<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.Attribute.КаталогСохранения" id="661484f8-c054-4d11-b156-2c0221a5da39"/>
+			<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.Attribute.Организация" id="c1d36c0a-9582-4cf1-9206-4718407e7472"/>
+		</Metadata>
+		<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.Form.Форма" id="71490a4d-da47-4ba5-b48f-7cf653086c86" configVersion="a6fef6989b6e49384f339fc0980c493b9083bd92"/>
+		<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.Form.Форма.Form" id="71490a4d-da47-4ba5-b48f-7cf653086c86.0" configVersion="db79229e29b3c2fdef09b9cc10b9aa3ef154c243"/>
+		<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.ObjectModule" id="381ede49-6d01-4b1d-81e4-c415e4f278f1.0" configVersion="1727ecd60846f2b80ea3ed00da377cb4517cbbfa"/>
+		<Metadata name="Document.КорректировкаРегистров" id="145ab1c0-6a7a-4976-a61d-95121a913263" configVersion="dd91cf316f4aa44c66e994629879a68be225df52"/>
+		<Metadata name="Language.Русский" id="43522c8b-d5af-46ec-ab9e-a37e51da80f5" configVersion="7de978644467cd31f2289d399c02d9885c8fb3b0"/>
+		<Metadata name="Role.MRS_ОсновнаяРоль" id="c99577fb-56fc-4930-9d92-2b6819ad4c18" configVersion="a3ba8904557d447f2d36a756e8a63faffeb01e1f"/>
+	</ConfigVersions>
+</ConfigDumpInfo>
