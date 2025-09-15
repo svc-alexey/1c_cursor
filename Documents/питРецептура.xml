@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.17">
+	<Document uuid="b30f82f3-6803-406b-99af-6e9707a519b4">
+		<InternalInfo>
+			<xr:GeneratedType name="DocumentObject.питРецептура" category="Object">
+				<xr:TypeId>8219b968-07e0-4083-982f-12ac2831ba65</xr:TypeId>
+				<xr:ValueId>17cdf2c6-14c3-4cda-a767-295dd3a0eb71</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentRef.питРецептура" category="Ref">
+				<xr:TypeId>9be2c374-2484-4a41-882e-1506853b25be</xr:TypeId>
+				<xr:ValueId>f79874ae-e450-40bc-a14d-3dc1807075b6</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentSelection.питРецептура" category="Selection">
+				<xr:TypeId>be869ea4-8488-4a0b-a398-742a9e4bc1bc</xr:TypeId>
+				<xr:ValueId>ee616bd8-bd04-4646-ae71-786f56a93621</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentList.питРецептура" category="List">
+				<xr:TypeId>e15eb2c4-d986-4fac-8ed5-e38cc8d1d2f3</xr:TypeId>
+				<xr:ValueId>2f24296e-6d9a-41e8-817b-5ba2c54e6d07</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentManager.питРецептура" category="Manager">
+				<xr:TypeId>9e0b91b0-f8d6-4115-8a86-31af0d55ca45</xr:TypeId>
+				<xr:ValueId>197ad38d-593c-427d-8396-e3e0783f5bf5</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<ObjectBelonging>Adopted</ObjectBelonging>
+			<Name>питРецептура</Name>
+			<Comment/>
+			<ExtendedConfigurationObject>002faff6-ef3c-496d-8bcd-97cc6617123a</ExtendedConfigurationObject>
+			<RegisterRecords/>
+		</Properties>
+		<ChildObjects/>
+	</Document>
+</MetaDataObject>

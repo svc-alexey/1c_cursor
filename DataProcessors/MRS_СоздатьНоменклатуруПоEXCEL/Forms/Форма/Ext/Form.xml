@@ -544,6 +544,7 @@
 											<v8:content>Только без соответствий</v8:content>
 										</v8:item>
 									</Title>
+									<CheckBoxType>Auto</CheckBoxType>
 									<ContextMenu name="ТолькоБезСоответствийКонтекстноеМеню" id="345"/>
 									<ExtendedTooltip name="ТолькоБезСоответствийРасширеннаяПодсказка" id="346"/>
 									<Events>
@@ -568,7 +569,6 @@
 							<EnableStartDrag>true</EnableStartDrag>
 							<EnableDrag>true</EnableDrag>
 							<DataPath>ДеревоРецептур</DataPath>
-							<RowFilter xsi:nil="true"/>
 							<ContextMenu name="ДеревоРецептурКонтекстноеМеню" id="352"/>
 							<AutoCommandBar name="ДеревоРецептурКоманднаяПанель" id="353"/>
 							<ExtendedTooltip name="ДеревоРецептурРасширеннаяПодсказка" id="354"/>
@@ -605,19 +605,18 @@
 											<v8:content>Рецептура / Ингредиент</v8:content>
 										</v8:item>
 									</Title>
-									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
 									<ContextMenu name="ДеревоРецептурНаименованиеКонтекстноеМеню" id="365"/>
 									<ExtendedTooltip name="ДеревоРецептурНаименованиеРасширеннаяПодсказка" id="366"/>
 								</LabelField>
 								<InputField name="ДеревоРецептурСтараяНоменклатура" id="367">
 									<DataPath>ДеревоРецептур.СтараяНоменклатура</DataPath>
+									<ReadOnly>true</ReadOnly>
 									<Title>
 										<v8:item>
 											<v8:lang>ru</v8:lang>
 											<v8:content>Старая номенклатура</v8:content>
 										</v8:item>
 									</Title>
-									<ReadOnly>true</ReadOnly>
 									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
 									<ContextMenu name="ДеревоРецептурСтараяНоменклатураКонтекстноеМеню" id="368"/>
 									<ExtendedTooltip name="ДеревоРецептурСтараяНоменклатураРасширеннаяПодсказка" id="369"/>
@@ -645,19 +644,18 @@
 											<v8:content>Статус</v8:content>
 										</v8:item>
 									</Title>
-									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
 									<ContextMenu name="ДеревоРецептурСтатусКонтекстноеМеню" id="374"/>
 									<ExtendedTooltip name="ДеревоРецептурСтатусРасширеннаяПодсказка" id="375"/>
 								</LabelField>
 								<InputField name="ДеревоРецептурКоличество" id="376">
 									<DataPath>ДеревоРецептур.Количество</DataPath>
+									<ReadOnly>true</ReadOnly>
 									<Title>
 										<v8:item>
 											<v8:lang>ru</v8:lang>
 											<v8:content>Количество</v8:content>
 										</v8:item>
 									</Title>
-									<ReadOnly>true</ReadOnly>
 									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
 									<ContextMenu name="ДеревоРецептурКоличествоКонтекстноеМеню" id="377"/>
 									<ExtendedTooltip name="ДеревоРецептурКоличествоРасширеннаяПодсказка" id="378"/>
@@ -755,11 +753,7 @@
 						</v8:item>
 					</Title>
 					<Type>
-						<v8:Type>xs:string</v8:Type>
-						<v8:StringQualifiers>
-							<v8:Length>0</v8:Length>
-							<v8:AllowedLength>Variable</v8:AllowedLength>
-						</v8:StringQualifiers>
+						<v8:Type>cfg:CatalogRef.Номенклатура</v8:Type>
 					</Type>
 				</Column>
 				<Column name="НовоеНаименование" id="3">
@@ -785,11 +779,7 @@
 						</v8:item>
 					</Title>
 					<Type>
-						<v8:Type>xs:string</v8:Type>
-						<v8:StringQualifiers>
-							<v8:Length>0</v8:Length>
-							<v8:AllowedLength>Variable</v8:AllowedLength>
-						</v8:StringQualifiers>
+						<v8:Type>cfg:CatalogRef.Номенклатура</v8:Type>
 					</Type>
 				</Column>
 				<Column name="НоваяКод" id="5">
@@ -815,11 +805,7 @@
 						</v8:item>
 					</Title>
 					<Type>
-						<v8:Type>xs:string</v8:Type>
-						<v8:StringQualifiers>
-							<v8:Length>0</v8:Length>
-							<v8:AllowedLength>Variable</v8:AllowedLength>
-						</v8:StringQualifiers>
+						<v8:Type>cfg:CatalogRef.Номенклатура</v8:Type>
 					</Type>
 				</Column>
 			</Columns>
@@ -875,11 +861,7 @@
 						</v8:item>
 					</Title>
 					<Type>
-						<v8:Type>xs:string</v8:Type>
-						<v8:StringQualifiers>
-							<v8:Length>0</v8:Length>
-							<v8:AllowedLength>Variable</v8:AllowedLength>
-						</v8:StringQualifiers>
+						<v8:Type>cfg:DocumentRef.питРецептура</v8:Type>
 					</Type>
 				</Column>
 				<Column name="НомерСтарой" id="2">
@@ -905,7 +887,7 @@
 						</v8:item>
 					</Title>
 					<Type>
-						<v8:Type>v8:ValueListType</v8:Type>
+						<v8:Type>cfg:CatalogRef.Номенклатура</v8:Type>
 					</Type>
 				</Column>
 				<Column name="Подразделение" id="4">
@@ -916,11 +898,7 @@
 						</v8:item>
 					</Title>
 					<Type>
-						<v8:Type>xs:string</v8:Type>
-						<v8:StringQualifiers>
-							<v8:Length>0</v8:Length>
-							<v8:AllowedLength>Variable</v8:AllowedLength>
-						</v8:StringQualifiers>
+						<v8:Type>cfg:CatalogRef.ПодразделенияОрганизаций</v8:Type>
 					</Type>
 				</Column>
 				<Column name="РецептураНовая" id="5">
@@ -931,11 +909,7 @@
 						</v8:item>
 					</Title>
 					<Type>
-						<v8:Type>xs:string</v8:Type>
-						<v8:StringQualifiers>
-							<v8:Length>0</v8:Length>
-							<v8:AllowedLength>Variable</v8:AllowedLength>
-						</v8:StringQualifiers>
+						<v8:Type>cfg:DocumentRef.питРецептура</v8:Type>
 					</Type>
 				</Column>
 				<Column name="РецептураНоваяНомер" id="6">
@@ -961,7 +935,7 @@
 						</v8:item>
 					</Title>
 					<Type>
-						<v8:Type>v8:ValueListType</v8:Type>
+						<v8:Type>cfg:CatalogRef.Номенклатура</v8:Type>
 					</Type>
 				</Column>
 				<Column name="НоменклатураСтараяКод" id="8">
@@ -972,7 +946,11 @@
 						</v8:item>
 					</Title>
 					<Type>
-						<v8:Type>v8:ValueListType</v8:Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
 					</Type>
 				</Column>
 				<Column name="СтрокаОшибки" id="9">
@@ -1039,11 +1017,7 @@
 				</v8:item>
 			</Title>
 			<Type>
-				<v8:Type>xs:string</v8:Type>
-				<v8:StringQualifiers>
-					<v8:Length>0</v8:Length>
-					<v8:AllowedLength>Variable</v8:AllowedLength>
-				</v8:StringQualifiers>
+				<v8:Type>cfg:CatalogRef.Номенклатура</v8:Type>
 			</Type>
 		</Attribute>
 		<Attribute name="Склад" id="10">
@@ -1131,12 +1105,11 @@
 						</v8:item>
 					</Title>
 					<Type>
-						<v8:Type>xs:decimal</v8:Type>
-						<v8:NumberQualifiers>
-							<v8:Digits>15</v8:Digits>
-							<v8:FractionDigits>3</v8:FractionDigits>
-							<v8:AllowedSign>Nonnegative</v8:AllowedSign>
-						</v8:NumberQualifiers>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
 					</Type>
 				</Column>
 				<Column name="СтатусСоответствия" id="5">
@@ -1193,93 +1166,6 @@
 				<v8:Type>xs:boolean</v8:Type>
 			</Type>
 		</Attribute>
-		<ConditionalAppearance>
-			<dcsset:item>
-				<dcsset:selection>
-					<dcsset:item>
-						<dcsset:field>Нагрузка</dcsset:field>
-					</dcsset:item>
-				</dcsset:selection>
-				<dcsset:filter>
-					<dcsset:item xsi:type="dcsset:FilterItemComparison">
-						<dcsset:left xsi:type="dcscor:Field">Расчет.Нагрузка</dcsset:left>
-						<dcsset:comparisonType>NotFilled</dcsset:comparisonType>
-					</dcsset:item>
-				</dcsset:filter>
-				<dcsset:appearance>
-					<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-						<dcscor:parameter>ЦветФона</dcscor:parameter>
-						<dcscor:value xsi:type="v8ui:Color">web:Salmon</dcscor:value>
-					</dcscor:item>
-				</dcsset:appearance>
-			</dcsset:item>
-			<dcsset:item>
-				<dcsset:selection>
-					<dcsset:item>
-						<dcsset:field>ФИО</dcsset:field>
-					</dcsset:item>
-					<dcsset:item>
-						<dcsset:field>Должность</dcsset:field>
-					</dcsset:item>
-					<dcsset:item>
-						<dcsset:field>Организация</dcsset:field>
-					</dcsset:item>
-					<dcsset:item>
-						<dcsset:field>Подразделение</dcsset:field>
-					</dcsset:item>
-				</dcsset:selection>
-				<dcsset:filter>
-					<dcsset:item xsi:type="dcsset:FilterItemComparison">
-						<dcsset:left xsi:type="dcscor:Field">Расчет.ФИО</dcsset:left>
-						<dcsset:comparisonType>NotFilled</dcsset:comparisonType>
-					</dcsset:item>
-				</dcsset:filter>
-				<dcsset:appearance>
-					<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-						<dcscor:parameter>ЦветФона</dcscor:parameter>
-						<dcscor:value xsi:type="v8ui:Color">web:Salmon</dcscor:value>
-					</dcscor:item>
-				</dcsset:appearance>
-			</dcsset:item>
-			<dcsset:item>
-				<dcsset:selection>
-					<dcsset:item>
-						<dcsset:field>ОценкаРаботы</dcsset:field>
-					</dcsset:item>
-				</dcsset:selection>
-				<dcsset:filter>
-					<dcsset:item xsi:type="dcsset:FilterItemComparison">
-						<dcsset:left xsi:type="dcscor:Field">Расчет.ОценкаРаботы</dcsset:left>
-						<dcsset:comparisonType>NotFilled</dcsset:comparisonType>
-					</dcsset:item>
-				</dcsset:filter>
-				<dcsset:appearance>
-					<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-						<dcscor:parameter>ЦветФона</dcscor:parameter>
-						<dcscor:value xsi:type="v8ui:Color">web:Salmon</dcscor:value>
-					</dcscor:item>
-				</dcsset:appearance>
-			</dcsset:item>
-			<dcsset:item>
-				<dcsset:selection>
-					<dcsset:item>
-						<dcsset:field>ДатаВыхода</dcsset:field>
-					</dcsset:item>
-				</dcsset:selection>
-				<dcsset:filter>
-					<dcsset:item xsi:type="dcsset:FilterItemComparison">
-						<dcsset:left xsi:type="dcscor:Field">Расчет.ДатаВыхода</dcsset:left>
-						<dcsset:comparisonType>NotFilled</dcsset:comparisonType>
-					</dcsset:item>
-				</dcsset:filter>
-				<dcsset:appearance>
-					<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-						<dcscor:parameter>ЦветФона</dcscor:parameter>
-						<dcscor:value xsi:type="v8ui:Color">web:Salmon</dcscor:value>
-					</dcscor:item>
-				</dcsset:appearance>
-			</dcsset:item>
-		</ConditionalAppearance>
 	</Attributes>
 	<Commands>
 		<Command name="ПрочитатьФайл" id="1">
