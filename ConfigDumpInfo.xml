@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ConfigDumpInfo xmlns="http://v8.1c.ru/8.3/xcf/dumpinfo" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" format="Hierarchical" version="2.17">
+<ConfigDumpInfo xmlns="http://v8.1c.ru/8.3/xcf/dumpinfo" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" format="Hierarchical" version="2.19">
 	<ConfigVersions>
-		<Metadata name="Catalog.Номенклатура" id="0b18ff68-ac76-4049-92aa-1d72b8bfc487" configVersion="42a66d23cc10666774fdc05fa562aee1661768a2"/>
-		<Metadata name="Catalog.ПодразделенияОрганизаций" id="4f1392aa-e06d-4e82-a59b-9f381ad90eae" configVersion="a53d1afd84438555be3c23fa86873fbf070eca43"/>
-		<Metadata name="Catalog.Склады" id="77d7a4c1-87d3-4ea4-be48-cada0805de86" configVersion="6156209a1eb4bfb8ef5ce9bd1ed734251621cba8"/>
-		<Metadata name="Configuration.MRS_Cursor" id="db09653c-ac9b-48f4-81ff-bc86fa9d5901" configVersion="a15c6e450728dadb09c54bfafea6579b86b2c4a6"/>
+		<Metadata name="Catalog.Номенклатура" id="0b18ff68-ac76-4049-92aa-1d72b8bfc487" configVersion="b06579a975ccb043cb04bffd5c987054aa7cdc52"/>
+		<Metadata name="Catalog.ПодразделенияОрганизаций" id="4f1392aa-e06d-4e82-a59b-9f381ad90eae" configVersion="16358ebd4401ae3cba5a7d7ea91b0d62803f86c4"/>
+		<Metadata name="Catalog.Склады" id="77d7a4c1-87d3-4ea4-be48-cada0805de86" configVersion="4bdcf50ce48d5b5a1fbb1dd2ce51c5b19d9dfc4b"/>
+		<Metadata name="Configuration.MRS_Cursor" id="db09653c-ac9b-48f4-81ff-bc86fa9d5901" configVersion="f8d53b21051063359d287a05153c2fae507e2410"/>
 		<Metadata name="DataProcessor.MRS_КорректировкаНазначений" id="3d240765-91a3-43cb-9401-93da8ea471c0" configVersion="afd2e3c9ec22d427b0866452c16ceb6fa388d4a3"/>
 		<Metadata name="DataProcessor.MRS_КорректировкаНазначений.Form.Форма" id="773bd07b-8af0-4641-882d-09e96150dd50" configVersion="92927d4ef9572145a042f5bde5a7c5c75d808140"/>
 		<Metadata name="DataProcessor.MRS_КорректировкаНазначений.Form.Форма.Form" id="773bd07b-8af0-4641-882d-09e96150dd50.0" configVersion="bde63b40a6c1cbefeeb76952fa5cec79a8a64da7"/>
@@ -15,8 +15,8 @@
 			<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.Attribute.Организация" id="c1d36c0a-9582-4cf1-9206-4718407e7472"/>
 		</Metadata>
 		<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.Form.Форма" id="71490a4d-da47-4ba5-b48f-7cf653086c86" configVersion="a6fef6989b6e49384f339fc0980c493b9083bd92"/>
-		<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.Form.Форма.Form" id="71490a4d-da47-4ba5-b48f-7cf653086c86.0" configVersion="e3d8ac50287e16e20210a9ef0bd79e1dfa8be978"/>
-		<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.ObjectModule" id="381ede49-6d01-4b1d-81e4-c415e4f278f1.0" configVersion="f8857a2fb48dcc5ee3a5cd826fe30e4f24fe2168"/>
+		<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.Form.Форма.Form" id="71490a4d-da47-4ba5-b48f-7cf653086c86.0" configVersion="5cfe27f5c90404bf2101e65d42ea28dec1adb160"/>
+		<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.ObjectModule" id="381ede49-6d01-4b1d-81e4-c415e4f278f1.0" configVersion="a1a66fa503162db761c45e122b9b060659a30836"/>
 		<Metadata name="Document.КорректировкаРегистров" id="145ab1c0-6a7a-4976-a61d-95121a913263" configVersion="dd91cf316f4aa44c66e994629879a68be225df52"/>
 		<Metadata name="Document.СборкаТоваров" id="5207270b-0236-4a00-a1da-d532e9d8e285" configVersion="6775e2063aef9886f29bdea0f43b44f4ea8da04d"/>
 		<Metadata name="Document.питРецептура" id="b30f82f3-6803-406b-99af-6e9707a519b4" configVersion="97d0cc0ad663e9202612f6671376cde22429cd8f"/>
