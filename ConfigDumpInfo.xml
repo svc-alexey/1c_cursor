@@ -15,7 +15,7 @@
 			<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.Attribute.Организация" id="c1d36c0a-9582-4cf1-9206-4718407e7472"/>
 		</Metadata>
 		<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.Form.Форма" id="71490a4d-da47-4ba5-b48f-7cf653086c86" configVersion="a6fef6989b6e49384f339fc0980c493b9083bd92"/>
-		<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.Form.Форма.Form" id="71490a4d-da47-4ba5-b48f-7cf653086c86.0" configVersion="4b67f338cbb6ea1ddeb1c7eea59787988f5de2c9"/>
+		<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.Form.Форма.Form" id="71490a4d-da47-4ba5-b48f-7cf653086c86.0" configVersion="a04149f8e3837a116ac7b28801b1425f4f91f7ec"/>
 		<Metadata name="DataProcessor.MRS_СоздатьНоменклатуруПоEXCEL.ObjectModule" id="381ede49-6d01-4b1d-81e4-c415e4f278f1.0" configVersion="9f7f752df29c5f1f9eacafd4fdeb978e93af3d14"/>
 		<Metadata name="Document.КорректировкаРегистров" id="145ab1c0-6a7a-4976-a61d-95121a913263" configVersion="dd91cf316f4aa44c66e994629879a68be225df52"/>
 		<Metadata name="Document.СборкаТоваров" id="5207270b-0236-4a00-a1da-d532e9d8e285" configVersion="6775e2063aef9886f29bdea0f43b44f4ea8da04d"/>

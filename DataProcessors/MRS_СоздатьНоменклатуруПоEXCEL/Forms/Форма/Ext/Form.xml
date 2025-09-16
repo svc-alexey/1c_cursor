@@ -597,7 +597,7 @@
 								<ExtendedTooltip name="ДеревоРецептурУправлениеПоискомРасширеннаяПодсказка" id="363"/>
 							</SearchControlAddition>
 							<ChildItems>
-								<LabelField name="ДеревоРецептурНаименование" id="364">
+								<InputField name="ДеревоРецептурНаименование" id="364">
 									<DataPath>ДеревоРецептур.РецептураСсылка</DataPath>
 									<Title>
 										<v8:item>
@@ -605,9 +605,10 @@
 											<v8:content>Рецептура / Ингредиент</v8:content>
 										</v8:item>
 									</Title>
+									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
 									<ContextMenu name="ДеревоРецептурНаименованиеКонтекстноеМеню" id="365"/>
 									<ExtendedTooltip name="ДеревоРецептурНаименованиеРасширеннаяПодсказка" id="366"/>
-								</LabelField>
+								</InputField>
 								<InputField name="ДеревоРецептурСтараяНоменклатура" id="367">
 									<DataPath>ДеревоРецептур.СтараяНоменклатура</DataPath>
 									<ReadOnly>true</ReadOnly>
@@ -1135,7 +1136,12 @@
 						</v8:item>
 					</Title>
 					<Type>
+						<v8:Type>xs:string</v8:Type>
 						<v8:Type>cfg:DocumentRef.питРецептура</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
 					</Type>
 				</Column>
 				<Column name="ТипУзла" id="7">
