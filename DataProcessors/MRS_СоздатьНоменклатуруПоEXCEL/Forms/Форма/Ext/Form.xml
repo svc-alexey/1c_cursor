@@ -598,7 +598,7 @@
 							</SearchControlAddition>
 							<ChildItems>
 								<LabelField name="ДеревоРецептурНаименование" id="364">
-									<DataPath>ДеревоРецептур.Наименование</DataPath>
+									<DataPath>ДеревоРецептур.РецептураСсылка</DataPath>
 									<Title>
 										<v8:item>
 											<v8:lang>ru</v8:lang>
