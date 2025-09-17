@@ -384,6 +384,20 @@
 									<ContextMenu name="РецептурыНоменклатураНоваяКонтекстноеМеню" id="294"/>
 									<ExtendedTooltip name="РецептурыНоменклатураНоваяРасширеннаяПодсказка" id="295"/>
 								</InputField>
+								<InputField name="РецептурыСтатусРецептуры" id="400">
+									<DataPath>Рецептуры.СтатусРецептуры</DataPath>
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>Статус</v8:content>
+										</v8:item>
+									</Title>
+									<ReadOnly>true</ReadOnly>
+									<EditMode>EnterOnInput</EditMode>
+									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+									<ContextMenu name="РецептурыСтатусРецептурыКонтекстноеМеню" id="401"/>
+									<ExtendedTooltip name="РецептурыСтатусРецептурыРасширеннаяПодсказка" id="402"/>
+								</InputField>
 								<InputField name="РецептурыСтрокаОшибки" id="302">
 									<DataPath>Рецептуры.СтрокаОшибки</DataPath>
 									<EditMode>EnterOnInput</EditMode>
@@ -536,21 +550,51 @@
 							<Behavior>Usual</Behavior>
 							<ExtendedTooltip name="ГруппаФильтрыРасширеннаяПодсказка" id="343"/>
 							<ChildItems>
-								<CheckBoxField name="ТолькоБезСоответствий" id="344">
-									<DataPath>ТолькоБезСоответствий</DataPath>
-									<Title>
-										<v8:item>
-											<v8:lang>ru</v8:lang>
-											<v8:content>Только без соответствий</v8:content>
-										</v8:item>
-									</Title>
-									<CheckBoxType>Auto</CheckBoxType>
-									<ContextMenu name="ТолькоБезСоответствийКонтекстноеМеню" id="345"/>
-									<ExtendedTooltip name="ТолькоБезСоответствийРасширеннаяПодсказка" id="346"/>
-									<Events>
-										<Event name="OnChange">ТолькоБезСоответствийПриИзменении</Event>
-									</Events>
-								</CheckBoxField>
+						<CheckBoxField name="ТольоБезСоответствий" id="344">
+							<DataPath>ТолькоБезСоответствий</DataPath>
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Только без соответствий</v8:content>
+								</v8:item>
+							</Title>
+							<CheckBoxType>Auto</CheckBoxType>
+							<ContextMenu name="ТолькоБезСоответствийКонтекстноеМеню" id="345"/>
+							<ExtendedTooltip name="ТолькоБезСоответствийРасширеннаяПодсказка" id="346"/>
+							<Events>
+								<Event name="OnChange">ТолькоБезСоответствийПриИзменении</Event>
+							</Events>
+						</CheckBoxField>
+						<CheckBoxField name="ТолькоНеСозданные" id="450">
+							<DataPath>ТолькоНеСозданные</DataPath>
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Только не созданные</v8:content>
+								</v8:item>
+							</Title>
+							<CheckBoxType>Auto</CheckBoxType>
+							<ContextMenu name="ТолькоНеСозданныеКонтекстноеМеню" id="451"/>
+							<ExtendedTooltip name="ТолькоНеСозданныеРасширеннаяПодсказка" id="452"/>
+							<Events>
+								<Event name="OnChange">ФильтрыПриИзменении</Event>
+							</Events>
+						</CheckBoxField>
+						<CheckBoxField name="ТолькоЧастичноЗамененные" id="453">
+							<DataPath>ТолькоЧастичноЗамененные</DataPath>
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Только частично замененные</v8:content>
+								</v8:item>
+							</Title>
+							<CheckBoxType>Auto</CheckBoxType>
+							<ContextMenu name="ТолькоЧастичноЗамененныеКонтекстноеМеню" id="454"/>
+							<ExtendedTooltip name="ТолькоЧастичноЗамененныеРасширеннаяПодсказка" id="455"/>
+							<Events>
+								<Event name="OnChange">ФильтрыПриИзменении</Event>
+							</Events>
+						</CheckBoxField>
 								<Button name="ОбновитьДеревоРецептур" id="347">
 									<Type>UsualButton</Type>
 									<CommandName>Form.Command.ОбновитьДеревоРецептур</CommandName>
@@ -980,6 +1024,21 @@
 						<v8:Type>v8:ValueListType</v8:Type>
 					</Type>
 				</Column>
+				<Column name="СтатусРецептуры" id="11">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Статус рецептуры</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>50</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
 			</Columns>
 		</Attribute>
 		<Attribute name="ТаблицаСборок" id="8">
@@ -1166,6 +1225,28 @@
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Только без соответствий</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:boolean</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="ТолькоНеСозданные" id="14">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Только не созданные</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:boolean</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="ТолькоЧастичноЗамененные" id="15">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Только частично замененные</v8:content>
 				</v8:item>
 			</Title>
 			<Type>
