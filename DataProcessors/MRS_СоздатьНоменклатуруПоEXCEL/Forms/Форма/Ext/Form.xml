@@ -286,16 +286,19 @@
 					</ToolTip>
 					<ExtendedTooltip name="СоздатьРецептРасширеннаяПодсказка" id="259"/>
 					<ChildItems>
-						<Table name="Рецептуры" id="262">
-							<Representation>List</Representation>
-							<AutoInsertNewRow>true</AutoInsertNewRow>
-							<EnableStartDrag>true</EnableStartDrag>
-							<EnableDrag>true</EnableDrag>
-							<DataPath>Рецептуры</DataPath>
-							<RowFilter xsi:nil="true"/>
-							<ContextMenu name="РецептурыКонтекстноеМеню" id="263"/>
-							<AutoCommandBar name="РецептурыКоманднаяПанель" id="264"/>
-							<ExtendedTooltip name="РецептурыРасширеннаяПодсказка" id="265"/>
+					<Table name="Рецептуры" id="262">
+						<Representation>List</Representation>
+						<AutoInsertNewRow>true</AutoInsertNewRow>
+						<EnableStartDrag>true</EnableStartDrag>
+						<EnableDrag>true</EnableDrag>
+						<DataPath>Рецептуры</DataPath>
+						<RowFilter xsi:nil="true"/>
+						<ContextMenu name="РецептурыКонтекстноеМеню" id="263"/>
+						<AutoCommandBar name="РецептурыКоманднаяПанель" id="264"/>
+						<ExtendedTooltip name="РецептурыРасширеннаяПодсказка" id="265"/>
+						<Events>
+							<Event name="OnRowOutput">РецептурыПриВыводеСтроки</Event>
+						</Events>
 							<SearchStringAddition name="РецептурыСтрокаПоиска" id="266">
 								<AdditionSource>
 									<Item>Рецептуры</Item>
