@@ -296,9 +296,112 @@
 						<ContextMenu name="РецептурыКонтекстноеМеню" id="263"/>
 						<AutoCommandBar name="РецептурыКоманднаяПанель" id="264"/>
 						<ExtendedTooltip name="РецептурыРасширеннаяПодсказка" id="265"/>
-						<Events>
-							<Event name="OnRowOutput">РецептурыПриВыводеСтроки</Event>
-						</Events>
+						<ConditionalAppearance>
+							<Item>
+								<Selection>
+									<Item>
+										<Field>Рецептуры</Field>
+									</Item>
+								</Selection>
+								<Filter>
+									<Item>
+										<Left>
+											<Field>Рецептуры.СтатусРецептуры</Field>
+										</Left>
+										<ComparisonType>Equal</ComparisonType>
+										<Right>
+											<Value xsi:type="v8:LocalStringType">
+												<v8:item>
+													<v8:lang>ru</v8:lang>
+													<v8:content>Полностью заменена</v8:content>
+												</v8:item>
+											</Value>
+										</Right>
+									</Item>
+								</Filter>
+								<Appearance>
+									<Item>
+										<Parameter>BackColor</Parameter>
+										<Value xsi:type="v8:Color">LightGreen</Value>
+									</Item>
+								</Appearance>
+							</Item>
+							<Item>
+								<Selection>
+									<Item>
+										<Field>Рецептуры</Field>
+									</Item>
+								</Selection>
+								<Filter>
+									<Item>
+										<Left>
+											<Field>Рецептуры.СтатусРецептуры</Field>
+										</Left>
+										<ComparisonType>Equal</ComparisonType>
+										<Right>
+											<Value xsi:type="v8:LocalStringType">
+												<v8:item>
+													<v8:lang>ru</v8:lang>
+													<v8:content>Частично заменена</v8:content>
+												</v8:item>
+											</Value>
+										</Right>
+									</Item>
+								</Filter>
+								<Appearance>
+									<Item>
+										<Parameter>BackColor</Parameter>
+										<Value xsi:type="v8:Color">LightYellow</Value>
+									</Item>
+								</Appearance>
+							</Item>
+							<Item>
+								<Selection>
+									<Item>
+										<Field>Рецептуры</Field>
+									</Item>
+								</Selection>
+								<Filter>
+									<Group>
+										<GroupType>Or</GroupType>
+										<Item>
+											<Left>
+												<Field>Рецептуры.СтатусРецептуры</Field>
+											</Left>
+											<ComparisonType>Equal</ComparisonType>
+											<Right>
+												<Value xsi:type="v8:LocalStringType">
+													<v8:item>
+														<v8:lang>ru</v8:lang>
+														<v8:content>Не заменена</v8:content>
+													</v8:item>
+												</Value>
+											</Right>
+										</Item>
+										<Item>
+											<Left>
+												<Field>Рецептуры.СтатусРецептуры</Field>
+											</Left>
+											<ComparisonType>Equal</ComparisonType>
+											<Right>
+												<Value xsi:type="v8:LocalStringType">
+													<v8:item>
+														<v8:lang>ru</v8:lang>
+														<v8:content>Не создана</v8:content>
+													</v8:item>
+												</Value>
+											</Right>
+										</Item>
+									</Group>
+								</Filter>
+								<Appearance>
+									<Item>
+										<Parameter>BackColor</Parameter>
+										<Value xsi:type="v8:Color">LightCoral</Value>
+									</Item>
+								</Appearance>
+							</Item>
+						</ConditionalAppearance>
 							<SearchStringAddition name="РецептурыСтрокаПоиска" id="266">
 								<AdditionSource>
 									<Item>Рецептуры</Item>
