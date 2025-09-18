@@ -492,7 +492,6 @@
 								</InputField>
 								<InputField name="ДеревоПозицийБезЗаменАвтоЗамена" id="513">
 									<DataPath>ДеревоПозицийБезЗамен.АвтоЗамена</DataPath>
-									<ReadOnly>true</ReadOnly>
 									<Title>
 										<v8:item>
 											<v8:lang>ru</v8:lang>
@@ -503,6 +502,9 @@
 									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
 									<ContextMenu name="ДеревоПозицийБезЗаменАвтоЗаменаКонтекстноеМеню" id="514"/>
 									<ExtendedTooltip name="ДеревоПозицийБезЗаменАвтоЗаменаРасширеннаяПодсказка" id="515"/>
+									<Events>
+										<Event name="StartChoice">ДеревоПозицийБезЗаменАвтоЗаменаНачалоВыбора</Event>
+									</Events>
 								</InputField>
 								<InputField name="ДеревоПозицийБезЗаменРучнаяЗамена" id="508">
 									<DataPath>ДеревоПозицийБезЗамен.РучнаяЗамена</DataPath>
