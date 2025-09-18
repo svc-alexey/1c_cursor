@@ -282,6 +282,11 @@
 									</Title>
 									<ExtendedTooltip name="ПоказатьПозицииБезЗаменРасширеннаяПодсказка" id="457"/>
 								</Button>
+								<Button name="ОбновитьРецептурыПоСвязям" id="511">
+									<Type>UsualButton</Type>
+									<CommandName>Form.Command.ОбновитьРецептурыПоСвязям</CommandName>
+									<ExtendedTooltip name="ОбновитьРецептурыПоСвязямРасширеннаяПодсказка" id="512"/>
+								</Button>
 							</ChildItems>
 						</UsualGroup>
 						<Table name="ДеревоРецептур" id="351">
@@ -1337,6 +1342,21 @@
 				</v8:item>
 			</ToolTip>
 			<Action>СохранитьЗамены</Action>
+		</Command>
+		<Command name="ОбновитьРецептурыПоСвязям" id="11">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Обновить рецептуры по связям</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Обновить рецептуры по связям</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>ОбновитьРецептурыПоСвязям</Action>
 		</Command>
 	</Commands>
 </Form>
