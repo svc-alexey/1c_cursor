@@ -490,8 +490,28 @@
 									<ContextMenu name="ТаблицаПозицийБезЗаменРецептураКонтекстноеМеню" id="495"/>
 									<ExtendedTooltip name="ТаблицаПозицийБезЗаменРецептураРасширеннаяПодсказка" id="496"/>
 								</InputField>
-								<InputField name="ДеревоПозицийБезЗаменЗамена" id="508">
-									<DataPath>ДеревоПозицийБезЗамен.Замена</DataPath>
+								<InputField name="ДеревоПозицийБезЗаменАвтоЗамена" id="513">
+									<DataPath>ДеревоПозицийБезЗамен.АвтоЗамена</DataPath>
+									<ReadOnly>true</ReadOnly>
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>Авто замена</v8:content>
+										</v8:item>
+									</Title>
+									<EditMode>EnterOnInput</EditMode>
+									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+									<ContextMenu name="ДеревоПозицийБезЗаменАвтоЗаменаКонтекстноеМеню" id="514"/>
+									<ExtendedTooltip name="ДеревоПозицийБезЗаменАвтоЗаменаРасширеннаяПодсказка" id="515"/>
+								</InputField>
+								<InputField name="ДеревоПозицийБезЗаменРучнаяЗамена" id="508">
+									<DataPath>ДеревоПозицийБезЗамен.РучнаяЗамена</DataPath>
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>Ручная замена</v8:content>
+										</v8:item>
+									</Title>
 									<EditMode>EnterOnInput</EditMode>
 									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
 									<ContextMenu name="ТаблицаПозицийБезЗаменЗаменаКонтекстноеМеню" id="509"/>
@@ -1178,11 +1198,22 @@
 						<v8:Type>cfg:DocumentRef.питРецептура</v8:Type>
 					</Type>
 				</Column>
-				<Column name="Замена" id="8">
+				<Column name="РучнаяЗамена" id="8">
 					<Title>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>Замена</v8:content>
+							<v8:content>Ручная замена</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Номенклатура</v8:Type>
+					</Type>
+				</Column>
+				<Column name="АвтоЗамена" id="9">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Авто замена</v8:content>
 						</v8:item>
 					</Title>
 					<Type>
