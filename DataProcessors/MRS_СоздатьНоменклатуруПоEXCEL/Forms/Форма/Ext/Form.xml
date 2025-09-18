@@ -240,6 +240,14 @@
 											<ContextMenu name="ДанныеВскрытаяПродукцияКонтекстноеМеню" id="300"/>
 											<ExtendedTooltip name="ДанныеВскрытаяПродукцияРасширеннаяПодсказка" id="301"/>
 										</InputField>
+										<InputField name="ДанныеКомментарий" id="460">
+											<DataPath>Данные.Комментарий</DataPath>
+											<EditMode>EnterOnInput</EditMode>
+											<MultiLine>true</MultiLine>
+											<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+											<ContextMenu name="ДанныеКомментарийКонтекстноеМеню" id="461"/>
+											<ExtendedTooltip name="ДанныеКомментарийРасширеннаяПодсказка" id="462"/>
+										</InputField>
 									</ChildItems>
 								</Table>
 							</ChildItems>
@@ -605,6 +613,28 @@
 									<CommandName>Form.Command.СохранитьИзмененияВРецептурах</CommandName>
 									<ExtendedTooltip name="СохранитьИзмененияВРецептурахРасширеннаяПодсказка" id="350"/>
 								</Button>
+								<Button name="ПоказатьПозицииБезЗамен" id="456">
+									<Type>UsualButton</Type>
+									<CommandName>Form.Command.ПоказатьПозицииБезЗамен</CommandName>
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>Показать позиции без замен</v8:content>
+										</v8:item>
+									</Title>
+									<ExtendedTooltip name="ПоказатьПозицииБезЗаменРасширеннаяПодсказка" id="457"/>
+								</Button>
+								<Button name="ПолучитьТаблицуПозицийБезЗамен" id="458">
+									<Type>UsualButton</Type>
+									<CommandName>Form.Command.ПолучитьТаблицуПозицийБезЗамен</CommandName>
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>Загрузить позиции без замен</v8:content>
+										</v8:item>
+									</Title>
+									<ExtendedTooltip name="ПолучитьТаблицуПозицийБезЗаменРасширеннаяПодсказка" id="459"/>
+								</Button>
 							</ChildItems>
 						</UsualGroup>
 						<Table name="ДеревоРецептур" id="351">
@@ -704,6 +734,140 @@
 									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
 									<ContextMenu name="ДеревоРецептурКоличествоКонтекстноеМеню" id="377"/>
 									<ExtendedTooltip name="ДеревоРецептурКоличествоРасширеннаяПодсказка" id="378"/>
+								</InputField>
+							</ChildItems>
+						</Table>
+					</ChildItems>
+				</Page>
+				<Page name="ПозицииБезЗамен" id="463">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Позиции без замен</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Алкогольные позиции без замен</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ExtendedTooltip name="ПозицииБезЗаменРасширеннаяПодсказка" id="464"/>
+					<ChildItems>
+						<UsualGroup name="КнопкиПозицийБезЗамен" id="465">
+							<Group>AlwaysHorizontal</Group>
+							<Behavior>Usual</Behavior>
+							<ExtendedTooltip name="КнопкиПозицийБезЗаменРасширеннаяПодсказка" id="466"/>
+							<ChildItems>
+								<Button name="ПоказатьПозицииБезЗаменТаблица" id="467">
+									<Type>UsualButton</Type>
+									<CommandName>Form.Command.ПоказатьПозицииБезЗамен</CommandName>
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>Показать позиции без замен</v8:content>
+										</v8:item>
+									</Title>
+									<ExtendedTooltip name="ПоказатьПозицииБезЗаменТаблицаРасширеннаяПодсказка" id="468"/>
+								</Button>
+							</ChildItems>
+						</UsualGroup>
+						<Table name="ТаблицаПозицийБезЗамен" id="469">
+							<Representation>List</Representation>
+							<AutoInsertNewRow>true</AutoInsertNewRow>
+							<EnableStartDrag>true</EnableStartDrag>
+							<EnableDrag>true</EnableDrag>
+							<DataPath>ТаблицаПозицийБезЗамен</DataPath>
+							<RowFilter xsi:nil="true"/>
+							<ContextMenu name="ТаблицаПозицийБезЗаменКонтекстноеМеню" id="470"/>
+							<AutoCommandBar name="ТаблицаПозицийБезЗаменКоманднаяПанель" id="471"/>
+							<ExtendedTooltip name="ТаблицаПозицийБезЗаменРасширеннаяПодсказка" id="472"/>
+							<SearchStringAddition name="ТаблицаПозицийБезЗаменСтрокаПоиска" id="473">
+								<AdditionSource>
+									<Item>ТаблицаПозицийБезЗамен</Item>
+									<Type>SearchStringRepresentation</Type>
+								</AdditionSource>
+								<ContextMenu name="ТаблицаПозицийБезЗаменСтрокаПоискаКонтекстноеМеню" id="474"/>
+								<ExtendedTooltip name="ТаблицаПозицийБезЗаменСтрокаПоискаРасширеннаяПодсказка" id="475"/>
+							</SearchStringAddition>
+							<ViewStatusAddition name="ТаблицаПозицийБезЗаменСостояниеПросмотра" id="476">
+								<AdditionSource>
+									<Item>ТаблицаПозицийБезЗамен</Item>
+									<Type>ViewStatusRepresentation</Type>
+								</AdditionSource>
+								<ContextMenu name="ТаблицаПозицийБезЗаменСостояниеПросмотраКонтекстноеМеню" id="477"/>
+								<ExtendedTooltip name="ТаблицаПозицийБезЗаменСостояниеПросмотраРасширеннаяПодсказка" id="478"/>
+							</ViewStatusAddition>
+							<SearchControlAddition name="ТаблицаПозицийБезЗаменУправлениеПоиском" id="479">
+								<AdditionSource>
+									<Item>ТаблицаПозицийБезЗамен</Item>
+									<Type>SearchControl</Type>
+								</AdditionSource>
+								<ContextMenu name="ТаблицаПозицийБезЗаменУправлениеПоискомКонтекстноеМеню" id="480"/>
+								<ExtendedTooltip name="ТаблицаПозицийБезЗаменУправлениеПоискомРасширеннаяПодсказка" id="481"/>
+							</SearchControlAddition>
+							<ChildItems>
+								<InputField name="ТаблицаПозицийБезЗаменНомерПозиции" id="482">
+									<DataPath>ТаблицаПозицийБезЗамен.НомерПозиции</DataPath>
+									<ReadOnly>true</ReadOnly>
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>№</v8:content>
+										</v8:item>
+									</Title>
+									<EditMode>EnterOnInput</EditMode>
+									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+									<ContextMenu name="ТаблицаПозицийБезЗаменНомерПозицииКонтекстноеМеню" id="483"/>
+									<ExtendedTooltip name="ТаблицаПозицийБезЗаменНомерПозицииРасширеннаяПодсказка" id="484"/>
+								</InputField>
+								<InputField name="ТаблицаПозицийБезЗаменНоменклатура" id="485">
+									<DataPath>ТаблицаПозицийБезЗамен.Номенклатура</DataPath>
+									<ReadOnly>true</ReadOnly>
+									<EditMode>EnterOnInput</EditMode>
+									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+									<ContextMenu name="ТаблицаПозицийБезЗаменНоменклатураКонтекстноеМеню" id="486"/>
+									<ExtendedTooltip name="ТаблицаПозицийБезЗаменНоменклатураРасширеннаяПодсказка" id="487"/>
+								</InputField>
+								<InputField name="ТаблицаПозицийБезЗаменКодНоменклатуры" id="488">
+									<DataPath>ТаблицаПозицийБезЗамен.КодНоменклатуры</DataPath>
+									<ReadOnly>true</ReadOnly>
+									<EditMode>EnterOnInput</EditMode>
+									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+									<ContextMenu name="ТаблицаПозицийБезЗаменКодНоменклатурыКонтекстноеМеню" id="489"/>
+									<ExtendedTooltip name="ТаблицаПозицийБезЗаменКодНоменклатурыРасширеннаяПодсказка" id="490"/>
+								</InputField>
+								<InputField name="ТаблицаПозицийБезЗаменНаименованиеНоменклатуры" id="491">
+									<DataPath>ТаблицаПозицийБезЗамен.НаименованиеНоменклатуры</DataPath>
+									<ReadOnly>true</ReadOnly>
+									<EditMode>EnterOnInput</EditMode>
+									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+									<ContextMenu name="ТаблицаПозицийБезЗаменНаименованиеНоменклатурыКонтекстноеМеню" id="492"/>
+									<ExtendedTooltip name="ТаблицаПозицийБезЗаменНаименованиеНоменклатурыРасширеннаяПодсказка" id="493"/>
+								</InputField>
+								<InputField name="ТаблицаПозицийБезЗаменРецептура" id="494">
+									<DataPath>ТаблицаПозицийБезЗамен.Рецептура</DataPath>
+									<ReadOnly>true</ReadOnly>
+									<EditMode>EnterOnInput</EditMode>
+									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+									<ContextMenu name="ТаблицаПозицийБезЗаменРецептураКонтекстноеМеню" id="495"/>
+									<ExtendedTooltip name="ТаблицаПозицийБезЗаменРецептураРасширеннаяПодсказка" id="496"/>
+								</InputField>
+								<InputField name="ТаблицаПозицийБезЗаменНомерРецептуры" id="497">
+									<DataPath>ТаблицаПозицийБезЗамен.НомерРецептуры</DataPath>
+									<ReadOnly>true</ReadOnly>
+									<EditMode>EnterOnInput</EditMode>
+									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+									<ContextMenu name="ТаблицаПозицийБезЗаменНомерРецептурыКонтекстноеМеню" id="498"/>
+									<ExtendedTooltip name="ТаблицаПозицийБезЗаменНомерРецептурыРасширеннаяПодсказка" id="499"/>
+								</InputField>
+								<InputField name="ТаблицаПозицийБезЗаменНаименованиеРецептуры" id="500">
+									<DataPath>ТаблицаПозицийБезЗамен.НаименованиеРецептуры</DataPath>
+									<ReadOnly>true</ReadOnly>
+									<EditMode>EnterOnInput</EditMode>
+									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+									<ContextMenu name="ТаблицаПозицийБезЗаменНаименованиеРецептурыКонтекстноеМеню" id="501"/>
+									<ExtendedTooltip name="ТаблицаПозицийБезЗаменНаименованиеРецептурыРасширеннаяПодсказка" id="502"/>
 								</InputField>
 							</ChildItems>
 						</Table>
@@ -851,6 +1015,21 @@
 					</Title>
 					<Type>
 						<v8:Type>cfg:CatalogRef.Номенклатура</v8:Type>
+					</Type>
+				</Column>
+				<Column name="Комментарий" id="7">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Комментарий</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
 					</Type>
 				</Column>
 			</Columns>
@@ -1253,6 +1432,117 @@
 				<v8:Type>xs:boolean</v8:Type>
 			</Type>
 		</Attribute>
+		<Attribute name="ТаблицаПозицийБезЗамен" id="16">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Таблица позиций без замен</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>v8:ValueTable</v8:Type>
+			</Type>
+			<Columns>
+				<Column name="НомерПозиции" id="1">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>№</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:decimal</v8:Type>
+						<v8:NumberQualifiers>
+							<v8:Digits>3</v8:Digits>
+							<v8:FractionDigits>0</v8:FractionDigits>
+							<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+						</v8:NumberQualifiers>
+					</Type>
+				</Column>
+				<Column name="Номенклатура" id="2">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Номенклатура</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Номенклатура</v8:Type>
+					</Type>
+				</Column>
+				<Column name="КодНоменклатуры" id="3">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Код</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>20</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="НаименованиеНоменклатуры" id="4">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Наименование номенклатуры</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Рецептура" id="5">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Рецептура</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>cfg:DocumentRef.питРецептура</v8:Type>
+					</Type>
+				</Column>
+				<Column name="НомерРецептуры" id="6">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>№ рецептуры</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>20</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="НаименованиеРецептуры" id="7">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Наименование рецептуры</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+			</Columns>
+		</Attribute>
 	</Attributes>
 	<Commands>
 		<Command name="ПрочитатьФайл" id="1">
@@ -1359,6 +1649,36 @@
 				</v8:item>
 			</ToolTip>
 			<Action>ОбновитьПредзаполнение</Action>
+		</Command>
+		<Command name="ПоказатьПозицииБезЗамен" id="8">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Показать позиции без замен</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Показать в консоли все алкогольные позиции без замен</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>ПоказатьПозицииБезЗамен</Action>
+		</Command>
+		<Command name="ПолучитьТаблицуПозицийБезЗамен" id="9">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Загрузить позиции без замен</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Загрузить позиции без замен в таблицу для анализа</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>ПолучитьТаблицуПозицийБезЗамен</Action>
 		</Command>
 	</Commands>
 </Form>
