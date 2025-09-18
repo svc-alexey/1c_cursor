@@ -504,6 +504,7 @@
 									<ExtendedTooltip name="ДеревоПозицийБезЗаменАвтоЗаменаРасширеннаяПодсказка" id="515"/>
 									<Events>
 										<Event name="StartChoice">ДеревоПозицийБезЗаменАвтоЗаменаНачалоВыбора</Event>
+										<Event name="ChoiceProcessing">ДеревоПозицийБезЗаменАвтоЗаменаОбработкаВыбора</Event>
 									</Events>
 								</InputField>
 								<InputField name="ДеревоПозицийБезЗаменРучнаяЗамена" id="508">
