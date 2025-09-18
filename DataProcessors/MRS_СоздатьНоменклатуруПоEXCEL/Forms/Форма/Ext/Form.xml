@@ -286,122 +286,16 @@
 					</ToolTip>
 					<ExtendedTooltip name="СоздатьРецептРасширеннаяПодсказка" id="259"/>
 					<ChildItems>
-					<Table name="Рецептуры" id="262">
-						<Representation>List</Representation>
-						<AutoInsertNewRow>true</AutoInsertNewRow>
-						<EnableStartDrag>true</EnableStartDrag>
-						<EnableDrag>true</EnableDrag>
-						<DataPath>Рецептуры</DataPath>
-						<RowFilter xsi:nil="true"/>
-						<ContextMenu name="РецептурыКонтекстноеМеню" id="263"/>
-						<AutoCommandBar name="РецептурыКоманднаяПанель" id="264"/>
-						<ExtendedTooltip name="РецептурыРасширеннаяПодсказка" id="265"/>
-						<ConditionalAppearance>
-							<Item>
-								<Selection>
-									<Item>
-										<Field>Рецептуры</Field>
-									</Item>
-								</Selection>
-								<Filter>
-									<Item>
-										<Left>
-											<Field>Рецептуры.СтатусРецептуры</Field>
-										</Left>
-										<ComparisonType>Equal</ComparisonType>
-										<Right>
-											<Value xsi:type="v8:LocalStringType">
-												<v8:item>
-													<v8:lang>ru</v8:lang>
-													<v8:content>Полностью заменена</v8:content>
-												</v8:item>
-											</Value>
-										</Right>
-									</Item>
-								</Filter>
-								<Appearance>
-									<Item>
-										<Parameter>BackColor</Parameter>
-										<Value xsi:type="v8:Color">LightGreen</Value>
-									</Item>
-								</Appearance>
-							</Item>
-							<Item>
-								<Selection>
-									<Item>
-										<Field>Рецептуры</Field>
-									</Item>
-								</Selection>
-								<Filter>
-									<Item>
-										<Left>
-											<Field>Рецептуры.СтатусРецептуры</Field>
-										</Left>
-										<ComparisonType>Equal</ComparisonType>
-										<Right>
-											<Value xsi:type="v8:LocalStringType">
-												<v8:item>
-													<v8:lang>ru</v8:lang>
-													<v8:content>Частично заменена</v8:content>
-												</v8:item>
-											</Value>
-										</Right>
-									</Item>
-								</Filter>
-								<Appearance>
-									<Item>
-										<Parameter>BackColor</Parameter>
-										<Value xsi:type="v8:Color">LightYellow</Value>
-									</Item>
-								</Appearance>
-							</Item>
-							<Item>
-								<Selection>
-									<Item>
-										<Field>Рецептуры</Field>
-									</Item>
-								</Selection>
-								<Filter>
-									<Group>
-										<GroupType>Or</GroupType>
-										<Item>
-											<Left>
-												<Field>Рецептуры.СтатусРецептуры</Field>
-											</Left>
-											<ComparisonType>Equal</ComparisonType>
-											<Right>
-												<Value xsi:type="v8:LocalStringType">
-													<v8:item>
-														<v8:lang>ru</v8:lang>
-														<v8:content>Не заменена</v8:content>
-													</v8:item>
-												</Value>
-											</Right>
-										</Item>
-										<Item>
-											<Left>
-												<Field>Рецептуры.СтатусРецептуры</Field>
-											</Left>
-											<ComparisonType>Equal</ComparisonType>
-											<Right>
-												<Value xsi:type="v8:LocalStringType">
-													<v8:item>
-														<v8:lang>ru</v8:lang>
-														<v8:content>Не создана</v8:content>
-													</v8:item>
-												</Value>
-											</Right>
-										</Item>
-									</Group>
-								</Filter>
-								<Appearance>
-									<Item>
-										<Parameter>BackColor</Parameter>
-										<Value xsi:type="v8:Color">LightCoral</Value>
-									</Item>
-								</Appearance>
-							</Item>
-						</ConditionalAppearance>
+						<Table name="Рецептуры" id="262">
+							<Representation>List</Representation>
+							<AutoInsertNewRow>true</AutoInsertNewRow>
+							<EnableStartDrag>true</EnableStartDrag>
+							<EnableDrag>true</EnableDrag>
+							<DataPath>Рецептуры</DataPath>
+							<RowFilter xsi:nil="true"/>
+							<ContextMenu name="РецептурыКонтекстноеМеню" id="263"/>
+							<AutoCommandBar name="РецептурыКоманднаяПанель" id="264"/>
+							<ExtendedTooltip name="РецептурыРасширеннаяПодсказка" id="265"/>
 							<SearchStringAddition name="РецептурыСтрокаПоиска" id="266">
 								<AdditionSource>
 									<Item>Рецептуры</Item>
@@ -492,13 +386,13 @@
 								</InputField>
 								<InputField name="РецептурыСтатусРецептуры" id="400">
 									<DataPath>Рецептуры.СтатусРецептуры</DataPath>
+									<ReadOnly>true</ReadOnly>
 									<Title>
 										<v8:item>
 											<v8:lang>ru</v8:lang>
 											<v8:content>Статус</v8:content>
 										</v8:item>
 									</Title>
-									<ReadOnly>true</ReadOnly>
 									<EditMode>EnterOnInput</EditMode>
 									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
 									<ContextMenu name="РецептурыСтатусРецептурыКонтекстноеМеню" id="401"/>
@@ -656,51 +550,51 @@
 							<Behavior>Usual</Behavior>
 							<ExtendedTooltip name="ГруппаФильтрыРасширеннаяПодсказка" id="343"/>
 							<ChildItems>
-						<CheckBoxField name="ТольоБезСоответствий" id="344">
-							<DataPath>ТолькоБезСоответствий</DataPath>
-							<Title>
-								<v8:item>
-									<v8:lang>ru</v8:lang>
-									<v8:content>Только без соответствий</v8:content>
-								</v8:item>
-							</Title>
-							<CheckBoxType>Auto</CheckBoxType>
-							<ContextMenu name="ТолькоБезСоответствийКонтекстноеМеню" id="345"/>
-							<ExtendedTooltip name="ТолькоБезСоответствийРасширеннаяПодсказка" id="346"/>
-							<Events>
-								<Event name="OnChange">ТолькоБезСоответствийПриИзменении</Event>
-							</Events>
-						</CheckBoxField>
-						<CheckBoxField name="ТолькоНеСозданные" id="450">
-							<DataPath>ТолькоНеСозданные</DataPath>
-							<Title>
-								<v8:item>
-									<v8:lang>ru</v8:lang>
-									<v8:content>Только не созданные</v8:content>
-								</v8:item>
-							</Title>
-							<CheckBoxType>Auto</CheckBoxType>
-							<ContextMenu name="ТолькоНеСозданныеКонтекстноеМеню" id="451"/>
-							<ExtendedTooltip name="ТолькоНеСозданныеРасширеннаяПодсказка" id="452"/>
-							<Events>
-								<Event name="OnChange">ФильтрыПриИзменении</Event>
-							</Events>
-						</CheckBoxField>
-						<CheckBoxField name="ТолькоЧастичноЗамененные" id="453">
-							<DataPath>ТолькоЧастичноЗамененные</DataPath>
-							<Title>
-								<v8:item>
-									<v8:lang>ru</v8:lang>
-									<v8:content>Только частично замененные</v8:content>
-								</v8:item>
-							</Title>
-							<CheckBoxType>Auto</CheckBoxType>
-							<ContextMenu name="ТолькоЧастичноЗамененныеКонтекстноеМеню" id="454"/>
-							<ExtendedTooltip name="ТолькоЧастичноЗамененныеРасширеннаяПодсказка" id="455"/>
-							<Events>
-								<Event name="OnChange">ФильтрыПриИзменении</Event>
-							</Events>
-						</CheckBoxField>
+								<CheckBoxField name="ТольоБезСоответствий" id="344">
+									<DataPath>ТолькоБезСоответствий</DataPath>
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>Только без соответствий</v8:content>
+										</v8:item>
+									</Title>
+									<CheckBoxType>Auto</CheckBoxType>
+									<ContextMenu name="ТолькоБезСоответствийКонтекстноеМеню" id="345"/>
+									<ExtendedTooltip name="ТолькоБезСоответствийРасширеннаяПодсказка" id="346"/>
+									<Events>
+										<Event name="OnChange">ТолькоБезСоответствийПриИзменении</Event>
+									</Events>
+								</CheckBoxField>
+								<CheckBoxField name="ТолькоНеСозданные" id="450">
+									<DataPath>ТолькоНеСозданные</DataPath>
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>Только не созданные</v8:content>
+										</v8:item>
+									</Title>
+									<CheckBoxType>Auto</CheckBoxType>
+									<ContextMenu name="ТолькоНеСозданныеКонтекстноеМеню" id="451"/>
+									<ExtendedTooltip name="ТолькоНеСозданныеРасширеннаяПодсказка" id="452"/>
+									<Events>
+										<Event name="OnChange">ФильтрыПриИзменении</Event>
+									</Events>
+								</CheckBoxField>
+								<CheckBoxField name="ТолькоЧастичноЗамененные" id="453">
+									<DataPath>ТолькоЧастичноЗамененные</DataPath>
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>Только частично замененные</v8:content>
+										</v8:item>
+									</Title>
+									<CheckBoxType>Auto</CheckBoxType>
+									<ContextMenu name="ТолькоЧастичноЗамененныеКонтекстноеМеню" id="454"/>
+									<ExtendedTooltip name="ТолькоЧастичноЗамененныеРасширеннаяПодсказка" id="455"/>
+									<Events>
+										<Event name="OnChange">ФильтрыПриИзменении</Event>
+									</Events>
+								</CheckBoxField>
 								<Button name="ОбновитьДеревоРецептур" id="347">
 									<Type>UsualButton</Type>
 									<CommandName>Form.Command.ОбновитьДеревоРецептур</CommandName>
