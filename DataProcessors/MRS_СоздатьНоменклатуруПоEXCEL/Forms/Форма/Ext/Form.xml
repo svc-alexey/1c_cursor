@@ -437,7 +437,6 @@
 							<EnableStartDrag>true</EnableStartDrag>
 							<EnableDrag>true</EnableDrag>
 							<DataPath>ДеревоПозицийБезЗамен</DataPath>
-							<RowFilter xsi:nil="true"/>
 							<ContextMenu name="ТаблицаПозицийБезЗаменКонтекстноеМеню" id="470"/>
 							<AutoCommandBar name="ТаблицаПозицийБезЗаменКоманднаяПанель" id="471">
 								<ChildItems>
@@ -1221,6 +1220,7 @@
 					</Title>
 					<Type>
 						<v8:Type>cfg:CatalogRef.Номенклатура</v8:Type>
+						<v8:Type>v8:ValueListType</v8:Type>
 					</Type>
 				</Column>
 			</Columns>
