@@ -1432,7 +1432,7 @@
 				<v8:Type>xs:boolean</v8:Type>
 			</Type>
 		</Attribute>
-		<Attribute name="ТаблицаПозицийБезЗамен" id="16">
+		<Attribute name="ТаблицаПозицийБезЗамен" id="17">
 			<Title>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
