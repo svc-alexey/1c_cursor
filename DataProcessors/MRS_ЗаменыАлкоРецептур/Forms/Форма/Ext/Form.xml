@@ -22,6 +22,7 @@
 			<ExtendedTooltip name="СтраницыРасширеннаяПодсказка" id="255"/>
 			<ChildItems>
 				<Page name="СоздатьРецепт" id="258">
+					<Visible>false</Visible>
 					<Title>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -614,7 +615,7 @@
 	<Attributes>
 		<Attribute name="Объект" id="1">
 			<Type>
-				<v8:Type>cfg:DataProcessorObject.MRS_СоздатьНоменклатуруПоEXCEL</v8:Type>
+				<v8:Type>cfg:DataProcessorObject.MRS_ЗаменыАлкоРецептур</v8:Type>
 			</Type>
 			<MainAttribute>true</MainAttribute>
 		</Attribute>

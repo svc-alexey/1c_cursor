@@ -73,7 +73,8 @@
 			<Document>питРецептура</Document>
 			<Document>СборкаТоваров</Document>
 			<DataProcessor>MRS_КорректировкаНазначений</DataProcessor>
-			<DataProcessor>MRS_СоздатьНоменклатуруПоEXCEL</DataProcessor>
+			<DataProcessor>MRS_ЗаменыАлкоРецептур</DataProcessor>
+			<DataProcessor>БыстроеОбезличивание</DataProcessor>
 		</ChildObjects>
 	</Configuration>
 </MetaDataObject>
