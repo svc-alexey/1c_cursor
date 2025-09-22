@@ -887,6 +887,7 @@
 							НовСтр.АлкогольнаяПродукция = Марка.АлкогольнаяПродукция;
 							НовСтр.Количество = Марка.КоличествоВыбытия / 1000;
 							НовСтр.ЕдиницаИзмерения = Марка.НоменклатураЕдиницаИзмерения;
+							НовСтр.MRS_ПозицияЧека = Марка.ПозицияЧека;
 						КонецЦикла;
 					КонецЕсли;
 				КонецЕсли;
@@ -998,6 +999,7 @@
 					НовСтр.АлкогольнаяПродукция = Марка.АлкогольнаяПродукция;
 					НовСтр.Количество = Марка.КоличествоВыбытия / 1000;
 					НовСтр.ЕдиницаИзмерения = Марка.НоменклатураЕдиницаИзмерения;
+					НовСтр.MRS_ПозицияЧека = Марка.ПозицияЧека;
 				КонецЦикла;
 			КонецЕсли;                                 
 		КонецЕсли;
@@ -1201,9 +1203,6 @@
 	RecordSet.CursorType = 3;
 	RecordSet.LockType = 2; 
 	
-	//ДатаЗапретаПодключенияНачало = Формат(НачалоДня(СтруктураПараметров.ДатаЗапретаПодключения), "ДФ=yyyy-MM-dd hh:mm:dd");   
-	//ДатаЗапретаПодключенияКонец = Формат(КонецДня(СтруктураПараметров.ДатаЗапретаПодключения), "ДФ=yyyy-MM-dd hh:mm:dd"); 
-	
 	#Область Запрос
 	
 	УсловиеДатаЗагрузки = "cc.checkclose BETWEEN TO_TIMESTAMP('" + ПараметрыВыборки.НачалоВыборки + "','YYYY-MM-DD HH24:MI:SS') AND TO_TIMESTAMP('" + ПараметрыВыборки.КонецВыборки + "','YYYY-MM-DD HH24:MI:SS')";
@@ -1340,24 +1339,24 @@
 				|    SELECT
 				|        checkid,
 				|        stringobjectnum,
-				|        MAX(rc_objectnumber) AS objectnumber,
-				|        MAX(hu_stringtext) AS stringtext,
-				|        MAX(checknumber) AS checknumber,
-				|        MAX(checkopenday) AS checkopenday,
-				|        MAX(checkcloseday) AS checkcloseday,
-				|        MAX(mg_objectnumber) AS objectnumber_mg,
-				|        MAX(md_stringtext) AS stringtext_md,
-				|        SUM(quantity) AS total_quantity,
+				|        detailindex,
+				|        rc_objectnumber AS objectnumber,
+				|        hu_stringtext AS stringtext,
+				|        checknumber,
+				|        checkopenday,
+				|        checkcloseday,
+				|        mg_objectnumber AS objectnumber_mg,
+				|        md_stringtext AS stringtext_md,
+				|        quantity AS total_quantity,
 				|        price,
-				|        SUM(quantity * price) AS total_sum,
-				|        SUM(SUM(quantity * price)) OVER (PARTITION BY checkid) AS total_sales_per_check,
-				|        MAX(checkname) AS checkname,
-				|        MAX(ws_objectnumber) AS objectnumber_ws,
-				|        MAX(tax) AS TAX,
-				|        MAX(idtax) AS IDTAX
+				|        total AS total_sum,
+				|        SUM(total) OVER (PARTITION BY checkid) AS total_sales_per_check,
+				|        checkname,
+				|        ws_objectnumber AS objectnumber_ws,
+				|        tax AS TAX,
+				|        idtax AS IDTAX
 				|    FROM PreChecksDetail
-				|    GROUP BY checkid, stringobjectnum, price
-				|    HAVING SUM(quantity) != 0
+				|    WHERE quantity != 0
 				|)
 				|SELECT
 				|    cd.objectnumber AS НомерТочкиПродаж,
@@ -1385,10 +1384,11 @@
 				|    cd.TAX AS СтавкаНДССтрокой,
 				|    agg.discountname AS НаименованиеСкидкиЧека,
 				|    agg.tendernum AS НомерМетодаОплаты,
-				|    cd.checkname AS ИмяСотрудника
+				|    cd.checkname AS ИмяСотрудника,
+				|	cd.detailindex AS НомерПозицииВЧеке
 				|FROM ChecksDetail cd
 				|LEFT JOIN AggregatedDiscountData agg ON cd.checkid = agg.checkid
-				|ORDER BY cd.checknumber";
+				|ORDER BY cd.checknumber, cd.detailindex";
 	
 #КонецОбласти
 	
@@ -1527,7 +1527,8 @@
 				|	ТаблицаORACLE.СтавкаНДССтрокой КАК СтавкаНДССтрокой,
 				|	ТаблицаORACLE.НАИМЕНОВАНИЕСКИДКИЧЕКА КАК НАИМЕНОВАНИЕСКИДКИЧЕКА,
 				|	ТаблицаORACLE.НОМЕРМЕТОДАОПЛАТЫ КАК НОМЕРМЕТОДАОПЛАТЫ,
-				|	ТаблицаORACLE.НОМЕРКАССЫ КАК НОМЕРКАССЫ
+				|	ТаблицаORACLE.НОМЕРКАССЫ КАК НОМЕРКАССЫ,
+				|	ТаблицаORACLE.НомерПозицииВЧеке КАК НомерПозицииВЧеке
 				|ПОМЕСТИТЬ ТаблицаORACLE
 				|ИЗ
 				|	&ТаблицаORACLE КАК ТаблицаORACLE
@@ -1562,6 +1563,7 @@
 				|	ТаблицаORACLE.НАИМЕНОВАНИЕСКИДКИЧЕКА КАК НАИМЕНОВАНИЕСКИДКИЧЕКА,
 				|	ТаблицаORACLE.НОМЕРМЕТОДАОПЛАТЫ КАК НОМЕРМЕТОДАОПЛАТЫ,
 				|	ТаблицаORACLE.НОМЕРКАССЫ КАК НОМЕРКАССЫ,
+				|	ТаблицаORACLE.НомерПозицииВЧеке КАК НомерПозицииВЧеке,
 				|	Кассы.ФронтСистема КАК ФронтСистема,
 				|	ЕСТЬNULL(Кассы.Объект, ЗНАЧЕНИЕ(Справочник.КассыККМ.ПустаяСсылка)) КАК КассаККМ,
 				|	ЕСТЬNULL(Кассы.Объект.Владелец, ЗНАЧЕНИЕ(Справочник.Организации.ПустаяСсылка)) КАК Организация,
