@@ -4,11 +4,7 @@
 		<Metadata name="Catalog.Номенклатура" id="0b18ff68-ac76-4049-92aa-1d72b8bfc487" configVersion="b06579a975ccb043cb04bffd5c987054aa7cdc52"/>
 		<Metadata name="Catalog.ПодразделенияОрганизаций" id="4f1392aa-e06d-4e82-a59b-9f381ad90eae" configVersion="16358ebd4401ae3cba5a7d7ea91b0d62803f86c4"/>
 		<Metadata name="Catalog.Склады" id="77d7a4c1-87d3-4ea4-be48-cada0805de86" configVersion="4bdcf50ce48d5b5a1fbb1dd2ce51c5b19d9dfc4b"/>
-		<Metadata name="CommonModule.MRS_ЗагрузкаЕГАИСФронт" id="3e2bf08a-35de-473a-957c-4535198b077f" configVersion="89531f746e0b30263395d98bd992c4914d1a8e15"/>
-		<Metadata name="CommonModule.MRS_ЗагрузкаЕГАИСФронт.Module" id="3e2bf08a-35de-473a-957c-4535198b077f.0" configVersion="12e325a1156315b723ca9670acd11e834b10f5e5"/>
-		<Metadata name="CommonModule.MRS_МенеджерОбменаMicros" id="daaa7a0c-a82c-489d-a06d-6f2e73fabdbf" configVersion="18d75ea105b09ff609b5b2cc0dd0174781bb2fb4"/>
-		<Metadata name="CommonModule.MRS_МенеджерОбменаMicros.Module" id="daaa7a0c-a82c-489d-a06d-6f2e73fabdbf.0" configVersion="b6ce03b56699bffbe1e94d74cddf7a5489329da6"/>
-		<Metadata name="Configuration.MRS_Cursor" id="db09653c-ac9b-48f4-81ff-bc86fa9d5901" configVersion="65128b4618a585c2e81d0f8040bf45775d34fead"/>
+		<Metadata name="Configuration.MRS_Cursor" id="db09653c-ac9b-48f4-81ff-bc86fa9d5901" configVersion="f8d53b21051063359d287a05153c2fae507e2410"/>
 		<Metadata name="DataProcessor.MRS_ЗаменыАлкоРецептур" id="381ede49-6d01-4b1d-81e4-c415e4f278f1" configVersion="f7f7173dc800b4e3a168dd1dd4ca33166be5257d">
 			<Metadata name="DataProcessor.MRS_ЗаменыАлкоРецептур.Attribute.Адрес" id="45692267-9065-47ec-820b-61b264d22140"/>
 			<Metadata name="DataProcessor.MRS_ЗаменыАлкоРецептур.Attribute.ПериодРегистрации" id="4b7b7564-d075-4db7-b6e7-89d60e0daf5a"/>
@@ -16,14 +12,11 @@
 			<Metadata name="DataProcessor.MRS_ЗаменыАлкоРецептур.Attribute.Организация" id="c1d36c0a-9582-4cf1-9206-4718407e7472"/>
 		</Metadata>
 		<Metadata name="DataProcessor.MRS_ЗаменыАлкоРецептур.Form.Форма" id="71490a4d-da47-4ba5-b48f-7cf653086c86" configVersion="a6fef6989b6e49384f339fc0980c493b9083bd92"/>
-		<Metadata name="DataProcessor.MRS_ЗаменыАлкоРецептур.Form.Форма.Form" id="71490a4d-da47-4ba5-b48f-7cf653086c86.0" configVersion="efcc10a1ded33721289a1fb533d7ccaa5d338f6b"/>
-		<Metadata name="DataProcessor.MRS_ЗаменыАлкоРецептур.ObjectModule" id="381ede49-6d01-4b1d-81e4-c415e4f278f1.0" configVersion="f8ce41d7b8bf736d12c6400959ab8f2a8a30106a"/>
+		<Metadata name="DataProcessor.MRS_ЗаменыАлкоРецептур.Form.Форма.Form" id="71490a4d-da47-4ba5-b48f-7cf653086c86.0" configVersion="38401181281b8b875bd17cbbabd884d9636f340c"/>
+		<Metadata name="DataProcessor.MRS_ЗаменыАлкоРецептур.ObjectModule" id="381ede49-6d01-4b1d-81e4-c415e4f278f1.0" configVersion="6fb4955677b5ed20323d324449cc13872f353c22"/>
 		<Metadata name="DataProcessor.MRS_КорректировкаНазначений" id="3d240765-91a3-43cb-9401-93da8ea471c0" configVersion="afd2e3c9ec22d427b0866452c16ceb6fa388d4a3"/>
 		<Metadata name="DataProcessor.MRS_КорректировкаНазначений.Form.Форма" id="773bd07b-8af0-4641-882d-09e96150dd50" configVersion="92927d4ef9572145a042f5bde5a7c5c75d808140"/>
 		<Metadata name="DataProcessor.MRS_КорректировкаНазначений.Form.Форма.Form" id="773bd07b-8af0-4641-882d-09e96150dd50.0" configVersion="bde63b40a6c1cbefeeb76952fa5cec79a8a64da7"/>
-		<Metadata name="DataProcessor.БыстроеОбезличивание" id="a0fee7db-e49d-4ea2-ae79-34d00d5c7af2" configVersion="db1a9f01eb91ad5c28b57796e63545a7c563aeb1"/>
-		<Metadata name="DataProcessor.БыстроеОбезличивание.Form.Форма" id="ffdcfb7c-bc36-4814-87ab-2fb25a99caf4" configVersion="46e6ba6cdd62af3bfcacfb156beea0c3f7f2f386"/>
-		<Metadata name="DataProcessor.БыстроеОбезличивание.Form.Форма.Form" id="ffdcfb7c-bc36-4814-87ab-2fb25a99caf4.0" configVersion="e55376bc415281d0461f69368f3c3c9b49ff585e"/>
 		<Metadata name="Document.КорректировкаРегистров" id="145ab1c0-6a7a-4976-a61d-95121a913263" configVersion="dd91cf316f4aa44c66e994629879a68be225df52"/>
 		<Metadata name="Document.СборкаТоваров" id="5207270b-0236-4a00-a1da-d532e9d8e285" configVersion="6775e2063aef9886f29bdea0f43b44f4ea8da04d"/>
 		<Metadata name="Document.питРецептура" id="b30f82f3-6803-406b-99af-6e9707a519b4" configVersion="97d0cc0ad663e9202612f6671376cde22429cd8f"/>
