@@ -66,6 +66,8 @@
 		<ChildObjects>
 			<Language>Русский</Language>
 			<Role>MRS_ОсновнаяРоль</Role>
+			<CommonModule>MRS_ЗагрузкаЕГАИСФронт</CommonModule>
+			<CommonModule>MRS_МенеджерОбменаMicros</CommonModule>
 			<Catalog>Номенклатура</Catalog>
 			<Catalog>ПодразделенияОрганизаций</Catalog>
 			<Catalog>Склады</Catalog>
