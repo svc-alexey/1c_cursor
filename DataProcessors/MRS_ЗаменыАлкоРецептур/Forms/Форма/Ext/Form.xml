@@ -324,6 +324,13 @@
 								<ExtendedTooltip name="ДеревоРецептурУправлениеПоискомРасширеннаяПодсказка" id="363"/>
 							</SearchControlAddition>
 							<ChildItems>
+								<CheckBoxField name="ДеревоРецептурОтключить" id="516">
+									<DataPath>ДеревоРецептур.Отключить</DataPath>
+									<TitleLocation>None</TitleLocation>
+									<CheckBoxType>Auto</CheckBoxType>
+									<ContextMenu name="ДеревоРецептурОтключитьКонтекстноеМеню" id="517"/>
+									<ExtendedTooltip name="ДеревоРецептурОтключитьРасширеннаяПодсказка" id="518"/>
+								</CheckBoxField>
 								<InputField name="ДеревоРецептурНаименование" id="364">
 									<DataPath>ДеревоРецептур.Наименование</DataPath>
 									<Title>
@@ -474,6 +481,16 @@
 								<ExtendedTooltip name="ТаблицаПозицийБезЗаменУправлениеПоискомРасширеннаяПодсказка" id="481"/>
 							</SearchControlAddition>
 							<ChildItems>
+								<CheckBoxField name="ДеревоПозицийБезЗаменОтключить" id="521">
+									<DataPath>ДеревоПозицийБезЗамен.Отключить</DataPath>
+									<TitleLocation>None</TitleLocation>
+									<CheckBoxType>Auto</CheckBoxType>
+									<ContextMenu name="ДеревоПозицийБезЗаменОтключитьКонтекстноеМеню" id="522"/>
+									<ExtendedTooltip name="ДеревоПозицийБезЗаменОтключитьРасширеннаяПодсказка" id="523"/>
+									<Events>
+										<Event name="OnChange">ДеревоПозицийБезЗаменОтключитьПриИзменении</Event>
+									</Events>
+								</CheckBoxField>
 								<InputField name="ДеревоПозицийБезЗаменНоменклатура" id="485">
 									<DataPath>ДеревоПозицийБезЗамен.Номенклатура</DataPath>
 									<ReadOnly>true</ReadOnly>
@@ -1391,6 +1408,36 @@
 				</v8:item>
 			</ToolTip>
 			<Action>ОбновитьРецептурыПоСвязям</Action>
+		</Command>
+		<Command name="ОтключитьВыбранныеРецептуры" id="12">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Отключить выбранные рецептуры</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Отключить выбранные рецептуры</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>ОтключитьВыбранныеРецептуры</Action>
+		</Command>
+		<Command name="ОтключитьНеактуальныеРецептуры" id="13">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Отключить неактуальные рецептуры</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Отключить неактуальные рецептуры</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>ОтключитьНеактуальныеРецептуры</Action>
 		</Command>
 	</Commands>
 </Form>
