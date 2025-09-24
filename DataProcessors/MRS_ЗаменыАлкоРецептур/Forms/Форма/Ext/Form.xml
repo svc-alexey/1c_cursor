@@ -288,6 +288,11 @@
 									<CommandName>Form.Command.ОбновитьРецептурыПоСвязям</CommandName>
 									<ExtendedTooltip name="ОбновитьРецептурыПоСвязямРасширеннаяПодсказка" id="512"/>
 								</Button>
+								<Button name="ОтключитьВыбранныеРецептуры" id="524">
+									<Type>UsualButton</Type>
+									<CommandName>Form.Command.ОтключитьВыбранныеРецептуры</CommandName>
+									<ExtendedTooltip name="ОтключитьВыбранныеРецептурыРасширеннаяПодсказка" id="525"/>
+								</Button>
 							</ChildItems>
 						</UsualGroup>
 						<Table name="ДеревоРецептур" id="351">
@@ -389,19 +394,6 @@
 									<ContextMenu name="ДеревоРецептурСтатусКонтекстноеМеню" id="374"/>
 									<ExtendedTooltip name="ДеревоРецептурСтатусРасширеннаяПодсказка" id="375"/>
 								</LabelField>
-								<InputField name="ДеревоРецептурКоличество" id="376">
-									<DataPath>ДеревоРецептур.Количество</DataPath>
-									<ReadOnly>true</ReadOnly>
-									<Title>
-										<v8:item>
-											<v8:lang>ru</v8:lang>
-											<v8:content>Количество</v8:content>
-										</v8:item>
-									</Title>
-									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
-									<ContextMenu name="ДеревоРецептурКоличествоКонтекстноеМеню" id="377"/>
-									<ExtendedTooltip name="ДеревоРецептурКоличествоРасширеннаяПодсказка" id="378"/>
-								</InputField>
 							</ChildItems>
 						</Table>
 					</ChildItems>
@@ -439,6 +431,11 @@
 								</Button>
 							</ChildItems>
 						</UsualGroup>
+						<Button name="ОтключитьНеактуальныеРецептуры" id="526">
+							<Type>UsualButton</Type>
+							<CommandName>Form.Command.ОтключитьНеактуальныеРецептуры</CommandName>
+							<ExtendedTooltip name="ОтключитьНеактуальныеРецептурыРасширеннаяПодсказка" id="527"/>
+						</Button>
 						<Table name="ДеревоПозицийБезЗамен" id="469">
 							<Representation>Tree</Representation>
 							<AutoInsertNewRow>true</AutoInsertNewRow>
@@ -628,36 +625,6 @@
 			</ChildItems>
 		</Pages>
 	</ChildItems>
-	<ConditionalAppearance>
-		<dcsset:item>
-			<dcsset:selection>
-				<dcsset:item>
-					<dcsset:field>ДеревоРецептурОтключить</dcsset:field>
-				</dcsset:item>
-			</dcsset:selection>
-			<dcsset:filter>
-				<dcsset:item xsi:type="dcsset:FilterItemGroup">
-					<dcsset:groupType>OrGroup</dcsset:groupType>
-					<dcsset:item xsi:type="dcsset:FilterItemComparison">
-						<dcsset:left xsi:type="dcscor:Field">ДеревоРецептур.ТипУзла</dcsset:left>
-						<dcsset:comparisonType>Equal</dcsset:comparisonType>
-						<dcsset:right xsi:type="xs:string">Ингредиент</dcsset:right>
-					</dcsset:item>
-					<dcsset:item xsi:type="dcsset:FilterItemComparison">
-						<dcsset:left xsi:type="dcscor:Field">ДеревоРецептур.ТипУзла</dcsset:left>
-						<dcsset:comparisonType>Equal</dcsset:comparisonType>
-						<dcsset:right xsi:type="xs:string">ИнгредиентНовый</dcsset:right>
-					</dcsset:item>
-				</dcsset:item>
-			</dcsset:filter>
-			<dcsset:appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Видимость</dcscor:parameter>
-					<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-				</dcscor:item>
-			</dcsset:appearance>
-		</dcsset:item>
-	</ConditionalAppearance>
 	<Attributes>
 		<Attribute name="Объект" id="1">
 			<Type>
@@ -1294,6 +1261,48 @@
 				</Column>
 			</Columns>
 		</Attribute>
+		<ConditionalAppearance>
+			<dcsset:item>
+				<dcsset:selection>
+					<dcsset:item>
+						<dcsset:field>ДеревоРецептурОтключить</dcsset:field>
+					</dcsset:item>
+				</dcsset:selection>
+				<dcsset:filter>
+					<dcsset:item xsi:type="dcsset:FilterItemComparison">
+						<dcsset:left xsi:type="dcscor:Field">ДеревоРецептур.ТипУзла</dcsset:left>
+						<dcsset:comparisonType>Contains</dcsset:comparisonType>
+						<dcsset:right xsi:type="xs:string">Ингредиент</dcsset:right>
+					</dcsset:item>
+				</dcsset:filter>
+				<dcsset:appearance>
+					<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+						<dcscor:parameter>Видимость</dcscor:parameter>
+						<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+					</dcscor:item>
+				</dcsset:appearance>
+			</dcsset:item>
+			<dcsset:item>
+				<dcsset:selection>
+					<dcsset:item>
+						<dcsset:field>ДеревоРецептурОтключить</dcsset:field>
+					</dcsset:item>
+				</dcsset:selection>
+				<dcsset:filter>
+					<dcsset:item xsi:type="dcsset:FilterItemComparison">
+						<dcsset:left xsi:type="dcscor:Field">ДеревоРецептур.ТипУзла</dcsset:left>
+						<dcsset:comparisonType>Contains</dcsset:comparisonType>
+						<dcsset:right xsi:type="xs:string">ИнгредиентНовый</dcsset:right>
+					</dcsset:item>
+				</dcsset:filter>
+				<dcsset:appearance>
+					<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+						<dcscor:parameter>Видимость</dcscor:parameter>
+						<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+					</dcscor:item>
+				</dcsset:appearance>
+			</dcsset:item>
+		</ConditionalAppearance>
 	</Attributes>
 	<Commands>
 		<Command name="ПрочитатьФайл" id="1">
