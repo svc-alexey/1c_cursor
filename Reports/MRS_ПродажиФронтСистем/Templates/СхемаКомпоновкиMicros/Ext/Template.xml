@@ -389,6 +389,26 @@
 				</v8:item>
 			</title>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>НомерПозицииВЧекеORACLE</dataPath>
+			<field>НомерПозицииВЧекеORACLE</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Позиция в чеке (Micros)</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ПозицияВЧекеЧекОбщепита</dataPath>
+			<field>ПозицияВЧекеЧекОбщепита</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Позиция в чеке (1С)</v8:content>
+				</v8:item>
+			</title>
+		</field>
 		<dataSource>ИсточникДанных1</dataSource>
 		<objectName>ТаблицаЗначенийMicros</objectName>
 	</dataSet>
@@ -619,6 +639,12 @@
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
 					<dcsset:field>РазницаСумм</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>НомерПозицииВЧекеORACLE</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>ПозицияВЧекеЧекОбщепита</dcsset:field>
 				</dcsset:item>
 			</dcsset:selection>
 			<dcsset:order>
@@ -880,6 +906,12 @@
 								</dcsset:item>
 								<dcsset:item xsi:type="dcsset:SelectedItemField">
 									<dcsset:field>РазницаСумм</dcsset:field>
+								</dcsset:item>
+								<dcsset:item xsi:type="dcsset:SelectedItemField">
+									<dcsset:field>НомерПозицииВЧекеORACLE</dcsset:field>
+								</dcsset:item>
+								<dcsset:item xsi:type="dcsset:SelectedItemField">
+									<dcsset:field>ПозицияВЧекеЧекОбщепита</dcsset:field>
 								</dcsset:item>
 							</dcsset:selection>
 						</dcsset:item>
