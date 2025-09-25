@@ -426,13 +426,26 @@
 		<dataPath>СуммаПродажORACLEИтоги</dataPath>
 		<expression>Выбор 
     Когда ВидОперации = Значение(Перечисление.питХозяйственныеОперации.ДанныеПродажФронтаВозврат) Тогда -((СУММАТОВАРАORACLE * -1 ) - (СУММАСКИДКИСТРОКИORACLE * -1))
-    Когда СУММАТОВАРАORACLE = СУММАСКИДКИСТРОКИORACLE И СУММАТОВАРАORACLE <> 0 Тогда СУММАТОВАРАORACLE
+    Когда СУММАТОВАРАORACLE = СуммаСкидкиЧекОбщепита И СУММАТОВАРАORACLE &lt;&gt; 0 Тогда 0
     иначе СУММАТОВАРАORACLE - СУММАСКИДКИСТРОКИORACLE
 Конец</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>ru</v8:lang>
 				<v8:content>Сумма продаж (Micros)</v8:content>
+			</v8:item>
+		</title>
+	</calculatedField>
+	<calculatedField>
+		<dataPath>СУММАСКИДКИСТРОКИORACLE</dataPath>
+		<expression>Выбор 
+    Когда СУММАТОВАРАORACLE = СуммаСкидкиЧекОбщепита И СУММАТОВАРАORACLE &lt;&gt; 0 Тогда СУММАТОВАРАORACLE
+    иначе СУММАСКИДКИСТРОКИORACLE
+Конец</expression>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Скидка на строку (Micros)</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
