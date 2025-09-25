@@ -65,6 +65,7 @@
 		</Properties>
 		<ChildObjects>
 			<Language>Русский</Language>
+			<StyleItem>ЕдиныйНалоговыйСчетКрасныйЦветФона</StyleItem>
 			<Role>MRS_ОсновнаяРоль</Role>
 			<CommonModule>MRS_ЗагрузкаЕГАИСФронт</CommonModule>
 			<CommonModule>MRS_МенеджерОбменаMicros</CommonModule>
@@ -74,9 +75,11 @@
 			<Document>КорректировкаРегистров</Document>
 			<Document>питРецептура</Document>
 			<Document>СборкаТоваров</Document>
+			<Report>MRS_ПродажиФронтСистем</Report>
 			<DataProcessor>MRS_КорректировкаНазначений</DataProcessor>
 			<DataProcessor>MRS_ЗаменыАлкоРецептур</DataProcessor>
 			<DataProcessor>БыстроеОбезличивание</DataProcessor>
+			<DataProcessor>MRS_ЗагрузкаДанныхИзФронтСистем</DataProcessor>
 		</ChildObjects>
 	</Configuration>
 </MetaDataObject>
