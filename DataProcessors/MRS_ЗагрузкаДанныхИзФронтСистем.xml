@@ -1,13 +1,24 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.19">
-	<Template uuid="5c08501f-ef41-477d-8b4c-843424a71976">
-		<InternalInfo/>
+	<DataProcessor uuid="fd9515c4-394a-40e9-b021-8bc7d9d8be40">
+		<InternalInfo>
+			<xr:GeneratedType name="DataProcessorObject.MRS_ЗагрузкаДанныхИзФронтСистем" category="Object">
+				<xr:TypeId>1ef346c7-a337-47d6-bb4b-f3169348568e</xr:TypeId>
+				<xr:ValueId>8142194e-dea8-4f6f-83c5-656aef5414d5</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DataProcessorManager.MRS_ЗагрузкаДанныхИзФронтСистем" category="Manager">
+				<xr:TypeId>4aefc55b-8ff3-433b-873d-0782f0e61767</xr:TypeId>
+				<xr:ValueId>63e30674-679a-4d11-9c20-58551a7a7896</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
 		<Properties>
 			<ObjectBelonging>Adopted</ObjectBelonging>
-			<Name>СхемаКомпоновкиMicros</Name>
+			<Name>MRS_ЗагрузкаДанныхИзФронтСистем</Name>
 			<Comment/>
-			<ExtendedConfigurationObject>884dbf93-cef7-466c-ad0f-d2a127e3507a</ExtendedConfigurationObject>
-			<TemplateType>DataCompositionSchema</TemplateType>
+			<ExtendedConfigurationObject>4b6aa653-c6c7-40fb-83dd-7c06c7e51aa3</ExtendedConfigurationObject>
 		</Properties>
-	</Template>
+		<ChildObjects>
+			<Form>Форма</Form>
+		</ChildObjects>
+	</DataProcessor>
 </MetaDataObject>

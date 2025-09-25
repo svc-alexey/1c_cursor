@@ -1,13 +1,24 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.19">
-	<Template uuid="5c08501f-ef41-477d-8b4c-843424a71976">
-		<InternalInfo/>
+	<Report uuid="d8adbca9-a490-4bc3-b2fa-351891e82014">
+		<InternalInfo>
+			<xr:GeneratedType name="ReportObject.MRS_ПродажиФронтСистем" category="Object">
+				<xr:TypeId>a3d303d8-31f0-4af8-b5ee-148370a6e02b</xr:TypeId>
+				<xr:ValueId>bdf982b1-efcd-4246-9ac4-4cb781de1a6b</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ReportManager.MRS_ПродажиФронтСистем" category="Manager">
+				<xr:TypeId>77cd1dd8-7333-410b-b012-6a9e86749580</xr:TypeId>
+				<xr:ValueId>23ba5d57-7ce4-4dbd-b84e-547111f92b67</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
 		<Properties>
 			<ObjectBelonging>Adopted</ObjectBelonging>
-			<Name>СхемаКомпоновкиMicros</Name>
+			<Name>MRS_ПродажиФронтСистем</Name>
 			<Comment/>
-			<ExtendedConfigurationObject>884dbf93-cef7-466c-ad0f-d2a127e3507a</ExtendedConfigurationObject>
-			<TemplateType>DataCompositionSchema</TemplateType>
+			<ExtendedConfigurationObject>325410a6-b350-4490-97fb-df3eb026ab1f</ExtendedConfigurationObject>
 		</Properties>
-	</Template>
+		<ChildObjects>
+			<Template>СхемаКомпоновкиMicros</Template>
+		</ChildObjects>
+	</Report>
 </MetaDataObject>
