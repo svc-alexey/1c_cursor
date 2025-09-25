@@ -52,7 +52,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>НОМЕРТОЧКИПРОДАЖORACLE</v8:content>
+					<v8:content>Номер точки продаж (Micros)</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -62,7 +62,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>НОМЕРЧЕКАORACLE</v8:content>
+					<v8:content>Номер чека (Micros)</v8:content>
 				</v8:item>
 			</title>
 			<presentationExpression>"Чек № " + Строка(НомерЧекаORACLE)</presentationExpression>
@@ -73,7 +73,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Дата закрытия чека ORACLE</v8:content>
+					<v8:content>Дата закрытия чека (Micros)</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -123,7 +123,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>КОЛИЧЕСТВОТОВАРАORACLE</v8:content>
+					<v8:content>Количество (Micros)</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -151,7 +151,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>СУММАТОВАРАORACLE</v8:content>
+					<v8:content>Сумма строки (Micros)</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -365,7 +365,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>СУММАЧЕКАORACLE</v8:content>
+					<v8:content>Сумма чека (Micros)</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -385,7 +385,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>СУММАСКИДКИСТРОКИORACLE</v8:content>
+					<v8:content>Скидка на строку (Micros)</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -412,7 +412,7 @@
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>ru</v8:lang>
-				<v8:content>Сумма продаж ORACLEИтоги</v8:content>
+				<v8:content>Сумма продаж (Micros)</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -470,6 +470,22 @@
 	<totalField>
 		<dataPath>СуммаПродажИтоги</dataPath>
 		<expression>Сумма(СуммаПродажИтоги)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>СУММАТОВАРАORACLE</dataPath>
+		<expression>Сумма(СУММАТОВАРАORACLE)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>КОЛИЧЕСТВОТОВАРАORACLE</dataPath>
+		<expression>Сумма(КОЛИЧЕСТВОТОВАРАORACLE)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>СУММАСКИДКИСТРОКИORACLE</dataPath>
+		<expression>Сумма(СУММАСКИДКИСТРОКИORACLE)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>СУММАЧЕКАORACLE</dataPath>
+		<expression>Максимум(СУММАЧЕКАORACLE)</expression>
 	</totalField>
 	<settingsVariant>
 		<dcsset:name>Основной</dcsset:name>
@@ -806,73 +822,6 @@
 						<dcsset:selection>
 							<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 						</dcsset:selection>
-						<dcsset:item xsi:type="dcsset:StructureItemGroup">
-							<dcsset:order>
-								<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
-							</dcsset:order>
-							<dcsset:selection>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>ДатаГруппировка</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>ДатаОткрытияЧекаORACLE</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>ДатаЗакрытияЧекаORACLE</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>ЧекОбщепита</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>НомерЧекаЧекОбщепита</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>НОМЕРЧЕКАORACLE</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>СкладЧекОбщепита</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>НАИМЕНОВАНИЕТОЧКИПРОДАЖORACLE</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>НоменклатураЧекОбщепита</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>НоменклатураАлкогольВЛитрах</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>НАЗВАНИЕТОВАРАORACLE</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>КоличествоЧекОбщепита</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>КОЛИЧЕСТВОТОВАРАORACLE</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>ЦенаЧекОбщепита</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>ЦЕНАТОВАРАORACLE</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>СуммаЧекОбщепита</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>СУММАТОВАРАORACLE</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>СуммаДокументаЧекОбщепита</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>СУММАЧЕКАORACLE</dcsset:field>
-								</dcsset:item>
-								<dcsset:item xsi:type="dcsset:SelectedItemField">
-									<dcsset:field>РазницаСумм</dcsset:field>
-								</dcsset:item>
-							</dcsset:selection>
-						</dcsset:item>
 					</dcsset:item>
 				</dcsset:item>
 			</dcsset:item>
