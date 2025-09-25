@@ -488,6 +488,10 @@
 		<expression>Сумма(СУММАСКИДКИСТРОКИORACLE)</expression>
 	</totalField>
 	<totalField>
+		<dataPath>СуммаСкидкиЧекОбщепита</dataPath>
+		<expression>Сумма(СуммаСкидкиЧекОбщепита)</expression>
+	</totalField>
+	<totalField>
 		<dataPath>СУММАЧЕКАORACLE</dataPath>
 		<expression>Максимум(СУММАЧЕКАORACLE)</expression>
 	</totalField>
