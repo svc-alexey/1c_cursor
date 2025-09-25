@@ -9,19 +9,48 @@
 	ТекущийПользователь = ПараметрыСеанса.ТекущийПользователь;                                             
 	ФронтСистема = Перечисления.ПЛ_ТипыФронтСистем.Micros;
 	
-	ПараметрыФЗ = Новый Массив();
-	ПараметрыФЗ.Добавить(ФронтСистема);
-	ПараметрыФЗ.Добавить(ТекущийПользователь);
-	Попытка
-		ФоновыеЗадания.Выполнить(
-		"MRS_МенеджерОбменаMicros.ФоновоеЗаданиеЗагрузкаЧеков",
-		ПараметрыФЗ,
-		Метаданные.РегламентныеЗадания.MRS_ЗагрузкаЧековMicros.Ключ,
-		НСтр("ru = 'Загрузка чеков Micros уже выполняется';
-		|en = 'MRS_Micros'"));
-	Исключение
-		ЗаписьЖурналаРегистрацииОбмена("Загрузка чеков Micros", "Повторный запуск обмена. Загрузка чеков Micros уже выполняется");
-	КонецПопытки
+	// Получение списка точек продаж для параллельного запуска
+	Запрос = Новый Запрос;
+	Запрос.Текст = 
+		"ВЫБРАТЬ
+		|	ПЛ_СоответствиеСФронтСистемами.Код КАК КодТочкиПродаж
+		|ИЗ
+		|	РегистрСведений.ПЛ_СоответствиеСФронтСистемами КАК ПЛ_СоответствиеСФронтСистемами
+		|ГДЕ
+		|	ПЛ_СоответствиеСФронтСистемами.ФронтСистема = &ФронтСистема
+		|	И ПЛ_СоответствиеСФронтСистемами.ТипОбъекта = &ТипОбъектаКасса";
+
+	Запрос.УстановитьПараметр("ФронтСистема", ФронтСистема);
+	Запрос.УстановитьПараметр("ТипОбъектаКасса", ПланыВидовХарактеристик.ПЛ_ТипыОбъектовФронтСистем.КассаККМ);
+	
+	ВыборкаТочекПродаж = Запрос.Выполнить().Выгрузить();
+	
+	Если ВыборкаТочекПродаж.Количество() = 0 Тогда
+		ЗаписьЖурналаРегистрацииОбмена("Загрузка чеков Micros", "Не найдены настроенные точки продаж (кассы) для Micros. Загрузка не будет запущена.");
+		Возврат;
+	КонецЕсли;
+	
+	Для Каждого СтрокаТочкиПродаж Из ВыборкаТочекПродаж Цикл
+		
+		ПараметрыФЗ = Новый Массив();
+		ПараметрыФЗ.Добавить(ФронтСистема);
+		ПараметрыФЗ.Добавить(ТекущийПользователь);
+		ПараметрыФЗ.Добавить(СтрокаТочкиПродаж.КодТочкиПродаж); // Передаем код точки продаж
+		
+		КлючЗадания = Метаданные.РегламентныеЗадания.MRS_ЗагрузкаЧековMicros.Ключ + "." + СтрокаТочкиПродаж.КодТочкиПродаж;
+		
+		Попытка
+			ФоновыеЗадания.Выполнить(
+			"MRS_МенеджерОбменаMicros.ФоновоеЗаданиеЗагрузкаЧеков",
+			ПараметрыФЗ,
+			КлючЗадания,
+			НСтр("ru = 'Загрузка чеков Micros для точки продаж " + СтрокаТочкиПродаж.КодТочкиПродаж + " уже выполняется';
+			|en = 'MRS_Micros_" + СтрокаТочкиПродаж.КодТочкиПродаж + "'"));
+		Исключение
+			ЗаписьЖурналаРегистрацииОбмена("Загрузка чеков Micros", "Повторный запуск обмена для точки продаж " + СтрокаТочкиПродаж.КодТочкиПродаж + ". Загрузка уже выполняется");
+		КонецПопытки;
+		
+	КонецЦикла;
 		
 КонецПроцедуры
 
@@ -46,13 +75,26 @@
 		
 КонецПроцедуры
 
-Процедура ФоновоеЗаданиеЗагрузкаЧеков(ФронтСистема, Пользователь) Экспорт
+Процедура ФоновоеЗаданиеЗагрузкаЧеков(ФронтСистема, Пользователь, КодТочкиПродаж = "") Экспорт
 	
 	ДатаЗапрета = ПолучитьДатыЗапрета(ФронтСистема, Пользователь);
 	
 	Если ТипЗнч(ДатаЗапрета) = Тип("Структура") Тогда 
+		
+		ПараметрыКасс = Неопределено;
+		Если ЗначениеЗаполнено(КодТочкиПродаж) Тогда
+			ПараметрыКасс = Новый ТаблицаЗначений;
+			ПараметрыКасс.Колонки.Добавить("ФронтСистема");
+			ПараметрыКасс.Колонки.Добавить("КодТочкиПродаж");
+			ПараметрыКасс.Колонки.Добавить("Использовать", Новый ОписаниеТипов("Булево"));
+			
+			НоваяСтрока = ПараметрыКасс.Добавить();
+			НоваяСтрока.ФронтСистема = ФронтСистема;
+			НоваяСтрока.КодТочкиПродаж = КодТочкиПродаж;
+			НоваяСтрока.Использовать = Истина;
+		КонецЕсли;
 				
-		ВыполнитьЗагрузкуДанныхMicros(ФронтСистема, ДатаЗапрета.НачалоПериода, ДатаЗапрета.КонецПериода, 0, , Пользователь);		
+		ВыполнитьЗагрузкуДанныхMicros(ФронтСистема, ДатаЗапрета.НачалоПериода, ДатаЗапрета.КонецПериода, 0, ПараметрыКасс, Пользователь);		
 		
 	Иначе
 		
@@ -110,6 +152,9 @@
 //
 Процедура ВыполнитьЗагрузкуДанныхMicros(ФронтСистема, НачалоПериода, КонецПериода, НомерЧека, ПараметрыКасс = Неопределено, Пользователь = Неопределено) Экспорт
 
+	ВремяНачала = ТекущаяДатаСеанса();
+	ЗаписьЖурналаРегистрацииОбмена("Загрузка чеков Micros", "Начало загрузки. Период с " + НачалоПериода + " по " + КонецПериода);
+
 	Если НЕ ЗначениеЗаполнено(НачалоПериода) ИЛИ НЕ ЗначениеЗаполнено(КонецПериода) Тогда
 		
 		ЗаписьЖурналаРегистрацииОбмена("Загрузка чеков Micros", "Пустые даты выборки!",Истина);
@@ -135,15 +180,24 @@
 	ЗаполнитьПараметрыЗапроса(НачалоПериода, КонецПериода, ПараметрыКасс, ПараметрыВыборки);	
 	
 	ТаблицаЗначенийORACLE = ПолучениеДанныхORACLE(ПараметрыВыборки);
+	ВремяОкончанияSQL = ТекущаяДатаСеанса();
+	ЗаписьЖурналаРегистрацииОбмена("Загрузка чеков Micros", "SQL-запрос выполнен за " + (ВремяОкончанияSQL - ВремяНачала) + " сек.");
 	
 	ЗаписатьДанныеДляСопоставления(ТаблицаЗначенийORACLE, ПараметрыВыборки);
+	ВремяОкончанияСопоставления = ТекущаяДатаСеанса();
+	ЗаписьЖурналаРегистрацииОбмена("Загрузка чеков Micros", "Запись данных для сопоставления выполнена за " + (ВремяОкончанияСопоставления - ВремяОкончанияSQL) + " сек.");
 	
 	//++ MRS-225
 	ТаблицаАкцизныхМарок = ПолучитьАкцизныеМарки(ПараметрыВыборки, Пользователь);
 	ЗаписатьВБазу(ТаблицаЗначенийORACLE, ПараметрыВыборки, ТаблицаАкцизныхМарок);
+	ВремяОкончанияЗаписи = ТекущаяДатаСеанса();
+	ЗаписьЖурналаРегистрацииОбмена("Загрузка чеков Micros", "Запись в базу выполнена за " + (ВремяОкончанияЗаписи - ВремяОкончанияСопоставления) + " сек.");
 	//-- MRS-225
 
 	СдвинутьДатуЗапрета(ПараметрыВыборки);
+	
+	ВремяОкончанияОбщее = ТекущаяДатаСеанса();
+	ЗаписьЖурналаРегистрацииОбмена("Загрузка чеков Micros", "Загрузка завершена. Общее время: " + (ВремяОкончанияОбщее - ВремяНачала) + " сек.");
 	
 КонецПроцедуры
 
@@ -258,6 +312,8 @@
 		
 		ПараметрыВыборки.НачалоВыборки = Формат(НачалоПериода, "ДФ='yyyy-MM-dd HH:mm:ss'");
 		ПараметрыВыборки.КонецВыборки =  Формат(КонецДня(КонецПериода), "ДФ='yyyy-MM-dd HH:mm:ss'");
+		ПараметрыВыборки.НачалоПериода = НачалоПериода; 
+		ПараметрыВыборки.КонецПериода = КонецПериода + 14400; //в фискальной базе может быть смещение дат
 		
 	КонецЕсли;
 	
@@ -548,15 +604,11 @@
 	ДокументЧек.НомерСмены = Формат(ДокументЧек.Дата, "ДФ=yyMMdd");
 	//>> Портал-Юг, Баринов, 2019.04.04
 	
-	Если НЕ ЗаписатьОбъектВИБ(ДокументЧек) Тогда
-		//Отказ = Истина;
-	КонецЕсли;
+	ЗаписатьОбъектВИБ(ДокументЧек);
 	
 КонецПроцедуры
 
-Функция ЗаписатьОбъектВИБ(Объект)
-	
-	ОбъектЗаписан = Истина;
+Процедура ЗаписатьОбъектВИБ(Объект)
 	
 	// Для корректной загрузки чеков из обработки ПЛ_ЗагрузкаДанныхИзФронтСистем
 	// Передадим это доп свойство в обработчики записи документа и проверим там его наличие. Если Истина, то выполним код ПриЗаписи
@@ -566,7 +618,6 @@
 	Попытка
 		
 		Объект.Записать();
-		ОбъектЗаписан = Истина;
 	    РегистрыСведений.ПЛ_СтатусыОбработкиЧековОбщепита.ПриЗаписиЧека(Объект, Ложь);
 		
 	Исключение
@@ -578,13 +629,11 @@
 			
 		ЗаписьЖурналаРегистрацииОбмена("Загрузка чеков Micros", СтрокаСообщенияОбОшибке, Истина);
 
-		ОбъектЗаписан = Ложь;
+		ВызватьИсключение;
 		
 	КонецПопытки;
 	
-	Возврат ОбъектЗаписан;
-	
-КонецФункции
+КонецПроцедуры
 
 Функция ПолучитьЧек(Запрос, КлючевыеПоля) Экспорт
 	
@@ -845,6 +894,8 @@
 	// Структура для хранения данных об оплате для текущего чека
 	ДанныеОплаты = Новый Структура("МетодОплаты, СуммаОплаты", Неопределено, 0);
 	
+	МассивЧековДляЗаписи = Новый Массив;
+	
 	Для каждого СтрокаТаблицы Из ТаблицаЗначенийORACLE Цикл
 		
 		Если СтрокаТаблицы.КОЛИЧЕСТВОТОВАРА = 0 Тогда
@@ -873,20 +924,26 @@
 				
 				//++ MRS-225
 				Если ТаблицаАкцизныхМарок <> Неопределено Тогда
-					НайденныеМарки = ТаблицаАкцизныхМарок.НайтиСтроки(Новый Структура("cknum, rvc", ТекущийЧек.НомерЧека, Число(ТекущийЧек.ПЛ_КодТочкиПродажи)));
+					НайденныеМарки = ТаблицаАкцизныхМарок.НайтиСтроки(Новый Структура("НомерЧека, КодМестаПродажи, ДатаСканирования", ТекущийЧек.НомерЧека, ТекущийЧек.ПЛ_КодТочкиПродажи, НачалоДня(ТекущийЧек.ДатаЧека)));
 					Если НайденныеМарки.Количество() > 0 Тогда
 						ТекущийЧек.УчетАлкоголя.Очистить();
 						Для Каждого Марка Из НайденныеМарки Цикл
 							НовСтр = ТекущийЧек.УчетАлкоголя.Добавить();
-							НовСтр.КодАкциза = Марка.code;
-							НовСтр.Количество = 1;
+							НовСтр.Номенклатура = Марка.Номенклатура;
+							НовСтр.КодАкциза = Марка.ЗначениеШтрихкода;
+							НовСтр.КоличествоВМЛ = Марка.КоличествоВыбытия;
+							НовСтр.ШтрихкодУпаковки = Марка.АкцизнаяМарка;
+							НовСтр.АлкогольнаяПродукция = Марка.АлкогольнаяПродукция;
+							НовСтр.Количество = Марка.КоличествоВыбытия / 1000;
+							НовСтр.ЕдиницаИзмерения = Марка.НоменклатураЕдиницаИзмерения;
+							НовСтр.НомерСтрокиОсновнойПозиции = Марка.ПозицияЧека;
 						КонецЦикла;
 					КонецЕсли;
 				КонецЕсли;
 				//-- MRS-225
 				
 				// Сохранить текущий чек
-				ЗаписатьЧекВИБ(ТекущийЧек);
+				МассивЧековДляЗаписи.Добавить(ТекущийЧек);
 				ТекущийЧек = Неопределено;
 				// Очистить данные оплаты для нового чека
 				ДанныеОплаты = Новый Структура("МетодОплаты, СуммаОплаты", Неопределено, 0);
@@ -979,21 +1036,51 @@
 		
 		//++ MRS-225
 		Если ТаблицаАкцизныхМарок <> Неопределено Тогда
-			НайденныеМарки = ТаблицаАкцизныхМарок.НайтиСтроки(Новый Структура("cknum, rvc", ТекущийЧек.НомерЧека, Число(ТекущийЧек.ПЛ_КодТочкиПродажи)));
+			НайденныеМарки = ТаблицаАкцизныхМарок.НайтиСтроки(Новый Структура("НомерЧека, КодМестаПродажи, ДатаСканирования", ТекущийЧек.НомерЧека, ТекущийЧек.ПЛ_КодТочкиПродажи, НачалоДня(ТекущийЧек.ДатаЧека)));
 			Если НайденныеМарки.Количество() > 0 Тогда
 				ТекущийЧек.УчетАлкоголя.Очистить();
 				Для Каждого Марка Из НайденныеМарки Цикл
 					НовСтр = ТекущийЧек.УчетАлкоголя.Добавить();
-					НовСтр.КодАкциза = Марка.code;
-					НовСтр.Количество = 1;
+					НовСтр.Номенклатура = Марка.Номенклатура;
+					НовСтр.КодАкциза = Марка.ЗначениеШтрихкода;
+					НовСтр.КоличествоВМЛ = Марка.КоличествоВыбытия;
+					НовСтр.ШтрихкодУпаковки = Марка.АкцизнаяМарка;
+					НовСтр.АлкогольнаяПродукция = Марка.АлкогольнаяПродукция;
+					НовСтр.Количество = Марка.КоличествоВыбытия / 1000;
+					НовСтр.ЕдиницаИзмерения = Марка.НоменклатураЕдиницаИзмерения;
+					НовСтр.НомерСтрокиОсновнойПозиции = Марка.ПозицияЧека;
 				КонецЦикла;
-			КонецЕсли;
+			КонецЕсли;                                 
 		КонецЕсли;
 		//-- MRS-225
 		
 		// Сохранить текущий чек
-		ЗаписатьЧекВИБ(ТекущийЧек);
+		МассивЧековДляЗаписи.Добавить(ТекущийЧек);
 	КонецЕсли;
+	
+    РазмерПакета = 100;
+    КоличествоЧеков = МассивЧековДляЗаписи.Количество();
+    
+    Если КоличествоЧеков > 0 Тогда
+        Для ИндексПакета = 0 По Цел((КоличествоЧеков - 1) / РазмерПакета) Цикл
+            
+            НачалоПакета = ИндексПакета * РазмерПакета;
+            КонецПакета = Мин(НачалоПакета + РазмерПакета - 1, КоличествоЧеков - 1);
+            
+            НачатьТранзакцию();
+            Попытка
+                Для Индекс = НачалоПакета По КонецПакета Цикл
+                    ЗаписатьЧекВИБ(МассивЧековДляЗаписи[Индекс]);
+                КонецЦикла;
+                ЗафиксироватьТранзакцию();
+            Исключение
+                ОтменитьТранзакцию();
+                ВызватьИсключение;
+            КонецПопытки;
+            
+        КонецЦикла;
+    КонецЕсли;
+	
 КонецПроцедуры
 
 // Процедура для добавления строк с разбиением
@@ -1189,9 +1276,6 @@
 	RecordSet.CursorType = 3;
 	RecordSet.LockType = 2; 
 	
-	//ДатаЗапретаПодключенияНачало = Формат(НачалоДня(СтруктураПараметров.ДатаЗапретаПодключения), "ДФ=yyyy-MM-dd hh:mm:dd");   
-	//ДатаЗапретаПодключенияКонец = Формат(КонецДня(СтруктураПараметров.ДатаЗапретаПодключения), "ДФ=yyyy-MM-dd hh:mm:dd"); 
-	
 	#Область Запрос
 	
 	УсловиеДатаЗагрузки = "cc.checkclose BETWEEN TO_TIMESTAMP('" + ПараметрыВыборки.НачалоВыборки + "','YYYY-MM-DD HH24:MI:SS') AND TO_TIMESTAMP('" + ПараметрыВыборки.КонецВыборки + "','YYYY-MM-DD HH24:MI:SS')";
@@ -1201,182 +1285,200 @@
 	УсловиеНомерЧека = ?(ПараметрыВыборки.НомерЧека <> 0, "AND cc.CHECKNUMBER = " + Формат(ПараметрыВыборки.НомерЧека, "ЧГ="), "");
 	
 	CommandText = "WITH TenderData AS (
-				|    SELECT 
-				|        c.checkid,
-				|        MAX(tm.objectnumber) AS tendernum
-				|    FROM transdb.check_detail c
-				|    INNER JOIN transdb.checks cc ON c.checkid = cc.checkid
-				|    INNER JOIN transdb.tender_media_detail t ON c.checkdetailid = t.checkdetailid
-				|    INNER JOIN transdb.tender_media tm ON tm.tendmedid = t.tendmedid
-				|    INNER JOIN transdb.revenue_center rc ON rc.revctrid = c.revctrid
-				|    WHERE
-				|        " + УсловиеДатаЗагрузки + "
-				|        " + УсловиеТочкиПродаж + "
-				|        " + УсловиеНомерЧека + "
-				|        AND c.detailtype = 4
-				|        AND SUBSTR(cc.STATUS, 23, 1) = '0'
-				|        AND SUBSTR(cc.STATUS, 18, 1) = '0'
-				|        AND cc.reopenedtochecknum IS NULL
-				|        AND cc.ADDEDTOCHECKNUM IS NULL
-				|        AND SUBSTR(c.status, 10, 1) = '0'
-				|    GROUP BY c.checkid
-				|),
-				|DiscountData AS (
-				|    SELECT 
-				|        c.checkid,
-				|        SUM(c.total) AS total,
-				|        MAX(s1.stringtext) AS discountname
-				|    FROM transdb.check_detail c
-				|    INNER JOIN transdb.discount_detail d ON c.checkdetailid = d.checkdetailid
-				|    INNER JOIN transdb.discount dd ON dd.dscntid = d.dscntid
-				|    INNER JOIN transdb.string_table s1 ON s1.stringnumberid = dd.nameid AND s1.langid = 1
-				|    INNER JOIN transdb.checks cc ON c.checkid = cc.checkid
-				|    INNER JOIN transdb.revenue_center rc ON rc.revctrid = c.revctrid
-				|    WHERE
-				|        " + УсловиеДатаЗагрузки + "
-				|        " + УсловиеТочкиПродаж + "
-				|        " + УсловиеНомерЧека + "
-				|        AND c.detailtype = 2
-				|        AND SUBSTR(cc.STATUS, 23, 1) = '0'
-				|        AND SUBSTR(cc.STATUS, 18, 1) = '0'
-				|        AND cc.reopenedtochecknum IS NULL
-				|        AND cc.ADDEDTOCHECKNUM IS NULL
-				|        AND SUBSTR(c.status, 10, 1) = '0'
-				|    GROUP BY c.checkid
-				|),
-				|AggregatedDiscountData AS (
-				|    SELECT
-				|        td.checkid,
-				|        td.tendernum,
-				|        dd.total AS misum,
-				|        dd.discountname
-				|    FROM TenderData td
-				|    LEFT JOIN DiscountData dd ON td.checkid = dd.checkid
-				|),
-				|PreChecksDetail AS (
-				|    SELECT
-				|        d.checkid,
-				|        TO_CHAR(d.OBJECTNUMBER) AS stringobjectnum,
-				|        rc.objectnumber AS rc_objectnumber,
-				|        s5.stringtext AS hu_stringtext,
-				|        cc.checknumber,
-				|        TO_CHAR(cc.checkopen, 'DD-MM-YYYY HH24:MI:SS') AS checkopenday,
-				|        TO_CHAR(cc.checkclose, 'DD-MM-YYYY HH24:MI:SS') AS checkcloseday,
-				|        mg.objectnumber AS mg_objectnumber,
-				|        s3.stringtext AS md_stringtext,
-				|        ROUND(d.numerator / d.denominator, 3) AS quantity,
-				|        d.total,
-				|        ROUND(d.total / NULLIF(d.numerator / d.denominator, 0), 3) AS price,
-				|        e.checkname,
-				|        ws.objectnumber AS ws_objectnumber,
-				|        stax.STRINGTEXT AS tax,
-				|        tax.TAXCLASSID AS idtax
-				|    FROM transdb.menu_item_detail m
-				|    LEFT JOIN transdb.check_detail d ON d.checkdetailid = m.checkdetailid
-				|    LEFT JOIN transdb.checks cc ON cc.checkid = d.checkid
-				|    LEFT JOIN transdb.menu_item_definition md ON m.menuitemdefid = md.menuitemdefid
-				|    LEFT JOIN transdb.menu_item_price mp ON m.menuitempriceid = mp.menuitempriceid
-				|    LEFT JOIN transdb.menu_item_master mm ON md.menuitemmasterid = mm.menuitemmasterid
-				|    LEFT JOIN transdb.major_group mg ON (mg.objectnumber = mm.majgrpobjnum AND mg.hierstrucid = 1)
-				|    LEFT JOIN transdb.family_group fg ON (fg.objectnumber = mm.famgrpobjnum AND fg.hierstrucid = 1)
-				|    LEFT JOIN transdb.hierarchy_unit hu ON hu.revctrid = d.revctrid
-				|    LEFT JOIN transdb.hierarchy_structure hs ON hs.hierunitid = hu.hierunitid
-				|    LEFT JOIN transdb.employee e ON e.employeeid = cc.employeeid
-				|    LEFT JOIN transdb.cashier csh ON cc.cashierid = csh.cashierid
-				|    LEFT JOIN transdb.secure_detail sd ON sd.checkdetailid = d.checkdetailid + 1
-				|    LEFT JOIN transdb.revenue_center rc ON rc.revctrid = d.revctrid
-				|    LEFT JOIN transdb.dining_table t ON t.diningtableid = cc.diningtableid AND t.hierstrucid = hs.hierstrucid
-				|    LEFT JOIN transdb.string_table s1 ON s1.stringnumberid = mg.nameid AND s1.langid = 1
-				|    LEFT JOIN transdb.string_table s2 ON s2.stringnumberid = fg.nameid AND s2.langid = 1
-				|    LEFT JOIN transdb.string_table s3 ON s3.stringnumberid = md.name1id AND s3.langid = 1
-				|    LEFT JOIN transdb.string_table s5 ON s5.stringnumberid = hu.nameid AND s5.langid = 1
-				|    LEFT JOIN transdb.string_table s6 ON s6.stringnumberid = csh.nameid AND s6.langid = 1
-				|    LEFT JOIN transdb.string_table s7 ON s7.stringnumberid = t.nameid AND s7.langid = 1
-				|    LEFT JOIN (
-				|        SELECT 
-				|            ttls.checkid, 
-				|            MAX(ttls.transactiontime), 
-				|            ttls.workstationid, 
-				|            ttls.ordtypeid
-				|        FROM transdb.totals ttls
-				|        INNER JOIN (
-				|            SELECT 
-				|                checkid, 
-				|                MAX(transactiontime) maxtime 
-				|            FROM transdb.totals 
-				|            GROUP BY checkid
-				|        ) ttls1 ON ttls.checkid = ttls1.checkid AND ttls.transactiontime = ttls1.maxtime
-				|        GROUP BY ttls.checkid, ttls.workstationid, ttls.ordtypeid
-				|    ) ttl ON cc.checkid = ttl.checkid
-				|    LEFT JOIN transdb.workstation ws ON ttl.workstationid = ws.workstationid
-				|    LEFT JOIN transdb.MENU_ITEM_CLASS mic ON md.MENUITEMCLASSOBJNUM = mic.OBJECTNUMBER AND mic.hierstrucid = 2
-				|    LEFT JOIN transdb.TAX_CLASS tax ON mic.taxclassobjnum = tax.objectnumber AND tax.hierstrucid = 2
-				|    LEFT JOIN transdb.STRING_TABLE stax ON tax.NAMEID = stax.STRINGNUMBERID AND stax.langid = 1
-				|    WHERE
-				|        " + УсловиеДатаЗагрузки + "
-				|        " + УсловиеТочкиПродаж + "
-				|        " + УсловиеНомерЧека + "
-				|        AND SUBSTR(cc.STATUS, 23, 1) = '0'
-				|        AND SUBSTR(cc.STATUS, 18, 1) = '0'
-				|        AND d.detailtype = 1
-				|        AND cc.reopenedtochecknum IS NULL
-				|        AND cc.ADDEDTOCHECKNUM IS NULL
-				|        AND hs.hierid = 1
-				|        AND s2.stringtext != 'TXT MESSAGE'
-				|),
-				|ChecksDetail AS (
-				|    SELECT
-				|        checkid,
-				|        stringobjectnum,
-				|        MAX(rc_objectnumber) AS objectnumber,
-				|        MAX(hu_stringtext) AS stringtext,
-				|        MAX(checknumber) AS checknumber,
-				|        MAX(checkopenday) AS checkopenday,
-				|        MAX(checkcloseday) AS checkcloseday,
-				|        MAX(mg_objectnumber) AS objectnumber_mg,
-				|        MAX(md_stringtext) AS stringtext_md,
-				|        SUM(quantity) AS total_quantity,
-				|        price,
-				|        SUM(quantity * price) AS total_sum,
-				|        SUM(SUM(quantity * price)) OVER (PARTITION BY checkid) AS total_sales_per_check,
-				|        MAX(checkname) AS checkname,
-				|        MAX(ws_objectnumber) AS objectnumber_ws,
-				|        MAX(tax) AS TAX,
-				|        MAX(idtax) AS IDTAX
-				|    FROM PreChecksDetail
-				|    GROUP BY checkid, stringobjectnum, price
-				|    HAVING SUM(quantity) != 0
-				|)
-				|SELECT
-				|    cd.objectnumber AS НомерТочкиПродаж,
-				|    cd.stringtext AS НаименованиеТочкиПродаж,
-				|    cd.objectnumber_ws AS НомерКассы,
-				|    cd.checknumber AS НомерЧека,
-				|    cd.checkid AS ИДЧека,
-				|    cd.checkopenday AS ДатаОткрытияЧекаСтрока,
-				|    cd.checkcloseday AS ДатаЗакрытияЧекаСтрока,
-				|    cd.stringobjectnum AS КодТовара,
-				|    cd.stringtext_md AS НазваниеТовара,
-				|    cd.total_quantity AS КоличествоТовара,
-				|    cd.price AS ЦенаТовара,
-				|    cd.total_sum AS СуммаТовара,
-				|    cd.total_sales_per_check AS СтоимостьЧекаБезСкидки,
-				|    NVL(-agg.misum, 0) AS СуммаСкидкиЧека,
-				|    cd.total_sales_per_check - NVL(-agg.misum, 0) AS СтоимостьЧека,
-				|    CAST(
-				|        CASE
-				|            WHEN NVL(cd.total_sales_per_check, 0) = 0 THEN 0
-				|            ELSE NVL(cd.total_sum, 0) / cd.total_sales_per_check * NVL(-agg.misum, 0)
-				|        END AS NUMBER(15, 3)
-				|    ) AS СуммаСкидкиСтроки,
-				|    NVL(cd.IDTAX, 0) AS КодСтавкиНДС,
-				|    cd.TAX AS СтавкаНДССтрокой,
-				|    agg.discountname AS НаименованиеСкидкиЧека,
-				|    agg.tendernum AS НомерМетодаОплаты,
-				|    cd.checkname AS ИмяСотрудника
-				|FROM ChecksDetail cd
-				|LEFT JOIN AggregatedDiscountData agg ON cd.checkid = agg.checkid
-				|ORDER BY cd.checknumber";
+	|    SELECT 
+	|        c.checkid,
+	|        MAX(tm.objectnumber) AS tendernum
+	|    FROM transdb.check_detail c
+	|    INNER JOIN transdb.checks cc ON c.checkid = cc.checkid
+	|    INNER JOIN transdb.tender_media_detail t ON c.checkdetailid = t.checkdetailid
+	|    INNER JOIN transdb.tender_media tm ON tm.tendmedid = t.tendmedid
+	|    INNER JOIN transdb.revenue_center rc ON rc.revctrid = c.revctrid
+	|    WHERE
+	|        " + УсловиеДатаЗагрузки + "
+	|        " + УсловиеТочкиПродаж + "
+	|        " + УсловиеНомерЧека + "
+	|        AND c.detailtype = 4
+	|        AND SUBSTR(cc.STATUS, 23, 1) = '0'
+	|        AND SUBSTR(cc.STATUS, 18, 1) = '0'
+	|        AND cc.reopenedtochecknum IS NULL
+	|        AND cc.ADDEDTOCHECKNUM IS NULL
+	|        AND SUBSTR(c.status, 10, 1) = '0'
+	|    GROUP BY c.checkid
+	|),
+	|DiscountData AS (
+	|    SELECT 
+	|        c.checkid,
+	|        SUM(c.total) AS total,
+	|        MAX(s1.stringtext) AS discountname
+	|    FROM transdb.check_detail c
+	|    INNER JOIN transdb.discount_detail d ON c.checkdetailid = d.checkdetailid
+	|    INNER JOIN transdb.discount dd ON dd.dscntid = d.dscntid
+	|    INNER JOIN transdb.string_table s1 ON s1.stringnumberid = dd.nameid AND s1.langid = 1
+	|    INNER JOIN transdb.checks cc ON c.checkid = cc.checkid
+	|    INNER JOIN transdb.revenue_center rc ON rc.revctrid = c.revctrid
+	|    WHERE
+	|        " + УсловиеДатаЗагрузки + "
+	|        " + УсловиеТочкиПродаж + "
+	|        " + УсловиеНомерЧека + "
+	|        AND c.detailtype = 2
+	|        AND SUBSTR(cc.STATUS, 23, 1) = '0'
+	|        AND SUBSTR(cc.STATUS, 18, 1) = '0'
+	|        AND cc.reopenedtochecknum IS NULL
+	|        AND cc.ADDEDTOCHECKNUM IS NULL
+	|        AND SUBSTR(c.status, 10, 1) = '0'
+	|    GROUP BY c.checkid
+	|),
+	|AggregatedDiscountData AS (
+	|    SELECT
+	|        td.checkid,
+	|        td.tendernum,
+	|        dd.total AS misum,
+	|        dd.discountname
+	|    FROM TenderData td
+	|    LEFT JOIN DiscountData dd ON td.checkid = dd.checkid
+	|),
+	|PreChecksDetail AS (
+	|    SELECT
+	|        d.checkid,
+	|		 d.detailindex,
+	|        TO_CHAR(d.OBJECTNUMBER) AS stringobjectnum,
+	|        rc.objectnumber AS rc_objectnumber,
+	|        s5.stringtext AS hu_stringtext,
+	|        cc.checknumber,
+	|        TO_CHAR(cc.checkopen, 'DD-MM-YYYY HH24:MI:SS') AS checkopenday,
+	|        TO_CHAR(cc.checkclose, 'DD-MM-YYYY HH24:MI:SS') AS checkcloseday,
+	|        mg.objectnumber AS mg_objectnumber,
+	|        s3.stringtext AS md_stringtext,
+	|        ROUND(d.numerator / d.denominator, 3) AS quantity,
+	|        d.total,
+	|        ROUND(d.total / NULLIF(d.numerator / d.denominator, 0), 3) AS price,
+	|        e.checkname,
+	|        ws.objectnumber AS ws_objectnumber,
+	|        stax.STRINGTEXT AS tax,
+	|        tax.TAXCLASSID AS idtax
+	|    FROM transdb.menu_item_detail m
+	|    LEFT JOIN transdb.check_detail d ON d.checkdetailid = m.checkdetailid
+	|    LEFT JOIN transdb.checks cc ON cc.checkid = d.checkid
+	|    LEFT JOIN transdb.menu_item_definition md ON m.menuitemdefid = md.menuitemdefid
+	|    LEFT JOIN transdb.menu_item_price mp ON m.menuitempriceid = mp.menuitempriceid
+	|    LEFT JOIN transdb.menu_item_master mm ON md.menuitemmasterid = mm.menuitemmasterid
+	|    LEFT JOIN transdb.major_group mg ON (mg.objectnumber = mm.majgrpobjnum AND mg.hierstrucid = 1)
+	|    LEFT JOIN transdb.family_group fg ON (fg.objectnumber = mm.famgrpobjnum AND fg.hierstrucid = 1)
+	|    LEFT JOIN transdb.hierarchy_unit hu ON hu.revctrid = d.revctrid
+	|    LEFT JOIN transdb.hierarchy_structure hs ON hs.hierunitid = hu.hierunitid
+	|    LEFT JOIN transdb.employee e ON e.employeeid = cc.employeeid
+	|    LEFT JOIN transdb.cashier csh ON cc.cashierid = csh.cashierid
+	|    LEFT JOIN transdb.secure_detail sd ON sd.checkdetailid = d.checkdetailid + 1
+	|    LEFT JOIN transdb.revenue_center rc ON rc.revctrid = d.revctrid
+	|    LEFT JOIN transdb.dining_table t ON t.diningtableid = cc.diningtableid AND t.hierstrucid = hs.hierstrucid
+	|    LEFT JOIN transdb.string_table s1 ON s1.stringnumberid = mg.nameid AND s1.langid = 1
+	|    LEFT JOIN transdb.string_table s2 ON s2.stringnumberid = fg.nameid AND s2.langid = 1
+	|    LEFT JOIN transdb.string_table s3 ON s3.stringnumberid = md.name1id AND s3.langid = 1
+	|    LEFT JOIN transdb.string_table s5 ON s5.stringnumberid = hu.nameid AND s5.langid = 1
+	|    LEFT JOIN transdb.string_table s6 ON s6.stringnumberid = csh.nameid AND s6.langid = 1
+	|    LEFT JOIN transdb.string_table s7 ON s7.stringnumberid = t.nameid AND s7.langid = 1
+	|    LEFT JOIN (
+	|        SELECT 
+	|            ttls.checkid, 
+	|            MAX(ttls.transactiontime), 
+	|            ttls.workstationid, 
+	|            ttls.ordtypeid
+	|        FROM transdb.totals ttls
+	|        INNER JOIN (
+	|            SELECT 
+	|                checkid, 
+	|                MAX(transactiontime) maxtime 
+	|            FROM transdb.totals 
+	|            GROUP BY checkid
+	|        ) ttls1 ON ttls.checkid = ttls1.checkid AND ttls.transactiontime = ttls1.maxtime
+	|        GROUP BY ttls.checkid, ttls.workstationid, ttls.ordtypeid
+	|    ) ttl ON cc.checkid = ttl.checkid
+	|    LEFT JOIN transdb.workstation ws ON ttl.workstationid = ws.workstationid
+	|    LEFT JOIN transdb.MENU_ITEM_CLASS mic ON md.MENUITEMCLASSOBJNUM = mic.OBJECTNUMBER AND mic.hierstrucid = 2
+	|    LEFT JOIN transdb.TAX_CLASS tax ON mic.taxclassobjnum = tax.objectnumber AND tax.hierstrucid = 2
+	|    LEFT JOIN transdb.STRING_TABLE stax ON tax.NAMEID = stax.STRINGNUMBERID AND stax.langid = 1
+	|    WHERE
+	|        " + УсловиеДатаЗагрузки + "
+	|        " + УсловиеТочкиПродаж + "
+	|        " + УсловиеНомерЧека + "
+	|        AND SUBSTR(cc.STATUS, 23, 1) = '0'
+	|        AND SUBSTR(cc.STATUS, 18, 1) = '0'
+	|        AND d.detailtype = 1
+	|        AND cc.reopenedtochecknum IS NULL
+	|        AND cc.ADDEDTOCHECKNUM IS NULL
+	|        AND hs.hierid = 1
+	|        AND s2.stringtext != 'TXT MESSAGE'
+	|),
+	|RankedPreChecksDetail AS (
+	|    SELECT
+	|        pcd.*,
+	|        SUM(pcd.quantity) OVER (PARTITION BY pcd.checkid, pcd.stringobjectnum) as net_quantity,
+	|        CASE WHEN pcd.quantity > 0 THEN ROW_NUMBER() OVER (PARTITION BY pcd.checkid, pcd.stringobjectnum ORDER BY pcd.detailindex ASC) ELSE NULL END as sale_rank,
+	|        MAX(CASE WHEN TRUNC(pcd.quantity) != pcd.quantity THEN 1 ELSE 0 END) OVER (PARTITION BY pcd.checkid, pcd.stringobjectnum) as has_fractional
+	|    FROM PreChecksDetail pcd
+	|),
+	|FilteredPreChecksDetail AS (
+	|    SELECT *
+	|    FROM RankedPreChecksDetail
+	|    WHERE net_quantity > 0 AND (
+	|        (has_fractional = 1 AND quantity > 0)
+	|        OR
+	|        (has_fractional = 0 AND sale_rank <= net_quantity)
+	|    )
+	|),
+	|ChecksDetail AS (
+	|    SELECT
+	|        checkid,
+	|        stringobjectnum,
+	|        detailindex,
+	|        rc_objectnumber AS objectnumber,
+	|        hu_stringtext AS stringtext,
+	|        checknumber,
+	|        checkopenday,
+	|        checkcloseday,
+	|        mg_objectnumber AS objectnumber_mg,
+	|        md_stringtext AS stringtext_md,
+	|        quantity AS total_quantity,
+	|        price,
+	|        total AS total_sum,
+	|        SUM(total) OVER (PARTITION BY checkid) AS total_sales_per_check,
+	|        checkname,
+	|        ws_objectnumber AS objectnumber_ws,
+	|        tax AS TAX,
+	|        idtax AS IDTAX
+	|    FROM FilteredPreChecksDetail
+	|)
+	|SELECT
+	|    cd.objectnumber AS НомерТочкиПродаж,
+	|    cd.stringtext AS НаименованиеТочкиПродаж,
+	|    cd.objectnumber_ws AS НомерКассы,
+	|    cd.checknumber AS НомерЧека,
+	|    cd.checkid AS ИДЧека,
+	|    cd.checkopenday AS ДатаОткрытияЧекаСтрока,
+	|    cd.checkcloseday AS ДатаЗакрытияЧекаСтрока,
+	|    cd.stringobjectnum AS КодТовара,
+	|    cd.stringtext_md AS НазваниеТовара,
+	|    cd.total_quantity AS КоличествоТовара,
+	|    cd.price AS ЦенаТовара,
+	|    cd.total_sum AS СуммаТовара,
+	|    cd.total_sales_per_check AS СтоимостьЧекаБезСкидки,
+	|    NVL(-agg.misum, 0) AS СуммаСкидкиЧека,
+	|    cd.total_sales_per_check - NVL(-agg.misum, 0) AS СтоимостьЧека,
+	|    CAST(
+	|        CASE
+	|            WHEN NVL(cd.total_sales_per_check, 0) = 0 THEN 0
+	|            ELSE NVL(cd.total_sum, 0) / cd.total_sales_per_check * NVL(-agg.misum, 0)
+	|        END AS NUMBER(15, 3)
+	|    ) AS СуммаСкидкиСтроки,
+	|    NVL(cd.IDTAX, 0) AS КодСтавкиНДС,
+	|    cd.TAX AS СтавкаНДССтрокой,
+	|    agg.discountname AS НаименованиеСкидкиЧека,
+	|    agg.tendernum AS НомерМетодаОплаты,
+	|    cd.checkname AS ИмяСотрудника,
+	|	cd.detailindex AS НомерПозицииВЧеке
+	|FROM ChecksDetail cd
+	|LEFT JOIN AggregatedDiscountData agg ON cd.checkid = agg.checkid
+	|ORDER BY cd.checknumber, cd.detailindex";
 	
 #КонецОбласти
 	
@@ -1515,7 +1617,8 @@
 				|	ТаблицаORACLE.СтавкаНДССтрокой КАК СтавкаНДССтрокой,
 				|	ТаблицаORACLE.НАИМЕНОВАНИЕСКИДКИЧЕКА КАК НАИМЕНОВАНИЕСКИДКИЧЕКА,
 				|	ТаблицаORACLE.НОМЕРМЕТОДАОПЛАТЫ КАК НОМЕРМЕТОДАОПЛАТЫ,
-				|	ТаблицаORACLE.НОМЕРКАССЫ КАК НОМЕРКАССЫ
+				|	ТаблицаORACLE.НОМЕРКАССЫ КАК НОМЕРКАССЫ,
+				|	ТаблицаORACLE.НомерПозицииВЧеке КАК НомерПозицииВЧеке
 				|ПОМЕСТИТЬ ТаблицаORACLE
 				|ИЗ
 				|	&ТаблицаORACLE КАК ТаблицаORACLE
@@ -1550,6 +1653,7 @@
 				|	ТаблицаORACLE.НАИМЕНОВАНИЕСКИДКИЧЕКА КАК НАИМЕНОВАНИЕСКИДКИЧЕКА,
 				|	ТаблицаORACLE.НОМЕРМЕТОДАОПЛАТЫ КАК НОМЕРМЕТОДАОПЛАТЫ,
 				|	ТаблицаORACLE.НОМЕРКАССЫ КАК НОМЕРКАССЫ,
+				|	ТаблицаORACLE.НомерПозицииВЧеке КАК НомерПозицииВЧеке,
 				|	Кассы.ФронтСистема КАК ФронтСистема,
 				|	ЕСТЬNULL(Кассы.Объект, ЗНАЧЕНИЕ(Справочник.КассыККМ.ПустаяСсылка)) КАК КассаККМ,
 				|	ЕСТЬNULL(Кассы.Объект.Владелец, ЗНАЧЕНИЕ(Справочник.Организации.ПустаяСсылка)) КАК Организация,
@@ -2021,51 +2125,12 @@
 
 КонецПроцедуры
 
-#КонецОбласти
-
 //++ MRS-225
 Функция ПолучитьАкцизныеМарки(ПараметрыВыборки, Пользователь)
 	
-	Запрос = Новый Запрос;
-	Запрос.Текст = 
-		"ВЫБРАТЬ РАЗЛИЧНЫЕ
-		|	MRS_НастройкиПодключенияFiscalDBFront.ИмяВнешнейБД
-		|ИЗ
-		|	РегистрСведений.MRS_НастройкиПодключенияFiscalDBFront КАК MRS_НастройкиПодключенияFiscalDBFront";
-	
-	Результат = Запрос.Выполнить().Выгрузить();
-	
-	ОбщаяТаблицаМарок = Новый ТаблицаЗначений;
-
-	ИмяСобытия = "Загрузка чеков Micros";
-	
-	Для Каждого Строка Из Результат Цикл
-		ИмяФискальнойБазы = Строка.ИмяВнешнейБД;
-		
-		НастройкиФискальнойБазы = MRS_ЗагрузкаЕГАИСФронт.ПолучитьНастройкиФискальнойБазы(ИмяФискальнойБазы, Пользователь, ИмяСобытия);
-		Если НастройкиФискальнойБазы = Неопределено Тогда
-			Продолжить;
-		КонецЕсли;
-		
-		// Используем дату начала периода загрузки чеков
-		НастройкиФискальнойБазы.Вставить("ДатаЗапретаЗагрузки", ПараметрыВыборки.НачалоПериода);
-		
-		ТаблицаМарокДляОднойБазы = Новый ТаблицаЗначений;
-		MRS_ЗагрузкаЕГАИСФронт.ПолучитьРезультатыЗапросаКФискальнойБазе(ТаблицаМарокДляОднойБазы, НастройкиФискальнойБазы, ИмяСобытия);
-		
-		// Объединяем результаты
-		Если ОбщаяТаблицаМарок.Колонки.Количество() = 0 Тогда
-			Для Каждого Колонка Из ТаблицаМарокДляОднойБазы.Колонки Цикл
-				ОбщаяТаблицаМарок.Колонки.Добавить(Колонка.Имя, Колонка.ТипЗначения, Колонка.Заголовок);
-			КонецЦикла;
-		КонецЕсли;
-		
-		Для Каждого СтрокаМарки Из ТаблицаМарокДляОднойБазы Цикл
-			ЗаполнитьЗначенияСвойств(ОбщаяТаблицаМарок.Добавить(), СтрокаМарки);
-		КонецЦикла;
-	КонецЦикла;
-	
-	Возврат ОбщаяТаблицаМарок;
+	Возврат MRS_ЗагрузкаЕГАИСФронт.ПолучитьИОбработатьАкцизныеМаркиИзФронта(ПараметрыВыборки, Пользователь);
 	
 КонецФункции
 //-- MRS-225
+#КонецОбласти
+
