@@ -1,0 +1,669 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.17">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Основные настройки</v8:content>
+		</v8:item>
+	</Title>
+	<AutoCommandBar name="ФормаКоманднаяПанель" id="-1">
+		<Autofill>false</Autofill>
+	</AutoCommandBar>
+	<Events>
+		<Event name="OnOpen">ПриОткрытии</Event>
+		<Event name="OnCreateAtServer">ПриСозданииНаСервере</Event>
+	</Events>
+	<ChildItems>
+		<UsualGroup name="ГруппаКлючДоступа" id="188">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Группа ключ доступа</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Группа ключ доступа</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Behavior>Usual</Behavior>
+			<ShowTitle>false</ShowTitle>
+			<ExtendedTooltip name="ГруппаКлючДоступаРасширеннаяПодсказка" id="189"/>
+			<ChildItems>
+				<InputField name="КлючДоступа" id="1">
+					<DataPath>Токен</DataPath>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ключ доступа</v8:content>
+						</v8:item>
+					</Title>
+					<ChoiceButton>true</ChoiceButton>
+					<AutoMarkIncomplete>true</AutoMarkIncomplete>
+					<ChoiceButtonPicture>
+						<xr:Ref>StdPicture.ListViewModeList</xr:Ref>
+						<xr:LoadTransparent>true</xr:LoadTransparent>
+					</ChoiceButtonPicture>
+					<Font bold="true" kind="AutoFont"/>
+					<ContextMenu name="КлючДоступаКонтекстноеМеню" id="2"/>
+					<ExtendedTooltip name="КлючДоступаРасширеннаяПодсказка" id="3"/>
+					<Events>
+						<Event name="StartChoice">КлючДоступаНачалоВыбора</Event>
+					</Events>
+				</InputField>
+				<LabelDecoration name="СсылкаКлюч" id="190">
+					<HorizontalStretch>true</HorizontalStretch>
+					<Font ref="style:NormalTextFont" faceName="Arial" kind="StyleItem"/>
+					<Title formatted="false">
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>?</v8:content>
+						</v8:item>
+					</Title>
+					<GroupHorizontalAlign>Right</GroupHorizontalAlign>
+					<Hyperlink>true</Hyperlink>
+					<ContextMenu name="СсылкаКлючКонтекстноеМеню" id="191"/>
+					<ExtendedTooltip name="СсылкаКлючРасширеннаяПодсказка" id="192"/>
+					<Events>
+						<Event name="Click">СсылкаКлючНажатие</Event>
+					</Events>
+				</LabelDecoration>
+				<CheckBoxField name="РежимРазработчика" id="193">
+					<DataPath>РежимРазработчика</DataPath>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Данная функция отключает статусбар при получении данных и при создании документов</v8:content>
+						</v8:item>
+					</ToolTip>
+					<CheckBoxType>Auto</CheckBoxType>
+					<ContextMenu name="РежимРазработчикаКонтекстноеМеню" id="194"/>
+					<ExtendedTooltip name="РежимРазработчикаРасширеннаяПодсказка" id="195"/>
+				</CheckBoxField>
+			</ChildItems>
+		</UsualGroup>
+		<Pages name="ГруппаНастройки" id="49">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Основные настройки</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Группа настройки</v8:content>
+				</v8:item>
+			</ToolTip>
+			<PagesRepresentation>TabsOnTop</PagesRepresentation>
+			<ExtendedTooltip name="ГруппаНастройкиРасширеннаяПодсказка" id="50"/>
+			<ChildItems>
+				<Page name="ОсновныеНастройки" id="51">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Основные настройки</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Основные настройки</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ExtendedTooltip name="ОсновныеНастройкиРасширеннаяПодсказка" id="52"/>
+					<ChildItems>
+						<UsualGroup name="ГруппаЗагрузкиДокументов" id="4">
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Данные для заполнения документов</v8:content>
+								</v8:item>
+							</Title>
+							<ToolTip>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Группа загрузки документов</v8:content>
+								</v8:item>
+							</ToolTip>
+							<Group>Vertical</Group>
+							<Behavior>Usual</Behavior>
+							<Representation>StrongSeparation</Representation>
+							<ExtendedTooltip name="ГруппаЗагрузкиДокументовРасширеннаяПодсказка" id="5"/>
+							<ChildItems>
+								<InputField name="Организация" id="91">
+									<DataPath>Организация</DataPath>
+									<ContextMenu name="ОрганизацияКонтекстноеМеню" id="92"/>
+									<ExtendedTooltip name="ОрганизацияРасширеннаяПодсказка" id="93"/>
+								</InputField>
+								<InputField name="Склад" id="94">
+									<DataPath>Склад</DataPath>
+									<ContextMenu name="СкладКонтекстноеМеню" id="95"/>
+									<ExtendedTooltip name="СкладРасширеннаяПодсказка" id="96"/>
+								</InputField>
+							</ChildItems>
+						</UsualGroup>
+					</ChildItems>
+				</Page>
+				<Page name="НастройкиКасс" id="53">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Настройки касс</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Настройки касс</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ExtendedTooltip name="НастройкиКассРасширеннаяПодсказка" id="54"/>
+					<ChildItems>
+						<Table name="ТаблицаНастроекПоКассам" id="55">
+							<Representation>Tree</Representation>
+							<AutoInsertNewRow>true</AutoInsertNewRow>
+							<EnableStartDrag>true</EnableStartDrag>
+							<EnableDrag>true</EnableDrag>
+							<DataPath>ТаблицаНастроекПоКассам</DataPath>
+							<RowFilter xsi:nil="true"/>
+							<ContextMenu name="ТаблицаНастроекПоКассамКонтекстноеМеню" id="56"/>
+							<AutoCommandBar name="ТаблицаНастроекПоКассамКоманднаяПанель" id="57"/>
+							<ExtendedTooltip name="ТаблицаНастроекПоКассамРасширеннаяПодсказка" id="58"/>
+							<SearchStringAddition name="ТаблицаНастроекПоКассамСтрокаПоиска" id="59">
+								<AdditionSource>
+									<Item>ТаблицаНастроекПоКассам</Item>
+									<Type>SearchStringRepresentation</Type>
+								</AdditionSource>
+								<ContextMenu name="ТаблицаНастроекПоКассамСтрокаПоискаКонтекстноеМеню" id="60"/>
+								<ExtendedTooltip name="ТаблицаНастроекПоКассамСтрокаПоискаРасширеннаяПодсказка" id="61"/>
+							</SearchStringAddition>
+							<ViewStatusAddition name="ТаблицаНастроекПоКассамСостояниеПросмотра" id="62">
+								<AdditionSource>
+									<Item>ТаблицаНастроекПоКассам</Item>
+									<Type>ViewStatusRepresentation</Type>
+								</AdditionSource>
+								<ContextMenu name="ТаблицаНастроекПоКассамСостояниеПросмотраКонтекстноеМеню" id="63"/>
+								<ExtendedTooltip name="ТаблицаНастроекПоКассамСостояниеПросмотраРасширеннаяПодсказка" id="64"/>
+							</ViewStatusAddition>
+							<SearchControlAddition name="ТаблицаНастроекПоКассамУправлениеПоиском" id="65">
+								<AdditionSource>
+									<Item>ТаблицаНастроекПоКассам</Item>
+									<Type>SearchControl</Type>
+								</AdditionSource>
+								<ContextMenu name="ТаблицаНастроекПоКассамУправлениеПоискомКонтекстноеМеню" id="66"/>
+								<ExtendedTooltip name="ТаблицаНастроекПоКассамУправлениеПоискомРасширеннаяПодсказка" id="67"/>
+							</SearchControlAddition>
+							<Events>
+								<Event name="Selection">ТаблицаНастроекПоКассамВыбор</Event>
+								<Event name="OnActivateRow">ТаблицаНастроекПоКассамПриАктивизацииСтроки</Event>
+							</Events>
+							<ChildItems>
+								<ColumnGroup name="ГруппаКасса" id="89">
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>Группа касса</v8:content>
+										</v8:item>
+									</Title>
+									<ToolTip>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>Группа касса</v8:content>
+										</v8:item>
+									</ToolTip>
+									<Group>InCell</Group>
+									<ExtendedTooltip name="ГруппаКассаРасширеннаяПодсказка" id="90"/>
+									<ChildItems>
+										<InputField name="РегИмя" id="68">
+											<DataPath>ТаблицаНастроекПоКассам.РегИмя</DataPath>
+											<Title>
+												<v8:item>
+													<v8:lang>ru</v8:lang>
+													<v8:content>Касса</v8:content>
+												</v8:item>
+											</Title>
+											<EditMode>EnterOnInput</EditMode>
+											<DropListButton>false</DropListButton>
+											<ChoiceButton>true</ChoiceButton>
+											<ClearButton>true</ClearButton>
+											<AutoMarkIncomplete>true</AutoMarkIncomplete>
+											<TextEdit>false</TextEdit>
+											<ContextMenu name="РегИмяКонтекстноеМеню" id="69"/>
+											<ExtendedTooltip name="РегИмяРасширеннаяПодсказка" id="70"/>
+											<Events>
+												<Event name="StartChoice">РегНомерНачалоВыбора</Event>
+												<Event name="Clearing">РегНомерОчистка</Event>
+											</Events>
+										</InputField>
+										<InputField name="РегНомер" id="86">
+											<DataPath>ТаблицаНастроекПоКассам.РегНомер</DataPath>
+											<TitleLocation>None</TitleLocation>
+											<EditMode>EnterOnInput</EditMode>
+											<ContextMenu name="РегНомерКонтекстноеМеню" id="87"/>
+											<ExtendedTooltip name="РегНомерРасширеннаяПодсказка" id="88"/>
+										</InputField>
+									</ChildItems>
+								</ColumnGroup>
+								<ColumnGroup name="ТаблицаНастроекПоКассамГруппа2" id="137">
+									<ExtendedTooltip name="ТаблицаНастроекПоКассамГруппа2РасширеннаяПодсказка" id="138"/>
+									<ChildItems>
+										<InputField name="ТаблицаНастроекПоКассамОрганизация" id="71">
+											<DataPath>ТаблицаНастроекПоКассам.Организация</DataPath>
+											<EditMode>EnterOnInput</EditMode>
+											<AutoMarkIncomplete>true</AutoMarkIncomplete>
+											<ContextMenu name="ТаблицаНастроекПоКассамОрганизацияКонтекстноеМеню" id="72"/>
+											<ExtendedTooltip name="ТаблицаНастроекПоКассамОрганизацияРасширеннаяПодсказка" id="73"/>
+										</InputField>
+										<InputField name="ТаблицаНастроекПоКассамСклад" id="74">
+											<DataPath>ТаблицаНастроекПоКассам.Склад</DataPath>
+											<EditMode>EnterOnInput</EditMode>
+											<AutoMarkIncomplete>true</AutoMarkIncomplete>
+											<ContextMenu name="ТаблицаНастроекПоКассамСкладКонтекстноеМеню" id="75"/>
+											<ExtendedTooltip name="ТаблицаНастроекПоКассамСкладРасширеннаяПодсказка" id="76"/>
+										</InputField>
+									</ChildItems>
+								</ColumnGroup>
+							</ChildItems>
+						</Table>
+					</ChildItems>
+				</Page>
+			</ChildItems>
+		</Pages>
+		<UsualGroup name="ГруппаКнопок" id="34">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Группа кнопок</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Группа кнопок</v8:content>
+				</v8:item>
+			</ToolTip>
+			<GroupHorizontalAlign>Right</GroupHorizontalAlign>
+			<Behavior>Usual</Behavior>
+			<ShowTitle>false</ShowTitle>
+			<ExtendedTooltip name="ГруппаКнопокРасширеннаяПодсказка" id="35"/>
+			<ChildItems>
+				<Button name="СохранитьНастройки" id="24">
+					<Type>UsualButton</Type>
+					<Representation>PictureAndText</Representation>
+					<CommandName>Form.Command.СохранитьНастройки</CommandName>
+					<BackColor>style:ActivityColor</BackColor>
+					<Picture>
+						<xr:Ref>StdPicture.SaveReportSettings</xr:Ref>
+						<xr:LoadTransparent>true</xr:LoadTransparent>
+					</Picture>
+					<ExtendedTooltip name="СохранитьНастройкиРасширеннаяПодсказка" id="25"/>
+				</Button>
+				<Button name="Закрыть" id="32">
+					<Type>UsualButton</Type>
+					<Representation>PictureAndText</Representation>
+					<Width>9</Width>
+					<CommandName>Form.StandardCommand.Close</CommandName>
+					<Picture>
+						<xr:Ref>StdPicture.Close</xr:Ref>
+						<xr:LoadTransparent>true</xr:LoadTransparent>
+					</Picture>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Отмена</v8:content>
+						</v8:item>
+					</Title>
+					<ExtendedTooltip name="ЗакрытьРасширеннаяПодсказка" id="33"/>
+				</Button>
+			</ChildItems>
+		</UsualGroup>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Объект" id="1">
+			<Type>
+				<v8:Type>cfg:DataProcessorObject.MRS_ЗагрузкаДанныхИзФронтСистем</v8:Type>
+			</Type>
+			<MainAttribute>true</MainAttribute>
+		</Attribute>
+		<Attribute name="Токен" id="2">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Токен</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>50</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Организация" id="5">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Организация</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>cfg:CatalogRef.Организации</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="ТаблицаНастроекПоКассам" id="8">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Таблица настроек по кассам</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>v8:ValueTable</v8:Type>
+			</Type>
+			<Columns>
+				<Column name="РегИмя" id="1">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Касса</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="РегНомер" id="2">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Рег номер</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Организация" id="3">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Организация</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Организации</v8:Type>
+					</Type>
+				</Column>
+				<Column name="Склад" id="4">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Склад</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Склады</v8:Type>
+					</Type>
+				</Column>
+				<Column name="Токен" id="16">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Токен</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>50</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+			</Columns>
+		</Attribute>
+		<Attribute name="Склад" id="6">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Склад</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>cfg:CatalogRef.Склады</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="СписокНоменклатуры" id="10">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Список номенклатуры</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>v8:ValueListType</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="СписокКасс" id="3">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Список касс</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>v8:ValueListType</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="РежимРазработчика" id="23">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Режим разработчика</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:boolean</v8:Type>
+			</Type>
+		</Attribute>
+		<ConditionalAppearance>
+			<dcsset:item>
+				<dcsset:selection>
+					<dcsset:item>
+						<dcsset:field>СинхронизацияНоменклатуры</dcsset:field>
+					</dcsset:item>
+				</dcsset:selection>
+				<dcsset:filter>
+					<dcsset:item xsi:type="dcsset:FilterItemComparison">
+						<dcsset:left xsi:type="dcscor:Field">ТаблицаНастроекПоКассам.СинхронизацияНоменклатуры</dcsset:left>
+						<dcsset:comparisonType>Filled</dcsset:comparisonType>
+					</dcsset:item>
+				</dcsset:filter>
+				<dcsset:appearance>
+					<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+						<dcscor:parameter>Формат</dcscor:parameter>
+						<dcscor:value xsi:type="v8:LocalStringType">
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>ЧФ='"Строк: "Ч'</v8:content>
+							</v8:item>
+						</dcscor:value>
+					</dcscor:item>
+				</dcsset:appearance>
+			</dcsset:item>
+			<dcsset:item>
+				<dcsset:selection>
+					<dcsset:item>
+						<dcsset:field>СинхронизацияНоменклатуры</dcsset:field>
+					</dcsset:item>
+				</dcsset:selection>
+				<dcsset:filter>
+					<dcsset:item xsi:type="dcsset:FilterItemComparison">
+						<dcsset:left xsi:type="dcscor:Field">ВариантСозданияНоменклатуры</dcsset:left>
+						<dcsset:comparisonType>Greater</dcsset:comparisonType>
+						<dcsset:right xsi:type="xs:decimal">0</dcsset:right>
+					</dcsset:item>
+				</dcsset:filter>
+				<dcsset:appearance>
+					<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+						<dcscor:parameter>Видимость</dcscor:parameter>
+						<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+					</dcscor:item>
+				</dcsset:appearance>
+			</dcsset:item>
+			<dcsset:item>
+				<dcsset:selection>
+					<dcsset:item>
+						<dcsset:field>СинхронизацияНоменклатурыКнопка</dcsset:field>
+					</dcsset:item>
+				</dcsset:selection>
+				<dcsset:filter>
+					<dcsset:item xsi:type="dcsset:FilterItemComparison">
+						<dcsset:left xsi:type="dcscor:Field">ВариантСозданияНоменклатуры</dcsset:left>
+						<dcsset:comparisonType>Greater</dcsset:comparisonType>
+						<dcsset:right xsi:type="xs:decimal">0</dcsset:right>
+					</dcsset:item>
+				</dcsset:filter>
+				<dcsset:appearance>
+					<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+						<dcscor:parameter>Видимость</dcscor:parameter>
+						<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+					</dcscor:item>
+				</dcsset:appearance>
+			</dcsset:item>
+			<dcsset:item>
+				<dcsset:selection>
+					<dcsset:item>
+						<dcsset:field>ТаблицаНастроекПоКассамВариантЗагрузкиЧеков</dcsset:field>
+					</dcsset:item>
+				</dcsset:selection>
+				<dcsset:filter>
+					<dcsset:item xsi:type="dcsset:FilterItemComparison">
+						<dcsset:left xsi:type="dcscor:Field">ТаблицаНастроекПоКассам.ВариантЗагрузкиЧеков</dcsset:left>
+						<dcsset:comparisonType>Equal</dcsset:comparisonType>
+						<dcsset:right xsi:type="xs:decimal">0</dcsset:right>
+					</dcsset:item>
+				</dcsset:filter>
+				<dcsset:appearance>
+					<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+						<dcscor:parameter>Текст</dcscor:parameter>
+						<dcscor:value xsi:type="v8:LocalStringType">
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Все чеки</v8:content>
+							</v8:item>
+						</dcscor:value>
+					</dcscor:item>
+				</dcsset:appearance>
+			</dcsset:item>
+			<dcsset:item>
+				<dcsset:selection>
+					<dcsset:item>
+						<dcsset:field>ТаблицаНастроекПоКассамВариантЗагрузкиЧеков</dcsset:field>
+					</dcsset:item>
+				</dcsset:selection>
+				<dcsset:filter>
+					<dcsset:item xsi:type="dcsset:FilterItemComparison">
+						<dcsset:left xsi:type="dcscor:Field">ТаблицаНастроекПоКассам.ВариантЗагрузкиЧеков</dcsset:left>
+						<dcsset:comparisonType>Equal</dcsset:comparisonType>
+						<dcsset:right xsi:type="xs:decimal">1</dcsset:right>
+					</dcsset:item>
+				</dcsset:filter>
+				<dcsset:appearance>
+					<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+						<dcscor:parameter>Текст</dcscor:parameter>
+						<dcscor:value xsi:type="v8:LocalStringType">
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Только наличные</v8:content>
+							</v8:item>
+						</dcscor:value>
+					</dcscor:item>
+				</dcsset:appearance>
+			</dcsset:item>
+			<dcsset:item>
+				<dcsset:selection>
+					<dcsset:item>
+						<dcsset:field>ТаблицаНастроекПоКассамВариантЗагрузкиЧеков</dcsset:field>
+					</dcsset:item>
+				</dcsset:selection>
+				<dcsset:filter>
+					<dcsset:item xsi:type="dcsset:FilterItemComparison">
+						<dcsset:left xsi:type="dcscor:Field">ТаблицаНастроекПоКассам.ВариантЗагрузкиЧеков</dcsset:left>
+						<dcsset:comparisonType>Equal</dcsset:comparisonType>
+						<dcsset:right xsi:type="xs:decimal">2</dcsset:right>
+					</dcsset:item>
+				</dcsset:filter>
+				<dcsset:appearance>
+					<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+						<dcscor:parameter>Текст</dcscor:parameter>
+						<dcscor:value xsi:type="v8:LocalStringType">
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Только безналичные</v8:content>
+							</v8:item>
+						</dcscor:value>
+					</dcscor:item>
+				</dcsset:appearance>
+			</dcsset:item>
+		</ConditionalAppearance>
+	</Attributes>
+	<Commands>
+		<Command name="СохранитьНастройки" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сохранить настройки</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сохранить настройки</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>СохранитьНастройки</Action>
+		</Command>
+		<Command name="СинхронизацияНоменклатуры" id="2">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Синхронизация номенклатуры</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Синхронизация номенклатуры</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>СинхронизацияНоменклатуры</Action>
+		</Command>
+		<Command name="СкачатьОбновление" id="3">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Скачать обновление</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Скачать обновление</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>СкачатьОбновление</Action>
+		</Command>
+	</Commands>
+</Form>

@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.17">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Список токенов</v8:content>
+		</v8:item>
+	</Title>
+	<AutoCommandBar name="ФормаКоманднаяПанель" id="-1">
+		<Autofill>false</Autofill>
+	</AutoCommandBar>
+	<Events>
+		<Event name="OnOpen">ПриОткрытии</Event>
+		<Event name="OnCreateAtServer">ПриСозданииНаСервере</Event>
+	</Events>
+	<ChildItems>
+		<Table name="ТаблицаТокенов" id="1">
+			<Representation>List</Representation>
+			<AutoInsertNewRow>true</AutoInsertNewRow>
+			<EnableStartDrag>true</EnableStartDrag>
+			<EnableDrag>true</EnableDrag>
+			<DataPath>ТаблицаТокенов</DataPath>
+			<RowFilter xsi:nil="true"/>
+			<ContextMenu name="ТаблицаТокеновКонтекстноеМеню" id="2"/>
+			<AutoCommandBar name="ТаблицаТокеновКоманднаяПанель" id="3"/>
+			<ExtendedTooltip name="ТаблицаТокеновРасширеннаяПодсказка" id="4"/>
+			<SearchStringAddition name="ТаблицаТокеновСтрокаПоиска" id="5">
+				<AdditionSource>
+					<Item>ТаблицаТокенов</Item>
+					<Type>SearchStringRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="ТаблицаТокеновСтрокаПоискаКонтекстноеМеню" id="6"/>
+				<ExtendedTooltip name="ТаблицаТокеновСтрокаПоискаРасширеннаяПодсказка" id="7"/>
+			</SearchStringAddition>
+			<ViewStatusAddition name="ТаблицаТокеновСостояниеПросмотра" id="8">
+				<AdditionSource>
+					<Item>ТаблицаТокенов</Item>
+					<Type>ViewStatusRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="ТаблицаТокеновСостояниеПросмотраКонтекстноеМеню" id="9"/>
+				<ExtendedTooltip name="ТаблицаТокеновСостояниеПросмотраРасширеннаяПодсказка" id="10"/>
+			</ViewStatusAddition>
+			<SearchControlAddition name="ТаблицаТокеновУправлениеПоиском" id="11">
+				<AdditionSource>
+					<Item>ТаблицаТокенов</Item>
+					<Type>SearchControl</Type>
+				</AdditionSource>
+				<ContextMenu name="ТаблицаТокеновУправлениеПоискомКонтекстноеМеню" id="12"/>
+				<ExtendedTooltip name="ТаблицаТокеновУправлениеПоискомРасширеннаяПодсказка" id="13"/>
+			</SearchControlAddition>
+			<ChildItems>
+				<InputField name="ТаблицаСопоставлениеНаименованиеЛКК" id="14">
+					<DataPath>ТаблицаТокенов.Токен</DataPath>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ключ доступа</v8:content>
+						</v8:item>
+					</Title>
+					<EditMode>EnterOnInput</EditMode>
+					<AutoMarkIncomplete>true</AutoMarkIncomplete>
+					<ContextMenu name="ТаблицаСопоставлениеНаименованиеЛКККонтекстноеМеню" id="15"/>
+					<ExtendedTooltip name="ТаблицаСопоставлениеНаименованиеЛККРасширеннаяПодсказка" id="16"/>
+				</InputField>
+				<InputField name="ТаблицаСопоставлениеНоменклатура" id="17">
+					<DataPath>ТаблицаТокенов.Описание</DataPath>
+					<EditMode>EnterOnInput</EditMode>
+					<AutoMarkIncomplete>true</AutoMarkIncomplete>
+					<ContextMenu name="ТаблицаСопоставлениеНоменклатураКонтекстноеМеню" id="18"/>
+					<ExtendedTooltip name="ТаблицаСопоставлениеНоменклатураРасширеннаяПодсказка" id="19"/>
+				</InputField>
+			</ChildItems>
+		</Table>
+		<UsualGroup name="ГруппаКнопок" id="24">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Группа кнопок</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Группа кнопок</v8:content>
+				</v8:item>
+			</ToolTip>
+			<GroupHorizontalAlign>Right</GroupHorizontalAlign>
+			<Behavior>Usual</Behavior>
+			<ShowTitle>false</ShowTitle>
+			<ExtendedTooltip name="ГруппаКнопокРасширеннаяПодсказка" id="25"/>
+			<ChildItems>
+				<Button name="Сохранить" id="20">
+					<Type>UsualButton</Type>
+					<Representation>PictureAndText</Representation>
+					<CommandName>Form.Command.Сохранить</CommandName>
+					<BackColor>style:ActivityColor</BackColor>
+					<Picture>
+						<xr:Ref>StdPicture.SaveFile</xr:Ref>
+						<xr:LoadTransparent>true</xr:LoadTransparent>
+					</Picture>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Сохранить и выбрать</v8:content>
+						</v8:item>
+					</Title>
+					<ExtendedTooltip name="СохранитьРасширеннаяПодсказка" id="21"/>
+				</Button>
+				<Button name="Закрыть" id="26">
+					<Type>UsualButton</Type>
+					<Representation>PictureAndText</Representation>
+					<Width>9</Width>
+					<CommandName>Form.StandardCommand.Close</CommandName>
+					<Picture>
+						<xr:Ref>StdPicture.Close</xr:Ref>
+						<xr:LoadTransparent>true</xr:LoadTransparent>
+					</Picture>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Отмена</v8:content>
+						</v8:item>
+					</Title>
+					<ExtendedTooltip name="ЗакрытьРасширеннаяПодсказка" id="27"/>
+				</Button>
+			</ChildItems>
+		</UsualGroup>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Объект" id="1">
+			<Type>
+				<v8:Type>cfg:DataProcessorObject.MRS_ЗагрузкаДанныхИзФронтСистем</v8:Type>
+			</Type>
+			<MainAttribute>true</MainAttribute>
+		</Attribute>
+		<Attribute name="ТаблицаТокенов" id="2">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Таблица токенов</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>v8:ValueTable</v8:Type>
+			</Type>
+			<Columns>
+				<Column name="Токен" id="1">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Токен</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>50</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Описание" id="2">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Описание</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>50</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+			</Columns>
+		</Attribute>
+		<Attribute name="КлючОбъекта" id="3">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ключ объекта</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>50</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="КлючНастроек" id="4">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ключ настроек</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>50</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+	</Attributes>
+	<Commands>
+		<Command name="Сохранить" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сохранить</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сохранить</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>Сохранить</Action>
+		</Command>
+	</Commands>
+	<Parameters>
+		<Parameter name="СписокНоменклатуры">
+			<Type>
+				<v8:Type>v8:ValueListType</v8:Type>
+			</Type>
+		</Parameter>
+	</Parameters>
+</Form>
