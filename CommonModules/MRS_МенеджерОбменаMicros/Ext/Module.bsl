@@ -2223,34 +2223,45 @@
 	RecordSet.ActiveConnection = Соединение;
 	
 	УсловиеДатаЗагрузки = "cc.checkclose BETWEEN TO_TIMESTAMP('" + ПараметрыВыборки.НачалоВыборки + "','YYYY-MM-DD HH24:MI:SS') AND TO_TIMESTAMP('" + ПараметрыВыборки.КонецВыборки + "','YYYY-MM-DD HH24:MI:SS')";
-	УсловиеНомерЧека = "AND cc.CHECKNUMBER = " + Формат(ПараметрыВыборки.НомерЧека, "ЧГ=");
+	
+	УсловиеФильтра = "";
+	Если ЗначениеЗаполнено(ПараметрыВыборки.НомерЧека) И ПараметрыВыборки.НомерЧека <> 0 Тогда
+		УсловиеФильтра = "AND cc.CHECKNUMBER = " + Формат(ПараметрыВыборки.НомерЧека, "ЧГ=");
+	ИначеЕсли ЗначениеЗаполнено(ПараметрыВыборки.СтрокаВыборкиТочекПродаж) Тогда
+		УсловиеФильтра = "AND rc.objectnumber IN (" + ПараметрыВыборки.СтрокаВыборкиТочекПродаж + ")";
+	КонецЕсли;
 
-	CommandText = "SELECT
-	  |    checkid,
-	  |    LISTAGG(objectnumber, ',') WITHIN GROUP (ORDER BY objectnumber) as points_of_sale
-	  |FROM (
-	  |    SELECT DISTINCT
-	  |        d.checkid,
-	  |        rc.objectnumber
-	  |    FROM transdb.menu_item_detail m
-	  |    LEFT JOIN transdb.check_detail d ON d.checkdetailid = m.checkdetailid
-	  |    LEFT JOIN transdb.checks cc ON cc.checkid = d.checkid
-	  |    LEFT JOIN transdb.revenue_center rc ON rc.revctrid = d.revctrid
-	  |    WHERE " + УсловиеДатаЗагрузки + " " + УсловиеНомерЧека + "
-	  |        AND SUBSTR(cc.STATUS, 23, 1) = '0'
-	  |        AND SUBSTR(cc.STATUS, 18, 1) = '0'
-	  |        AND d.detailtype = 1
-	  |        AND cc.reopenedtochecknum IS NULL
-	  |        AND cc.ADDEDTOCHECKNUM IS NULL
+	CommandText = "WITH InitialChecks AS (
+	  |    SELECT DISTINCT checkid
+	  |    FROM transdb.check_detail d
+	  |    INNER JOIN transdb.checks cc ON cc.checkid = d.checkid
+	  |    INNER JOIN transdb.revenue_center rc ON rc.revctrid = d.revctrid
+	  |    WHERE " + УсловиеДатаЗагрузки + " " + УсловиеФильтра + "
+	  |      AND SUBSTR(cc.STATUS, 23, 1) = '0'
+	  |      AND SUBSTR(cc.STATUS, 18, 1) = '0'
+	  |      AND d.detailtype = 1
+	  |      AND cc.reopenedtochecknum IS NULL
+	  |      AND cc.ADDEDTOCHECKNUM IS NULL
 	  |)
-	  |GROUP BY checkid";
+	  |SELECT
+	  |  LISTAGG(checkid, ',') WITHIN GROUP (ORDER BY checkid) as check_ids,
+	  |  LISTAGG(objectnumber, ',') WITHIN GROUP (ORDER BY objectnumber) as points_of_sale
+	  |FROM (
+	  |  SELECT DISTINCT
+	  |    d.checkid,
+	  |    rc.objectnumber
+	  |  FROM transdb.check_detail d
+	  |  INNER JOIN transdb.checks cc ON d.checkid = cc.checkid
+	  |  INNER JOIN transdb.revenue_center rc ON d.revctrid = rc.revctrid
+	  |  INNER JOIN InitialChecks ic ON d.checkid = ic.checkid
+	  |)";
 	
     ДанныеЧека = Неопределено;
 	Попытка
 		RecordSet.Open(CommandText, Соединение); 
 		Если RecordSet.EOF() = Ложь Тогда
 			ДанныеЧека = Новый Структура;
-			ДанныеЧека.Вставить("ИДЧека", RecordSet.Fields("checkid").Value);
+			ДанныеЧека.Вставить("ИДЧека", RecordSet.Fields("check_ids").Value);
 			ДанныеЧека.Вставить("СтрокаТочекПродаж", RecordSet.Fields("points_of_sale").Value);
 		КонецЕсли;
 	Исключение
