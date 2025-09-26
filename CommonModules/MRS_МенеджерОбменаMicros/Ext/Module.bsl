@@ -1330,7 +1330,7 @@
 	
 	УсловиеФильтра = "";
 	Если ЗначениеЗаполнено(ПараметрыВыборки.ИДЧека) И ПараметрыВыборки.ИДЧека <> 0 Тогда
-		УсловиеФильтра = "AND cc.checkid = " + ПараметрыВыборки.ИДЧека;
+		УсловиеФильтра = "AND cc.checkid = " + Формат(ПараметрыВыборки.ИДЧека, "ЧГ="); 
 	ИначеЕсли ПараметрыВыборки.НомерЧека <> 0 Тогда
 		УсловиеФильтра = "AND cc.CHECKNUMBER = " + Формат(ПараметрыВыборки.НомерЧека, "ЧГ=");
 	КонецЕсли;
@@ -2225,25 +2225,25 @@
 	УсловиеДатаЗагрузки = "cc.checkclose BETWEEN TO_TIMESTAMP('" + ПараметрыВыборки.НачалоВыборки + "','YYYY-MM-DD HH24:MI:SS') AND TO_TIMESTAMP('" + ПараметрыВыборки.КонецВыборки + "','YYYY-MM-DD HH24:MI:SS')";
 	УсловиеНомерЧека = "AND cc.CHECKNUMBER = " + Формат(ПараметрыВыборки.НомерЧека, "ЧГ=");
 
-	CommandText = "
-	|SELECT
-	|	checkid,
-	|	LISTAGG(objectnumber, ',') WITHIN GROUP (ORDER BY objectnumber) as points_of_sale
-	|FROM (
-	|	SELECT DISTINCT
-	|		cc.checkid,
-	|		TO_CHAR(rc.objectnumber) as objectnumber
-	|	FROM transdb.checks cc
-	|	INNER JOIN transdb.revenue_center rc ON rc.revctrid = cc.revctrid
-	|	WHERE cc.checkid = (
-	|		SELECT checkid
-	|		FROM transdb.checks cc
-	|		INNER JOIN transdb.revenue_center rc ON rc.revctrid = cc.revctrid
-	|		WHERE " + УсловиеДатаЗагрузки + УсловиеНомерЧека + "
-	|		AND ROWNUM = 1
-	|	)
-	|)
-	|GROUP BY checkid";
+	CommandText = "SELECT
+	  |    checkid,
+	  |    LISTAGG(objectnumber, ',') WITHIN GROUP (ORDER BY objectnumber) as points_of_sale
+	  |FROM (
+	  |    SELECT DISTINCT
+	  |        d.checkid,
+	  |        rc.objectnumber
+	  |    FROM transdb.menu_item_detail m
+	  |    LEFT JOIN transdb.check_detail d ON d.checkdetailid = m.checkdetailid
+	  |    LEFT JOIN transdb.checks cc ON cc.checkid = d.checkid
+	  |    LEFT JOIN transdb.revenue_center rc ON rc.revctrid = d.revctrid
+	  |    WHERE " + УсловиеДатаЗагрузки + " " + УсловиеНомерЧека + "
+	  |        AND SUBSTR(cc.STATUS, 23, 1) = '0'
+	  |        AND SUBSTR(cc.STATUS, 18, 1) = '0'
+	  |        AND d.detailtype = 1
+	  |        AND cc.reopenedtochecknum IS NULL
+	  |        AND cc.ADDEDTOCHECKNUM IS NULL
+	  |)
+	  |GROUP BY checkid";
 	
     ДанныеЧека = Неопределено;
 	Попытка
