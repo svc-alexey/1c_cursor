@@ -169,36 +169,47 @@ ChecksDetail AS (
         tax AS TAX,
         idtax AS IDTAX
     FROM FilteredPreChecksDetail
+),
+ChecksWithDiscountContext AS (
+    SELECT
+        cd.*,
+        agg.misum,
+        agg.discountname,
+        agg.tendernum,
+        agg.detailindex AS discount_detailindex,
+        SUM(CASE WHEN cd.detailindex < agg.detailindex THEN cd.total_sum ELSE 0 END) OVER (PARTITION BY cd.checkid) AS total_for_discount_base
+    FROM ChecksDetail cd
+    LEFT JOIN AggregatedDiscountData agg ON cd.checkid = agg.checkid
 )
 SELECT
-    cd.objectnumber AS НомерТочкиПродаж,
-    cd.stringtext AS НаименованиеТочкиПродаж,
-    cd.objectnumber_ws AS НомерКассы,
-    cd.checknumber AS НомерЧека,
-    cd.checkid AS ИДЧека,
-    cd.checkopenday AS ДатаОткрытияЧекаСтрока,
-    cd.checkcloseday AS ДатаЗакрытияЧекаСтрока,
-    cd.stringobjectnum AS КодТовара,
-    cd.stringtext_md AS НазваниеТовара,
-    cd.total_quantity AS КоличествоТовара,
-    cd.price AS ЦенаТовара,
-    cd.total_sum AS СуммаТовара,
-    cd.total_sales_per_check AS СтоимостьЧекаБезСкидки,
-    NVL(-agg.misum, 0) AS СуммаСкидкиЧека,
-    cd.total_sales_per_check - NVL(-agg.misum, 0) AS СтоимостьЧека,
+    cwdc.objectnumber AS НомерТочкиПродаж,
+    cwdc.stringtext AS НаименованиеТочкиПродаж,
+    cwdc.objectnumber_ws AS НомерКассы,
+    cwdc.checknumber AS НомерЧека,
+    cwdc.checkid AS ИДЧека,
+    cwdc.checkopenday AS ДатаОткрытияЧекаСтрока,
+    cwdc.checkcloseday AS ДатаЗакрытияЧекаСтрока,
+    cwdc.stringobjectnum AS КодТовара,
+    cwdc.stringtext_md AS НазваниеТовара,
+    cwdc.total_quantity AS КоличествоТовара,
+    cwdc.price AS ЦенаТовара,
+    cwdc.total_sum AS СуммаТовара,
+    cwdc.total_sales_per_check AS СтоимостьЧекаБезСкидки,
+    NVL(-cwdc.misum, 0) AS СуммаСкидкиЧека,
+    cwdc.total_sales_per_check - NVL(-cwdc.misum, 0) AS СтоимостьЧека,
     CAST(
         CASE
-            WHEN NVL(cd.total_sales_per_check, 0) = 0 THEN 0
-            ELSE NVL(cd.total_sum, 0) / cd.total_sales_per_check * NVL(-agg.misum, 0)
+            WHEN cwdc.discount_detailindex IS NOT NULL AND cwdc.detailindex >= cwdc.discount_detailindex THEN 0
+            WHEN NVL(cwdc.total_for_discount_base, 0) = 0 THEN 0
+            ELSE NVL(cwdc.total_sum, 0) / cwdc.total_for_discount_base * NVL(-cwdc.misum, 0)
         END AS NUMBER(15, 3)
     ) AS СуммаСкидкиСтроки,
-    NVL(cd.IDTAX, 0) AS КодСтавкиНДС,
-    cd.TAX AS СтавкаНДССтрокой,
-    agg.discountname AS НаименованиеСкидкиЧека,
-    agg.tendernum AS НомерМетодаОплаты,
-    cd.checkname AS ИмяСотрудника,
-	cd.detailindex AS НомерПозицииВЧеке,
-	agg.detailindex AS НомерСтрокиСкидки
-FROM ChecksDetail cd
-LEFT JOIN AggregatedDiscountData agg ON cd.checkid = agg.checkid
-ORDER BY cd.checknumber, cd.detailindex
+    NVL(cwdc.IDTAX, 0) AS КодСтавкиНДС,
+    cwdc.TAX AS СтавкаНДССтрокой,
+    cwdc.discountname AS НаименованиеСкидкиЧека,
+    cwdc.tendernum AS НомерМетодаОплаты,
+    cwdc.checkname AS ИмяСотрудника,
+	cwdc.detailindex AS НомерПозицииВЧеке,
+	cwdc.discount_detailindex AS НомерСтрокиСкидки
+FROM ChecksWithDiscountContext cwdc
+ORDER BY cwdc.checknumber, cwdc.detailindex
