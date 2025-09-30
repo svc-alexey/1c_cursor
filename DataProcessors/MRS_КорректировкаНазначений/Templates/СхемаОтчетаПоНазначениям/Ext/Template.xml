@@ -4,7 +4,10 @@
 		<name>ИсточникДанных1</name>
 		<dataSourceType>Local</dataSourceType>
 	</dataSource>
-	<dataSet xsi:type="DataSetQuery">
+	<dataSet xsi:type="DataSetUnion">
+		<name>ОбъединениеНаборов</name>
+		<autoFillAvailableFields>true</autoFillAvailableFields>
+		<item xsi:type="DataSetQuery">
 		<name>НаборДанных1_СебестоимостьТоваров</name>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>АналитикаУчетаНоменклатуры</dataPath>
@@ -76,8 +79,9 @@
 				</v8:item>
 			</title>
 		</field>
-		<dataSource>ИсточникДанных1</dataSource>
-		<query>ВЫБРАТЬ
+			<dataSource>ИсточникДанных1</dataSource>
+			<query>ВЫБРАТЬ
+	"Себестоимость товаров" КАК ИсточникДанных,
 	СебестоимостьТоваровОстатки.АналитикаУчетаНоменклатуры КАК АналитикаУчетаНоменклатуры,
 	СебестоимостьТоваровОстатки.РазделУчета КАК РазделУчета,
 	СебестоимостьТоваровОстатки.ВидЗапасов КАК ВидЗапасов,
@@ -86,14 +90,18 @@
 	СебестоимостьТоваровОстатки.КоличествоОстаток КАК КоличествоОстаток,
 	СебестоимостьТоваровОстатки.СтоимостьОстаток КАК СтоимостьОстаток,
 	СебестоимостьТоваровОстатки.СтоимостьБезНДСОстаток КАК СтоимостьБезНДСОстаток,
-	СебестоимостьТоваровОстатки.СтоимостьРеглОстаток КАК СтоимостьРеглОстаток,
-	СебестоимостьТоваровОстатки.СтоимостьУпрОстаток КАК СтоимостьУпрОстаток
+	НЕОПРЕДЕЛЕНО КАК Номенклатура,
+	НЕОПРЕДЕЛЕНО КАК Характеристика,
+	НЕОПРЕДЕЛЕНО КАК Назначение,
+	НЕОПРЕДЕЛЕНО КАК Склад,
+	НЕОПРЕДЕЛЕНО КАК ВНаличииОстаток,
+	НЕОПРЕДЕЛЕНО КАК КОтгрузкеОстаток
 ИЗ
 	РегистрНакопления.СебестоимостьТоваров.Остатки(&amp;Дата, ) КАК СебестоимостьТоваровОстатки
 ГДЕ
 	СебестоимостьТоваровОстатки.АналитикаУчетаНоменклатуры.Назначение &lt;&gt; ЗНАЧЕНИЕ(Справочник.Назначения.ПустаяСсылка)</query>
-	</dataSet>
-	<dataSet xsi:type="DataSetQuery">
+		</item>
+		<item xsi:type="DataSetQuery">
 		<name>НаборДанных2_ТоварыОрганизаций</name>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>АналитикаУчетаНоменклатуры</dataPath>
@@ -135,19 +143,29 @@
 				</v8:item>
 			</title>
 		</field>
-		<dataSource>ИсточникДанных1</dataSource>
-		<query>ВЫБРАТЬ
+			<dataSource>ИсточникДанных1</dataSource>
+			<query>ВЫБРАТЬ
+	"Товары организаций" КАК ИсточникДанных,
 	ТоварыОрганизацийОстатки.АналитикаУчетаНоменклатуры КАК АналитикаУчетаНоменклатуры,
-	ТоварыОрганизацийОстатки.Организация КАК Организация,
+	НЕОПРЕДЕЛЕНО КАК РазделУчета,
 	ТоварыОрганизацийОстатки.ВидЗапасов КАК ВидЗапасов,
-	ТоварыОрганизацийОстатки.НомерГТД КАК НомерГТД,
-	ТоварыОрганизацийОстатки.КоличествоОстаток КАК КоличествоОстаток
+	ТоварыОрганизацийОстатки.Организация КАК Организация,
+	НЕОПРЕДЕЛЕНО КАК Партия,
+	ТоварыОрганизацийОстатки.КоличествоОстаток КАК КоличествоОстаток,
+	НЕОПРЕДЕЛЕНО КАК СтоимостьОстаток,
+	НЕОПРЕДЕЛЕНО КАК СтоимостьБезНДСОстаток,
+	НЕОПРЕДЕЛЕНО КАК Номенклатура,
+	НЕОПРЕДЕЛЕНО КАК Характеристика,
+	НЕОПРЕДЕЛЕНО КАК Назначение,
+	НЕОПРЕДЕЛЕНО КАК Склад,
+	НЕОПРЕДЕЛЕНО КАК ВНаличииОстаток,
+	НЕОПРЕДЕЛЕНО КАК КОтгрузкеОстаток
 ИЗ
 	РегистрНакопления.ТоварыОрганизаций.Остатки(&amp;Дата, ) КАК ТоварыОрганизацийОстатки
 ГДЕ
 	ТоварыОрганизацийОстатки.АналитикаУчетаНоменклатуры.Назначение &lt;&gt; ЗНАЧЕНИЕ(Справочник.Назначения.ПустаяСсылка)</query>
-	</dataSet>
-	<dataSet xsi:type="DataSetQuery">
+		</item>
+		<item xsi:type="DataSetQuery">
 		<name>НаборДанных3_ТоварыНаСкладах</name>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Номенклатура</dataPath>
@@ -209,20 +227,28 @@
 				</v8:item>
 			</title>
 		</field>
-		<dataSource>ИсточникДанных1</dataSource>
-		<query>ВЫБРАТЬ
+			<dataSource>ИсточникДанных1</dataSource>
+			<query>ВЫБРАТЬ
+	"Товары на складах" КАК ИсточникДанных,
+	НЕОПРЕДЕЛЕНО КАК АналитикаУчетаНоменклатуры,
+	НЕОПРЕДЕЛЕНО КАК РазделУчета,
+	НЕОПРЕДЕЛЕНО КАК ВидЗапасов,
+	НЕОПРЕДЕЛЕНО КАК Организация,
+	НЕОПРЕДЕЛЕНО КАК Партия,
+	НЕОПРЕДЕЛЕНО КАК КоличествоОстаток,
+	НЕОПРЕДЕЛЕНО КАК СтоимостьОстаток,
+	НЕОПРЕДЕЛЕНО КАК СтоимостьБезНДСОстаток,
 	ТоварыНаСкладахОстатки.Номенклатура КАК Номенклатура,
 	ТоварыНаСкладахОстатки.Характеристика КАК Характеристика,
 	ТоварыНаСкладахОстатки.Назначение КАК Назначение,
 	ТоварыНаСкладахОстатки.Склад КАК Склад,
-	ТоварыНаСкладахОстатки.Помещение КАК Помещение,
-	ТоварыНаСкладахОстатки.Серия КАК Серия,
 	ТоварыНаСкладахОстатки.ВНаличииОстаток КАК ВНаличииОстаток,
 	ТоварыНаСкладахОстатки.КОтгрузкеОстаток КАК КОтгрузкеОстаток
 ИЗ
 	РегистрНакопления.ТоварыНаСкладах.Остатки(&amp;Дата, ) КАК ТоварыНаСкладахОстатки
 ГДЕ
 	ТоварыНаСкладахОстатки.Назначение &lt;&gt; ЗНАЧЕНИЕ(Справочник.Назначения.ПустаяСсылка)</query>
+		</item>
 	</dataSet>
 	<parameter>
 		<name>Дата</name>
@@ -262,82 +288,21 @@
 				</dcscor:item>
 			</dcsset:dataParameters>
 			<dcsset:item xsi:type="dcsset:StructureItemGroup">
+				<dcsset:groupItems>
+					<dcsset:item xsi:type="dcsset:GroupItemField">
+						<dcsset:field>ИсточникДанных</dcsset:field>
+						<dcsset:groupType>Items</dcsset:groupType>
+						<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+						<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+						<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+					</dcsset:item>
+				</dcsset:groupItems>
 				<dcsset:order>
 					<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
 				</dcsset:order>
 				<dcsset:selection>
 					<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 				</dcsset:selection>
-				<dcsset:filter>
-					<dcsset:item xsi:type="dcsset:FilterItemComparison">
-						<dcsset:left xsi:type="dcscor:Field">НаборДанных</dcsset:left>
-						<dcsset:comparisonType>Equal</dcsset:comparisonType>
-						<dcsset:right xsi:type="xs:string">НаборДанных1_СебестоимостьТоваров</dcsset:right>
-					</dcsset:item>
-				</dcsset:filter>
-				<dcsset:outputParameters>
-					<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-						<dcscor:parameter>Заголовок</dcscor:parameter>
-						<dcscor:value xsi:type="v8:LocalStringType">
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Остатки по регистру "Себестоимость товаров"</v8:content>
-							</v8:item>
-						</dcscor:value>
-					</dcscor:item>
-				</dcsset:outputParameters>
-			</dcsset:item>
-			<dcsset:item xsi:type="dcsset:StructureItemGroup">
-				<dcsset:order>
-					<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
-				</dcsset:order>
-				<dcsset:selection>
-					<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
-				</dcsset:selection>
-				<dcsset:filter>
-					<dcsset:item xsi:type="dcsset:FilterItemComparison">
-						<dcsset:left xsi:type="dcscor:Field">НаборДанных</dcsset:left>
-						<dcsset:comparisonType>Equal</dcsset:comparisonType>
-						<dcsset:right xsi:type="xs:string">НаборДанных2_ТоварыОрганизаций</dcsset:right>
-					</dcsset:item>
-				</dcsset:filter>
-				<dcsset:outputParameters>
-					<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-						<dcscor:parameter>Заголовок</dcscor:parameter>
-						<dcscor:value xsi:type="v8:LocalStringType">
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Остатки по регистру "Товары организаций"</v8:content>
-							</v8:item>
-						</dcscor:value>
-					</dcscor:item>
-				</dcsset:outputParameters>
-			</dcsset:item>
-			<dcsset:item xsi:type="dcsset:StructureItemGroup">
-				<dcsset:order>
-					<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
-				</dcsset:order>
-				<dcsset:selection>
-					<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
-				</dcsset:selection>
-				<dcsset:filter>
-					<dcsset:item xsi:type="dcsset:FilterItemComparison">
-						<dcsset:left xsi:type="dcscor:Field">НаборДанных</dcsset:left>
-						<dcsset:comparisonType>Equal</dcsset:comparisonType>
-						<dcsset:right xsi:type="xs:string">НаборДанных3_ТоварыНаСкладах</dcsset:right>
-					</dcsset:item>
-				</dcsset:filter>
-				<dcsset:outputParameters>
-					<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-						<dcscor:parameter>Заголовок</dcscor:parameter>
-						<dcscor:value xsi:type="v8:LocalStringType">
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Остатки по регистру "Товары на складах"</v8:content>
-							</v8:item>
-						</dcscor:value>
-					</dcscor:item>
-				</dcsset:outputParameters>
 			</dcsset:item>
 		</dcsset:settings>
 	</settingsVariant>
