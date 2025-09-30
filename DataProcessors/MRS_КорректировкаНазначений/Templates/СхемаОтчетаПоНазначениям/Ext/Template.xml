@@ -6,7 +6,16 @@
 	</dataSource>
 	<dataSet xsi:type="DataSetUnion">
 		<name>ОбъединениеНаборов</name>
-		<autoFillAvailableFields>true</autoFillAvailableFields>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ИсточникДанных</dataPath>
+			<field>ИсточникДанных</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Источник данных</v8:content>
+				</v8:item>
+			</title>
+		</field>
 		<item xsi:type="DataSetQuery">
 		<name>НаборДанных1_СебестоимостьТоваров</name>
 		<field xsi:type="DataSetFieldField">
