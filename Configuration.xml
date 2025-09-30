@@ -80,6 +80,7 @@
 			<DataProcessor>MRS_ЗаменыАлкоРецептур</DataProcessor>
 			<DataProcessor>БыстроеОбезличивание</DataProcessor>
 			<DataProcessor>MRS_ЗагрузкаДанныхИзФронтСистем</DataProcessor>
+			<DataProcessor>питЗагрузкаИзДанныхПродажФронта</DataProcessor>
 		</ChildObjects>
 	</Configuration>
 </MetaDataObject>

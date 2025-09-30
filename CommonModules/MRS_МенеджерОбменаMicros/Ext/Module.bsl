@@ -132,7 +132,8 @@
 	
 	ЗаполнитьПараметрыЗапроса(НачалоПериода, КонецПериода, ПараметрыКасс, ПараметрыВыборки);
 	
-	Если ЗначениеЗаполнено(НомерЧека) И НомерЧека <> 0 Тогда
+	Если ЗначениеЗаполнено(НомерЧека) И НомерЧека <> 0 или ПараметрыВыборки.СтрокаВыборкиТочекПродаж <> "" 
+		и ПараметрыВыборки.СтрокаВыборкиТочекПродаж <> НЕОПРЕДЕЛЕНО  Тогда
 		//++ MRS-242: Поиск связанных чеков по разным точкам продаж
 		ДанныеЧека = ПолучитьДанныеЧекаПоНомеруЧека(ПараметрыВыборки);
 		
@@ -194,7 +195,8 @@
 	
 	ЗаполнитьПараметрыЗапроса(НачалоПериода, КонецПериода, ПараметрыКасс, ПараметрыВыборки);	
 	
-	Если ЗначениеЗаполнено(НомерЧека) И НомерЧека <> 0 Тогда
+	Если ЗначениеЗаполнено(НомерЧека) И НомерЧека <> 0 или ПараметрыВыборки.СтрокаВыборкиТочекПродаж <> "" 
+		и ПараметрыВыборки.СтрокаВыборкиТочекПродаж <> НЕОПРЕДЕЛЕНО  Тогда
 		//++ MRS-242: Поиск связанных чеков по разным точкам продаж
 		ДанныеЧека = ПолучитьДанныеЧекаПоНомеруЧека(ПараметрыВыборки);
 		
@@ -506,6 +508,7 @@
 	СтруктураПараметровВыборки.Вставить("КонецПериода",Неопределено);
 	СтруктураПараметровВыборки.Вставить("ФронтСистема",ФронтСистема);
 	СтруктураПараметровВыборки.Вставить("НомерЧека",НомерЧека);
+	СтруктураПараметровВыборки.Вставить("НомерЧекаФискальный",НомерЧека);
 	СтруктураПараметровВыборки.Вставить("ИДЧека", 0);
 	
 	Возврат СтруктураПараметровВыборки;	
@@ -1330,7 +1333,7 @@
 	
 	УсловиеФильтра = "";
 	Если ЗначениеЗаполнено(ПараметрыВыборки.ИДЧека) И ПараметрыВыборки.ИДЧека <> 0 Тогда
-		УсловиеФильтра = "AND cc.checkid = " + Формат(ПараметрыВыборки.ИДЧека, "ЧГ="); 
+		УсловиеФильтра = "AND cc.checkid in (" + Формат(ПараметрыВыборки.ИДЧека, "ЧГ=") + ")"; 
 	ИначеЕсли ПараметрыВыборки.НомерЧека <> 0 Тогда
 		УсловиеФильтра = "AND cc.CHECKNUMBER = " + Формат(ПараметрыВыборки.НомерЧека, "ЧГ=");
 	КонецЕсли;
@@ -2232,29 +2235,30 @@
 	КонецЕсли;
 
 	CommandText = "WITH InitialChecks AS (
-	  |    SELECT DISTINCT checkid
-	  |    FROM transdb.check_detail d
-	  |    INNER JOIN transdb.checks cc ON cc.checkid = d.checkid
-	  |    INNER JOIN transdb.revenue_center rc ON rc.revctrid = d.revctrid
-	  |    WHERE " + УсловиеДатаЗагрузки + " " + УсловиеФильтра + "
-	  |      AND SUBSTR(cc.STATUS, 23, 1) = '0'
-	  |      AND SUBSTR(cc.STATUS, 18, 1) = '0'
-	  |      AND d.detailtype = 1
-	  |      AND cc.reopenedtochecknum IS NULL
-	  |      AND cc.ADDEDTOCHECKNUM IS NULL
-	  |)
-	  |SELECT
-	  |  LISTAGG(checkid, ',') WITHIN GROUP (ORDER BY checkid) as check_ids,
-	  |  LISTAGG(objectnumber, ',') WITHIN GROUP (ORDER BY objectnumber) as points_of_sale
-	  |FROM (
-	  |  SELECT DISTINCT
-	  |    d.checkid,
-	  |    rc.objectnumber
-	  |  FROM transdb.check_detail d
-	  |  INNER JOIN transdb.checks cc ON d.checkid = cc.checkid
-	  |  INNER JOIN transdb.revenue_center rc ON d.revctrid = rc.revctrid
-	  |  INNER JOIN InitialChecks ic ON d.checkid = ic.checkid
-	  |)";
+    |    SELECT DISTINCT cc.checkid
+    |    FROM transdb.check_detail d
+    |    INNER JOIN transdb.checks cc ON cc.checkid = d.checkid
+    |    INNER JOIN transdb.revenue_center rc ON rc.revctrid = d.revctrid
+    |    WHERE " + УсловиеДатаЗагрузки + " " + УсловиеФильтра + "
+    |      AND SUBSTR(cc.STATUS, 23, 1) = '0'
+    |      AND SUBSTR(cc.STATUS, 18, 1) = '0'
+    |      AND d.detailtype = 1
+    |      AND cc.reopenedtochecknum IS NULL
+    |      AND cc.ADDEDTOCHECKNUM IS NULL
+    |),
+    |CheckAndPos AS (
+    |  SELECT DISTINCT
+    |    d.checkid,
+    |    rc.objectnumber
+    |  FROM transdb.check_detail d
+    |  INNER JOIN transdb.checks cc ON d.checkid = cc.checkid
+    |  INNER JOIN transdb.revenue_center rc ON d.revctrid = rc.revctrid
+    |  INNER JOIN InitialChecks ic ON d.checkid = ic.checkid
+    |)
+    |SELECT
+    |  (SELECT LISTAGG(checkid, ',') WITHIN GROUP (ORDER BY checkid) FROM CheckAndPos) as check_ids,
+    |  (SELECT LISTAGG(objectnumber, ',') WITHIN GROUP (ORDER BY objectnumber) FROM (SELECT DISTINCT objectnumber FROM CheckAndPos)) as points_of_sale
+    |FROM DUAL";
 	
     ДанныеЧека = Неопределено;
 	Попытка
