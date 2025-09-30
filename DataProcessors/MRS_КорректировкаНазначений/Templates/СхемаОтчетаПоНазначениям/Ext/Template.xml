@@ -1,22 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<parameter>
-		<name>Дата</name>
-		<title xsi:type="v8:LocalStringType">
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Дата</v8:content>
-			</v8:item>
-		</title>
-		<valueType>
-			<v8:Type>xs:dateTime</v8:Type>
-			<v8:DateQualifiers>
-				<v8:DateFractions>DateTime</v8:DateFractions>
-			</v8:DateQualifiers>
-		</valueType>
-		<useRestriction>true</useRestriction>
-		<use>Always</use>
-	</parameter>
 	<dataSource>
 		<name>ИсточникДанных1</name>
 		<dataSourceType>Local</dataSourceType>
@@ -241,6 +224,24 @@
 ГДЕ
 	ТоварыНаСкладахОстатки.Назначение &lt;&gt; ЗНАЧЕНИЕ(Справочник.Назначения.ПустаяСсылка)</query>
 	</dataSet>
+	<parameter>
+		<name>Дата</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Дата</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:nil="true"/>
+		<useRestriction>true</useRestriction>
+		<use>Always</use>
+	</parameter>
 	<settingsVariant>
 		<dcsset:name>Основной</dcsset:name>
 		<dcsset:presentation xsi:type="v8:LocalStringType">
@@ -261,6 +262,16 @@
 				</dcscor:item>
 			</dcsset:dataParameters>
 			<dcsset:item xsi:type="dcsset:StructureItemGroup">
+				<dcsset:filter>
+					<dcsset:item xsi:type="dcsset:FilterItemGroup">
+						<dcsset:groupType>AndGroup</dcsset:groupType>
+						<dcsset:item xsi:type="dcsset:FilterItemComparison">
+							<dcsset:left xsi:type="dcscor:Field">НаборДанных</dcsset:left>
+							<dcsset:comparisonType>Equal</dcsset:comparisonType>
+							<dcsset:right xsi:type="xs:string">НаборДанных1_СебестоимостьТоваров</dcsset:right>
+						</dcsset:item>
+					</dcsset:item>
+				</dcsset:filter>
 				<dcsset:order>
 					<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
 				</dcsset:order>
@@ -303,18 +314,18 @@
 						</dcsset:selection>
 					</dcsset:item>
 				</dcsset:item>
+			</dcsset:item>
+			<dcsset:item xsi:type="dcsset:StructureItemGroup">
 				<dcsset:filter>
 					<dcsset:item xsi:type="dcsset:FilterItemGroup">
 						<dcsset:groupType>AndGroup</dcsset:groupType>
 						<dcsset:item xsi:type="dcsset:FilterItemComparison">
 							<dcsset:left xsi:type="dcscor:Field">НаборДанных</dcsset:left>
 							<dcsset:comparisonType>Equal</dcsset:comparisonType>
-							<dcsset:right xsi:type="xs:string">НаборДанных1_СебестоимостьТоваров</dcsset:right>
+							<dcsset:right xsi:type="xs:string">НаборДанных2_ТоварыОрганизаций</dcsset:right>
 						</dcsset:item>
 					</dcsset:item>
 				</dcsset:filter>
-			</dcsset:item>
-			<dcsset:item xsi:type="dcsset:StructureItemGroup">
 				<dcsset:order>
 					<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
 				</dcsset:order>
@@ -357,18 +368,18 @@
 						</dcsset:selection>
 					</dcsset:item>
 				</dcsset:item>
+			</dcsset:item>
+			<dcsset:item xsi:type="dcsset:StructureItemGroup">
 				<dcsset:filter>
 					<dcsset:item xsi:type="dcsset:FilterItemGroup">
 						<dcsset:groupType>AndGroup</dcsset:groupType>
 						<dcsset:item xsi:type="dcsset:FilterItemComparison">
 							<dcsset:left xsi:type="dcscor:Field">НаборДанных</dcsset:left>
 							<dcsset:comparisonType>Equal</dcsset:comparisonType>
-							<dcsset:right xsi:type="xs:string">НаборДанных2_ТоварыОрганизаций</dcsset:right>
+							<dcsset:right xsi:type="xs:string">НаборДанных3_ТоварыНаСкладах</dcsset:right>
 						</dcsset:item>
 					</dcsset:item>
 				</dcsset:filter>
-			</dcsset:item>
-			<dcsset:item xsi:type="dcsset:StructureItemGroup">
 				<dcsset:order>
 					<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
 				</dcsset:order>
@@ -411,16 +422,6 @@
 						</dcsset:selection>
 					</dcsset:item>
 				</dcsset:item>
-				<dcsset:filter>
-					<dcsset:item xsi:type="dcsset:FilterItemGroup">
-						<dcsset:groupType>AndGroup</dcsset:groupType>
-						<dcsset:item xsi:type="dcsset:FilterItemComparison">
-							<dcsset:left xsi:type="dcscor:Field">НаборДанных</dcsset:left>
-							<dcsset:comparisonType>Equal</dcsset:comparisonType>
-							<dcsset:right xsi:type="xs:string">НаборДанных3_ТоварыНаСкладах</dcsset:right>
-						</dcsset:item>
-					</dcsset:item>
-				</dcsset:filter>
 			</dcsset:item>
 		</dcsset:settings>
 	</settingsVariant>
