@@ -2,6 +2,12 @@
 <Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.19">
 	<AutoCommandBar name="ФормаКоманднаяПанель" id="-1"/>
 	<ChildItems>
+		<InputField name="Дата" id="20">
+			<DataPath>Дата</DataPath>
+			<EditMode>EnterOnInput</EditMode>
+			<ContextMenu name="ДатаКонтекстноеМеню" id="21"/>
+			<ExtendedTooltip name="ДатаРасширеннаяПодсказка" id="22"/>
+		</InputField>
 		<Pages name="Страницы" id="40">
 			<Title>
 				<v8:item>
@@ -55,36 +61,45 @@
 									<v8:content>Параметры</v8:content>
 								</v8:item>
 							</Title>
+							<Group>Vertical</Group>
 							<ShowTitle>false</ShowTitle>
 							<ExtendedTooltip name="ГруппаПараметрыРасширеннаяПодсказка" id="11"/>
 							<ChildItems>
+								<LabelDecoration name="Декорация1" id="49">
+									<TextColor>web:Salmon</TextColor>
+									<Title formatted="false">
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>1. Поле комментарий это для комментария в корректировке
+2. Запускать нужно на дату закрытых отрицательных остатков (например 1 числа месяца после закрытия)
+3. Незавершенное производство обработка не скорректирует
+4. После корректировки проверит на отрицательные остатки, смотреть что случилось, могут быть варианты</v8:content>
+										</v8:item>
+									</Title>
+									<ContextMenu name="Декорация1КонтекстноеМеню" id="50"/>
+									<ExtendedTooltip name="Декорация1РасширеннаяПодсказка" id="51"/>
+								</LabelDecoration>
+								<InputField name="ДокументКорректировкиПоле" id="23">
+									<DataPath>ДокументКорректировки</DataPath>
+									<Enabled>false</Enabled>
+									<ReadOnly>true</ReadOnly>
+									<ContextMenu name="ДокументКорректировкиКонтекстноеМеню" id="24"/>
+									<ExtendedTooltip name="ДокументКорректировкиРасширеннаяПодсказка" id="25"/>
+								</InputField>
 								<UsualGroup name="ГруппаСтрока" id="12">
-									<Group>AlwaysHorizontal</Group>
+									<Group>Vertical</Group>
 									<ShowTitle>false</ShowTitle>
 									<ExtendedTooltip name="ГруппаСтрокаРасширеннаяПодсказка" id="13"/>
 									<ChildItems>
-										<InputField name="Дата" id="20">
-											<DataPath>Дата</DataPath>
+										<InputField name="Комментарий" id="26">
+											<DataPath>Комментарий</DataPath>
 											<EditMode>EnterOnInput</EditMode>
-											<ContextMenu name="ДатаКонтекстноеМеню" id="21"/>
-											<ExtendedTooltip name="ДатаРасширеннаяПодсказка" id="22"/>
-										</InputField>
-										<InputField name="ДокументКорректировкиПоле" id="23">
-											<DataPath>ДокументКорректировки</DataPath>
-											<Enabled>false</Enabled>
-											<ReadOnly>true</ReadOnly>
-											<ContextMenu name="ДокументКорректировкиКонтекстноеМеню" id="24"/>
-											<ExtendedTooltip name="ДокументКорректировкиРасширеннаяПодсказка" id="25"/>
+											<MultiLine>true</MultiLine>
+											<ContextMenu name="КомментарийКонтекстноеМеню" id="27"/>
+											<ExtendedTooltip name="КомментарийРасширеннаяПодсказка" id="28"/>
 										</InputField>
 									</ChildItems>
 								</UsualGroup>
-								<InputField name="Комментарий" id="26">
-									<DataPath>Комментарий</DataPath>
-									<EditMode>EnterOnInput</EditMode>
-									<MultiLine>true</MultiLine>
-									<ContextMenu name="КомментарийКонтекстноеМеню" id="27"/>
-									<ExtendedTooltip name="КомментарийРасширеннаяПодсказка" id="28"/>
-								</InputField>
 							</ChildItems>
 						</UsualGroup>
 						<UsualGroup name="Кнопки" id="30">
@@ -146,6 +161,15 @@
 			</Title>
 			<Type>
 				<v8:Type xmlns:mxl="http://v8.1c.ru/8.2/data/spreadsheet">mxl:SpreadsheetDocument</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="Реквизит1" id="6">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
 			</Type>
 		</Attribute>
 	</Attributes>
