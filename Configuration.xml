@@ -69,6 +69,7 @@
 			<Role>MRS_ОсновнаяРоль</Role>
 			<CommonModule>MRS_ЗагрузкаЕГАИСФронт</CommonModule>
 			<CommonModule>MRS_МенеджерОбменаMicros</CommonModule>
+			<CommonModule>питТиповыеДокументы</CommonModule>
 			<Catalog>Номенклатура</Catalog>
 			<Catalog>ПодразделенияОрганизаций</Catalog>
 			<Catalog>Склады</Catalog>
